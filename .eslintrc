@@ -1,25 +1,16 @@
 {
   "extends": [
-    "airbnb",
-    "prettier",
-    "prettier/flowtype",
-    "prettier/react"
+    "airbnb"
   ],
   "parser": "babel-eslint",
   "plugins": [
-    "flowtype",
-    "prettier"
+    "flowtype"
   ],
   "env": {
     "es6": true,
     "jasmine": true
   },
   "rules": {
-    "prettier/prettier": ["error", {
-      "trailingComma": "es5",
-      "singleQuote": true
-    }],
-
     "react/forbid-prop-types": "warn",
     "react/jsx-filename-extension": [
       "off", { "extensions": [".js", ".jsx"] }
