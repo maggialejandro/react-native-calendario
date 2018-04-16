@@ -4,18 +4,42 @@
  */
 
 import React from 'react';
-import { View } from 'react-native';
+import { View, Modal, Text, TouchableOpacity } from 'react-native';
 import Calendar from 'react-native-calendar';
-
-import type { Element } from 'react';
 
 type Props = {};
 
-export default class App extends React.PureComponent<Props> {
-  render(): Element<*> {
+type State = {
+  isVisibleModal: boolean
+};
+
+export default class App extends React.PureComponent<Props, State> {
+  state = {
+    isVisibleModal: false,
+  }
+
+  handleModalOpen = () => {
+    console.time('Calendar.mount');
+    this.setState({ isVisibleModal: true });
+  };
+
+  render() {
     return (
-      <View style={{ marginTop: 20 }}>
-        <Calendar />
+      <View style={{ marginTop: 20, justifyContent: 'center' }}>
+        <TouchableOpacity
+          style={{ padding: 20, backgroundColor: 'red' }}
+          onPress={this.handleModalOpen}
+        >
+          <Text>Show Modal</Text>
+        </TouchableOpacity>
+
+        <Modal
+          animationType="slide"
+          onRequestClose={() => this.setState({ isVisibleModal: false })}
+          visible={this.state.isVisibleModal}
+        >
+          <Calendar />
+        </Modal>
       </View>
     );
   }
