@@ -12,6 +12,7 @@
 ; For RN Apps installed via npm, "Libraries" folder is inside
 ; "node_modules/react-native" but in the source repo it is in the root
 .*/Libraries/react-native/React.js
+.*/Libraries/react-native/ReactNative.js
 
 ; Ignore polyfills
 .*/Libraries/polyfills/.*
@@ -27,6 +28,12 @@
 
 # Ignore bridge project
 .*/bridge/.*
+
+; Ignore duplicate modules under example folder/
+.*/RNCalendarExample/node_modules/fbjs
+.*/RNCalendarExample/node_modules/react
+.*/RNCalendarExample/node_modules/react-native
+.*/RNCalendarExample/\.buckd/
 
 [include]
 
