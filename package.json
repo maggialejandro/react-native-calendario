@@ -39,8 +39,6 @@
     "eslint-plugin-jsx-a11y": "^6.0.3",
     "eslint-plugin-prettier": "^2.6.0",
     "eslint-plugin-react": "^7.7.0",
-    "flow-bin": "^0.69.0",
-    "react": "^16.3.1",
-    "react-native": "^0.55.2"
+    "flow-bin": "^0.69.0"
   }
 }
