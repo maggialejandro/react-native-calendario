@@ -7,7 +7,7 @@
       ]
     },
     "publish": {
-      "presets": ["react-native"],
+      "presets": ["react-native-syntax"],
       "plugins": [
         "transform-flow-strip-types"
       ]
