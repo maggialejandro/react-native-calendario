@@ -68,6 +68,7 @@ import Calendar from 'react-native-calendar';
 |**`showMonthTitle`**|Show Month title |no|true|
 |**`initialListSize`**|FlatList initialNumToRender |no|2|
 |**`numberOfMonths`**|Number of months to render |no|12|
+|**`disableRange`**|Turn off range date selection |no|false|
 
 
 ## License
