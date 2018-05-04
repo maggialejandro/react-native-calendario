@@ -63,6 +63,7 @@ import Calendar from 'react-native-calendar';
 |**`startDate`**|Selected start date |no|null|
 |**`endDate`**|Selected end date |requires *startDate*|null|
 |**`theme`**|Calendar StyleSheet |no|null|
+|**`locale`**|Calendar language |no|'en'|
 |**`showWeekdays`**|Show Week columns |no|true|
 |**`showMonthTitle`**|Show Month title |no|true|
 |**`initialListSize`**|FlatList initialNumToRender |no|2|
