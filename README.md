@@ -1,4 +1,6 @@
-# React Native Calendar
+# React Native Calendar 📆
+
+![](https://media.giphy.com/media/eu8fFCG3rs3IEYwyYk/giphy.gif) ![](https://media.giphy.com/media/g0pZuxQ16frVSmEBSt/giphy.gif)
 
 
 ## Installation
