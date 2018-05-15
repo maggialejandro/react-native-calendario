@@ -5,17 +5,17 @@
 
 ## Installation
 ```console
-npm install react-native-calendar --save
+npm install react-native-calendario --save
 ```
 
 Using yarn
 ```console
-yarn add react-native-calendar
+yarn add react-native-calendario
 ```
 
 ## Usage
 ```js
-import Calendar from 'react-native-calendar';
+import Calendar from 'react-native-calendario';
 ```
 
 ```js

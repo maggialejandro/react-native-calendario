@@ -3,7 +3,7 @@
   "plugins": [
     ["module-resolver", {
       "alias": {
-        "react-native-calendar": ".."
+        "react-native-calendario": ".."
       }
     }]
   ]
