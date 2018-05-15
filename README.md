@@ -67,6 +67,7 @@ import Calendar from 'react-native-calendar';
 |**`showWeekdays`**|Show Week columns |no|true|
 |**`showMonthTitle`**|Show Month title |no|true|
 |**`initialListSize`**|FlatList initialNumToRender |no|2|
+|**`startingMonth`**|First month to render |no|current month|
 |**`numberOfMonths`**|Number of months to render |no|12|
 |**`disableRange`**|Turn off range date selection |no|false|
 |**`monthHeight`**|Change Month row height |no|370|
