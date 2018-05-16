@@ -13,7 +13,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/maggialejandro/react-native-calendar.git"
+    "url": "git+https://github.com/maggialejandro/react-native-calendario.git"
   },
   "keywords": [
     "react-native",
@@ -22,9 +22,9 @@
   "author": "Alejandro Maggi",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/maggialejandro/react-native-calendar/issues"
+    "url": "https://github.com/maggialejandro/react-native-calendario/issues"
   },
-  "homepage": "https://github.com/maggialejandro/react-native-calendar#readme",
+  "homepage": "https://github.com/maggialejandro/react-native-calendario#readme",
   "peerDependencies": {
     "react": "^16.3.2",
     "react-native": "^0.55.3"
