@@ -4,41 +4,104 @@
  */
 
 import React from 'react';
-import { View, Modal, Text, TouchableOpacity } from 'react-native';
-import Calendar from 'react-native-calendar';
+import { View, Modal, Text, Platform } from 'react-native';
+import Calendar from 'react-native-calendario';
 
-type Props = {};
+const iOS = Platform.OS === 'ios';
 
-type State = {
-  isVisibleModal: boolean
-};
+function CloseButton({ onClose, children }) {
+  return (
+    <View style={{ marginTop: iOS ? 20 : 0 }}>
+      <Text
+        style={{ fontSize: 20, marginLeft: 10 }}
+        onPress={() => onClose()}
+      >
+        Close
+      </Text>
+      {children}
+    </View>
+  );
+}
 
-export default class App extends React.PureComponent<Props, State> {
+export default class App extends React.PureComponent<{}, {
+  isVisibleModalCustom: boolean
+}> {
   state = {
-    isVisibleModal: false,
+    isVisibleModalCustom: false,
   }
 
-  handleModalOpen = () => {
-    console.time('Calendar.mount');
-    this.setState({ isVisibleModal: true });
+  handleOpenCustomModal = () => {
+    this.setState({ isVisibleModalCustom: true });
+  };
+
+  handleCloseCustomModal = () => {
+    this.setState({ isVisibleModalCustom: false });
   };
 
   render() {
     return (
-      <View style={{ marginTop: 20, justifyContent: 'center' }}>
-        <TouchableOpacity
-          style={{ padding: 20, backgroundColor: 'red' }}
-          onPress={this.handleModalOpen}
+      <View style={{ marginTop: iOS ? 20 : 0 }}>
+        <Text
+          style={{
+            color: '#6d95da',
+            fontWeight: 'bold',
+            textAlign: 'center',
+            marginTop: 50,
+          }}
+          onPress={this.handleOpenCustomModal}
         >
-          <Text>Show Modal</Text>
-        </TouchableOpacity>
+          Open Calendar
+        </Text>
 
         <Modal
-          animationType="slide"
-          onRequestClose={() => this.setState({ isVisibleModal: false })}
-          visible={this.state.isVisibleModal}
+          animationType="fade"
+          onRequestClose={() => this.setState({ isVisibleModalCustom: false })}
+          visible={this.state.isVisibleModalCustom}
         >
-          <Calendar />
+          <CloseButton onClose={this.handleCloseCustomModal}>
+            <Calendar
+              monthHeight={370}
+              startingMonth="2017-02-20"
+              initialListSize={2}
+              onChange={console.log}
+              theme={{
+                weekColumnTextStyle: {
+                  color: '#b6c1cd',
+                  fontSize: 13,
+                },
+                weekColumnStyle: {
+                  paddingVertical: 10,
+                },
+                weekColumnsContainerStyle: {
+                },
+                monthTitleStyle: {
+                  color: '#6d95da',
+                  fontWeight: '300',
+                  fontSize: 16,
+                },
+                emptyMonthTextStyle: {
+                  fontWeight: '200',
+                },
+                nonTouchableDayTextStyle: {
+                  color: 'white',
+                },
+                dayContainerStyle: {
+                  marginVertical: 3,
+                },
+                dayTextStyle: {
+                  color: '#2d4150',
+                  fontWeight: '200',
+                  fontSize: 15,
+                },
+                activeDayContainerStyle: {
+                  backgroundColor: '#6d95da',
+                },
+                activeDayTextStyle: {
+                  color: 'white',
+                },
+              }}
+            />
+          </CloseButton>
         </Modal>
       </View>
     );

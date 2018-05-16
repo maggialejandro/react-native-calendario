@@ -74,6 +74,11 @@ import Calendar from 'react-native-calendario';
 |**`disableRange`**|Turn off range date selection |no|false|
 |**`monthHeight`**|Change Month row height |no|370|
 
+## Example
+To run the example project change package.json main path to like this
+```json
+"main": "lib/index.js",
+```
 
 ## License
 MIT
