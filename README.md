@@ -72,6 +72,7 @@ import Calendar from 'react-native-calendario';
 |**`startingMonth`**|First month to render |no|current month|
 |**`numberOfMonths`**|Number of months to render |no|12|
 |**`disableRange`**|Turn off range date selection |no|false|
+|**`firstDayMonday`**|Monday as first day of the week |no|false|
 |**`monthHeight`**|Change Month row height |no|370|
 
 ## Example
