@@ -4,12 +4,12 @@
   "description": "React Native Calendar",
   "main": "dist/index.js",
   "scripts": {
-    "lint": "eslint index.js",
+    "lint": "eslint lib/**/*.js",
     "clean": "rimraf dist/",
     "build": "npm run build-lib && npm run build-flow",
     "build-flow": "flow-copy-source lib dist",
     "build-lib": "BABEL_ENV=publish babel lib -d dist --copy-files",
-    "prepublish": "npm run clean && npm run build"
+    "prepublish": "npm run clean && npm run lint && npm run build"
   },
   "repository": {
     "type": "git",
