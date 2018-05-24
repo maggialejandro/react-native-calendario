@@ -18,7 +18,7 @@ const THEME = {
   },
   weekColumnsContainerStyle: {
   },
-  monthTitleStyle: {
+  monthTitleTextStyle: {
     color: '#6d95da',
     fontWeight: '300',
     fontSize: 16,
