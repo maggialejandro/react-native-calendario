@@ -1,0 +1,10 @@
+{
+  "groups": {
+    "default": {
+      "packages": [
+        "RNCalendarExample/package.json",
+        "package.json"
+      ]
+    }
+  }
+}
