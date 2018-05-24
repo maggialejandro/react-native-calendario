@@ -8,6 +8,42 @@ import { View, Modal, Text, Platform } from 'react-native';
 import Calendar from 'react-native-calendario';
 
 const iOS = Platform.OS === 'ios';
+const THEME = {
+  weekColumnTextStyle: {
+    color: '#b6c1cd',
+    fontSize: 13,
+  },
+  weekColumnStyle: {
+    paddingVertical: 10,
+  },
+  weekColumnsContainerStyle: {
+  },
+  monthTitleStyle: {
+    color: '#6d95da',
+    fontWeight: '300',
+    fontSize: 16,
+  },
+  emptyMonthTextStyle: {
+    fontWeight: '200',
+  },
+  nonTouchableDayTextStyle: {
+    color: 'white',
+  },
+  dayContainerStyle: {
+    marginVertical: 3,
+  },
+  dayTextStyle: {
+    color: '#2d4150',
+    fontWeight: '200',
+    fontSize: 15,
+  },
+  activeDayContainerStyle: {
+    backgroundColor: '#6d95da',
+  },
+  activeDayTextStyle: {
+    color: 'white',
+  },
+};
 
 function CloseButton({ onClose, children }) {
   return (
@@ -64,42 +100,7 @@ export default class App extends React.PureComponent<{}, {
               startingMonth="2017-02-20"
               initialListSize={2}
               onChange={console.log}
-              theme={{
-                weekColumnTextStyle: {
-                  color: '#b6c1cd',
-                  fontSize: 13,
-                },
-                weekColumnStyle: {
-                  paddingVertical: 10,
-                },
-                weekColumnsContainerStyle: {
-                },
-                monthTitleStyle: {
-                  color: '#6d95da',
-                  fontWeight: '300',
-                  fontSize: 16,
-                },
-                emptyMonthTextStyle: {
-                  fontWeight: '200',
-                },
-                nonTouchableDayTextStyle: {
-                  color: 'white',
-                },
-                dayContainerStyle: {
-                  marginVertical: 3,
-                },
-                dayTextStyle: {
-                  color: '#2d4150',
-                  fontWeight: '200',
-                  fontSize: 15,
-                },
-                activeDayContainerStyle: {
-                  backgroundColor: '#6d95da',
-                },
-                activeDayTextStyle: {
-                  color: 'white',
-                },
-              }}
+              theme={THEME}
             />
           </CloseButton>
         </Modal>
