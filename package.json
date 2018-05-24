@@ -25,12 +25,10 @@
     "url": "https://github.com/maggialejandro/react-native-calendario/issues"
   },
   "homepage": "https://github.com/maggialejandro/react-native-calendario#readme",
-  "peerDependencies": {
+  "dependencies": {
+    "moment": "^2.22.1",
     "react": "^16.3.2",
     "react-native": "^0.55.3"
-  },
-  "dependencies": {
-    "moment": "^2.22.1"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
