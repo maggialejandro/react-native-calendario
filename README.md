@@ -1,5 +1,6 @@
 # React Native Calendar 📆
 [![Greenkeeper badge](https://badges.greenkeeper.io/maggialejandro/react-native-calendario.svg)](https://greenkeeper.io/)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmaggialejandro%2Freact-native-calendario.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmaggialejandro%2Freact-native-calendario?ref=badge_shield)
 
 [![BuildStatus](https://img.shields.io/travis/maggialejandro/react-native-calendario/master.svg)](https://travis-ci.org/maggialejandro/react-native-calendario)
 [![NPM version](https://img.shields.io/npm/v/react-native-calendario.svg)](https://www.npmjs.com/package/react-native-calendario) [![npm](https://img.shields.io/npm/dw/react-native-calendario.svg)](https://github.com/maggialejandro/react-native-calendario)  [![CodeFactor](https://www.codefactor.io/repository/github/maggialejandro/react-native-calendario/badge)](https://www.codefactor.io/repository/github/maggialejandro/react-native-calendario) [![Codacy Badge](https://api.codacy.com/project/badge/Grade/832690f286a5451cacdae664d63be3b9)](https://www.codacy.com/app/maggialejandro/react-native-calendario?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=maggialejandro/react-native-calendario&amp;utm_campaign=Badge_Grade)
@@ -87,3 +88,6 @@ To run the example project change package.json main path to like this
 
 ## License
 MIT
+
+
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2Fmaggialejandro%2Freact-native-calendario.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2Fmaggialejandro%2Freact-native-calendario?ref=badge_large)
