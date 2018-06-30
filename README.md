@@ -1,4 +1,6 @@
 # React Native Calendar 📆
+![Coverlogo](https://imgur.com/LINQ6HZ.png)
+
 [![Greenkeeper badge](https://badges.greenkeeper.io/maggialejandro/react-native-calendario.svg)](https://greenkeeper.io/)
 
 [![BuildStatus](https://img.shields.io/travis/maggialejandro/react-native-calendario/master.svg)](https://travis-ci.org/maggialejandro/react-native-calendario)
