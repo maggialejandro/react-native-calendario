@@ -74,6 +74,21 @@ export default class App extends React.PureComponent<{}, {
     this.setState({ isVisibleModalCustom: false });
   };
 
+  renderDayContent = (item: DayType) => {
+    const { isActive, date } = item;
+    return (
+      <Text
+        style={[
+          { color: isActive ? 'green' : 'grey' },
+          THEME.dayTextStyle,
+          isActive ? THEME.activeDayTextStyle : {},
+        ]}
+      >
+        {date.getDate()}
+      </Text>
+    );
+  }
+
   render() {
     return (
       <View style={{ marginTop: iOS ? 20 : 0 }}>
@@ -101,6 +116,7 @@ export default class App extends React.PureComponent<{}, {
               initialListSize={2}
               onChange={console.log}
               theme={THEME}
+              renderDayContent={this.renderDayContent}
             />
           </CloseButton>
         </Modal>

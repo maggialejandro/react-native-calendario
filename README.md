@@ -80,9 +80,10 @@ import Calendar from 'react-native-calendario';
 |**`disableRange`**|Turn off range date selection |no|false|
 |**`firstDayMonday`**|Monday as first day of the week |no|false|
 |**`monthHeight`**|Change Month row height |no|370|
+|**`renderDayContent`**|Render custom Day content |no|null|
 
 ## Example
-To run the example project change package.json main path to like this
+To run the example project change package.json main path like this
 ```json
 "main": "lib/index.js",
 ```
