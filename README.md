@@ -82,6 +82,8 @@ import Calendar from 'react-native-calendario';
 |**`monthHeight`**|Change Month row height |no|370|
 |**`renderDayContent`**|Render custom Day content |no|null|
 |**`extraData`**|FlatList extraData |no|null|
+|**`viewableItemsChanged`**|handleViewableItemsChange callback |no|null|
+
 
 ## Example
 To run the example project change package.json main path like this
