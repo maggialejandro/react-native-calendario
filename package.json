@@ -27,7 +27,7 @@
   "homepage": "https://github.com/maggialejandro/react-native-calendario#readme",
   "dependencies": {
     "moment": "^2.22.1",
-    "react": "^16.4.1",
+    "react": "^16.4.2",
     "react-native": "^0.55.3"
   },
   "devDependencies": {
