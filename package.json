@@ -1,6 +1,6 @@
 {
   "name": "react-native-calendario",
-  "version": "0.0.13",
+  "version": "0.0.14",
   "description": "React Native Calendar",
   "main": "dist/index.js",
   "scripts": {
