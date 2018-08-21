@@ -112,8 +112,11 @@ export default class App extends React.PureComponent<{}, {
           <CloseButton onClose={this.handleCloseCustomModal}>
             <Calendar
               monthHeight={370}
-              startingMonth="2017-02-20"
-              initialListSize={2}
+              startingMonth="2018-08-01"
+              startDate="2018-08-20"
+              endDate="2018-09-20"
+              numberOfMonths={100}
+              initialListSize={6}
               onChange={console.log}
               theme={THEME}
               renderDayContent={this.renderDayContent}
