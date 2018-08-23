@@ -63,26 +63,26 @@ import Calendar from 'react-native-calendario';
 ```
 
 ## API
-| Prop | Description | Required? | Default |
-|---|---|---|---|
-|**`onChange`**|Callback called when a day is pressed. |yes| |
-|**`minDate`**|Minimum date that can be selected. |no|null|
-|**`maxDate`**|Maximum date that can be selected. |no|null|
-|**`startDate`**|Selected start date |no|null|
-|**`endDate`**|Selected end date |requires *startDate*|null|
-|**`theme`**|Calendar StyleSheet |no|null|
-|**`locale`**|Calendar language |no|'en'|
-|**`showWeekdays`**|Show Week columns |no|true|
-|**`showMonthTitle`**|Show Month title |no|true|
-|**`initialListSize`**|FlatList initialNumToRender |no|2|
-|**`startingMonth`**|First month to render |no|current month|
-|**`numberOfMonths`**|Number of months to render |no|12|
-|**`disableRange`**|Turn off range date selection |no|false|
-|**`firstDayMonday`**|Monday as first day of the week |no|false|
-|**`monthHeight`**|Change Month row height |no|370|
-|**`renderDayContent`**|Render custom Day content |no|null|
-|**`extraData`**|FlatList extraData |no|null|
-|**`viewableItemsChanged`**|handleViewableItemsChange callback |no|null|
+| Prop | Description | Required? | Default | Type
+|---|---|---|---|---|
+|**`onChange`**|Callback called when a day is pressed. |yes| | Function |
+|**`minDate`**|Minimum date that can be selected. |no|null| 'YYYY-MM-DD' |
+|**`maxDate`**|Maximum date that can be selected. |no|null| 'YYYY-MM-DD' |
+|**`startDate`**|Selected start date |no|null| 'YYYY-MM-DD' |
+|**`endDate`**|Selected end date |requires *startDate*|null| 'YYYY-MM-DD' |
+|**`theme`**|Calendar StyleSheet |no|null| Object |
+|**`locale`**|Calendar language |no|'en'| string |
+|**`showWeekdays`**|Show Week columns |no|true| boolean |
+|**`showMonthTitle`**|Show Month title |no|true| boolean |
+|**`initialListSize`**|FlatList initialNumToRender |no|2| number |
+|**`startingMonth`**|First month to render |no|current month| 'YYYY-MM-DD' |
+|**`numberOfMonths`**|Number of months to render |no|12| number |
+|**`disableRange`**|Turn off range date selection |no|false| boolean |
+|**`firstDayMonday`**|Monday as first day of the week |no|false| boolean |
+|**`monthHeight`**|Change Month row height |no|370| number |
+|**`renderDayContent`**|Render custom Day content |no|null| Function |
+|**`extraData`**|FlatList extraData |no|null| any |
+|**`viewableItemsChanged`**|handleViewableItemsChange callback |no|null| Function |
 
 
 ## Example
