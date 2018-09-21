@@ -29,7 +29,7 @@
     "moment": "^2.22.1"
   },
   "peerDependencies": {
-    "react": "^16.4.2",
+    "react": "^16.5.0",
     "react-native": "^0.57.1"
   },
   "devDependencies": {
