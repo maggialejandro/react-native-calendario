@@ -11,6 +11,7 @@
     "jasmine": true
   },
   "rules": {
+    "react/destructuring-assignment": ['never'],
     "react/forbid-prop-types": "warn",
     "react/jsx-filename-extension": [
       "off", { "extensions": [".js", ".jsx"] }
