@@ -1,16 +1,21 @@
 {
-  "extends": [
-    "airbnb"
-  ],
+  "extends": ["airbnb", "prettier", "prettier/flowtype", "prettier/react"],
   "parser": "babel-eslint",
-  "plugins": [
-    "flowtype"
-  ],
+  "plugins": ["flowtype", "prettier"],
   "env": {
     "es6": true,
     "jasmine": true
   },
   "rules": {
+    "prettier/prettier": [
+      "error",
+      {
+        "avoidEscape": true,
+        "trailingComma": "all",
+        "arrowParens": "always",
+        "singleQuote": true
+      }
+    ],
     "react/destructuring-assignment": ['never'],
     "react/forbid-prop-types": "warn",
     "react/jsx-filename-extension": [
