@@ -1,8 +1,8 @@
 {
   "name": "react-native-calendario",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "React Native Calendar",
-  "main": "lib/index.js",
+  "main": "dist/index.js",
   "scripts": {
     "lint": "eslint lib/**/*.js",
     "clean": "rimraf dist/",
