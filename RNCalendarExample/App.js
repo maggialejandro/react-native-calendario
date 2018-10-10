@@ -1,37 +1,39 @@
-/**
- * RNCalendar Example
- * @flow
- */
-
+// @flow
 import React from 'react';
 import { View, Modal, Text, Platform } from 'react-native';
 import Calendar from 'react-native-calendario';
 
 const iOS = Platform.OS === 'ios';
 const THEME = {
-  weekColumnTextStyle: {
-    color: '#b6c1cd',
-    fontSize: 13,
-  },
-  weekColumnStyle: {
-    paddingVertical: 10,
-  },
-  weekColumnsContainerStyle: {
-  },
+  activeDayColor: {},
   monthTitleTextStyle: {
     color: '#6d95da',
     fontWeight: '300',
     fontSize: 16,
   },
+  emptyMonthContainerStyle: {},
   emptyMonthTextStyle: {
     fontWeight: '200',
   },
-  nonTouchableDayTextStyle: {
-    color: 'white',
+  weekColumnsContainerStyle: {},
+  weekColumnStyle: {
+    paddingVertical: 10,
   },
-  dayContainerStyle: {
-    marginVertical: 3,
+  weekColumnTextStyle: {
+    color: '#b6c1cd',
+    fontSize: 13,
   },
+  nonTouchableDayContainerStyle: {},
+  nonTouchableDayTextStyle: {},
+  startDateContainerStyle: {
+    borderTopLeftRadius: 18,
+    borderBottomLeftRadius: 18,
+  },
+  endDateContainerStyle: {
+    borderTopRightRadius: 18,
+    borderBottomRightRadius: 18,
+  },
+  dayContainerStyle: {},
   dayTextStyle: {
     color: '#2d4150',
     fontWeight: '200',
@@ -43,15 +45,13 @@ const THEME = {
   activeDayTextStyle: {
     color: 'white',
   },
+  nonTouchableLastMonthDayTextStyle: {},
 };
 
 function CloseButton({ onClose, children }) {
   return (
     <View style={{ marginTop: iOS ? 20 : 0 }}>
-      <Text
-        style={{ fontSize: 20, marginLeft: 10 }}
-        onPress={() => onClose()}
-      >
+      <Text style={{ fontSize: 20, marginLeft: 10 }} onPress={onClose}>
         Close
       </Text>
       {children}
@@ -59,12 +59,15 @@ function CloseButton({ onClose, children }) {
   );
 }
 
-export default class App extends React.PureComponent<{}, {
-  isVisibleModalCustom: boolean
-}> {
+export default class App extends React.PureComponent<
+  {},
+  {
+    isVisibleModalCustom: boolean,
+  },
+> {
   state = {
     isVisibleModalCustom: false,
-  }
+  };
 
   handleOpenCustomModal = () => {
     this.setState({ isVisibleModalCustom: true });
@@ -77,17 +80,20 @@ export default class App extends React.PureComponent<{}, {
   renderDayContent = (item: DayType) => {
     const { isActive, date } = item;
     return (
-      <Text
-        style={[
-          { color: isActive ? 'green' : 'grey' },
-          THEME.dayTextStyle,
-          isActive ? THEME.activeDayTextStyle : {},
-        ]}
-      >
-        {date.getDate()}
-      </Text>
+      <View style={{ justifyContent: 'center', alignItems: 'center' }}>
+        <Text
+          style={[
+            { color: isActive ? 'green' : 'grey' },
+            THEME.dayTextStyle,
+            isActive ? THEME.activeDayTextStyle : {},
+          ]}
+        >
+          {date.getDate()}
+        </Text>
+        <Text style={{ fontSize: 7 }}>asd</Text>
+      </View>
     );
-  }
+  };
 
   render() {
     return (
@@ -111,15 +117,15 @@ export default class App extends React.PureComponent<{}, {
         >
           <CloseButton onClose={this.handleCloseCustomModal}>
             <Calendar
-              monthHeight={370}
+              monthHeight={320}
               startingMonth="2018-08-01"
               startDate="2018-08-20"
               endDate="2018-09-20"
               numberOfMonths={100}
-              initialListSize={6}
+              initialListSize={4}
               onChange={console.log}
               theme={THEME}
-              renderDayContent={this.renderDayContent}
+              // renderDayContent={this.renderDayContent}
             />
           </CloseButton>
         </Modal>
