@@ -25,14 +25,8 @@ const THEME = {
   },
   nonTouchableDayContainerStyle: {},
   nonTouchableDayTextStyle: {},
-  startDateContainerStyle: {
-    borderTopLeftRadius: 18,
-    borderBottomLeftRadius: 18,
-  },
-  endDateContainerStyle: {
-    borderTopRightRadius: 18,
-    borderBottomRightRadius: 18,
-  },
+  startDateContainerStyle: {},
+  endDateContainerStyle: {},
   dayContainerStyle: {},
   dayTextStyle: {
     color: '#2d4150',
@@ -50,7 +44,7 @@ const THEME = {
 
 function CloseButton({ onClose, children }) {
   return (
-    <View style={{ marginTop: iOS ? 20 : 0 }}>
+    <View style={{ marginTop: iOS ? 40 : 0 }}>
       <Text style={{ fontSize: 20, marginLeft: 10 }} onPress={onClose}>
         Close
       </Text>
