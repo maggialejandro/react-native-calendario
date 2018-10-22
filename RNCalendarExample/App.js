@@ -45,7 +45,10 @@ const THEME = {
 function CloseButton({ onClose, children }) {
   return (
     <View style={{ marginTop: iOS ? 40 : 0 }}>
-      <Text style={{ fontSize: 20, marginLeft: 10 }} onPress={onClose}>
+      <Text
+        style={{ fontSize: 20, marginLeft: 10 }}
+        onPress={onClose}
+      >
         Close
       </Text>
       {children}

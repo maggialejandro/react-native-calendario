@@ -84,12 +84,5 @@ import Calendar from 'react-native-calendario';
 |**`extraData`**|FlatList extraData |no|null| any |
 |**`viewableItemsChanged`**|handleViewableItemsChange callback |no|null| Function |
 
-
-## Example
-To run the example project change package.json main path like this
-```json
-"main": "lib/index.js",
-```
-
 ## License
 MIT
