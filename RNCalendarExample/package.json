@@ -3,21 +3,25 @@
   "version": "0.0.1",
   "private": true,
   "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
+    "start": "node node_modules/react-native/local-cli/cli.js start --config ../../../../metro.config.js",
     "test": "jest"
   },
   "dependencies": {
-    "moment": "^2.22.1",
-    "react": "16.5.0",
-    "react-native": "0.57.1"
+    "@babel/runtime": "7.1.2",
+    "moment": "^2.22.2",
+    "react": "16.6.0-alpha.8af6728",
+    "react-native": "0.57.3"
   },
   "devDependencies": {
-    "babel-jest": "23.0.1",
+    "@babel/core": "7.1.2",
+    "babel-jest": "23.6.0",
     "babel-plugin-module-resolver": "^3.1.1",
-    "babel-preset-react-native": "4.0.0",
-    "flow-bin": "^0.81.0",
-    "jest": "22.4.4",
-    "react-test-renderer": "16.5.0"
+    "flow-bin": "^0.83.0",
+    "glob-to-regexp": "^0.4.0",
+    "jest": "23.6.0",
+    "metro-react-native-babel-preset": "0.48.1",
+    "react-test-renderer": "16.6.0-alpha.8af6728",
+    "schedule": "^0.4.0"
   },
   "jest": {
     "preset": "react-native"

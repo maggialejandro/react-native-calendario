@@ -12,6 +12,7 @@
   },
   "rules": {
     "react/forbid-prop-types": "warn",
+    "react/destructuring-assignment": ['never'],
     "react/jsx-filename-extension": [
       "off", { "extensions": [".js", ".jsx"] }
     ],
