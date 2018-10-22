@@ -16,7 +16,6 @@
         "singleQuote": true
       }
     ],
-    "react/destructuring-assignment": ['never'],
     "react/forbid-prop-types": "warn",
     "react/destructuring-assignment": ['never'],
     "react/jsx-filename-extension": [
