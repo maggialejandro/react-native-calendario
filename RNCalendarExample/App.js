@@ -47,7 +47,7 @@ function CloseButton({ onClose, children }) {
     <View style={{ marginTop: iOS ? 40 : 0 }}>
       <Text
         style={{ fontSize: 20, marginLeft: 10 }}
-        onPress={() => onClose()}
+        onPress={onClose}
       >
         Close
       </Text>
