@@ -13,7 +13,7 @@
     "react-native": "0.57.3"
   },
   "devDependencies": {
-    "@babel/core": "7.1.2",
+    "@babel/core": "7.1.5",
     "babel-jest": "23.6.0",
     "babel-plugin-module-resolver": "^3.1.1",
     "flow-bin": "^0.83.0",
