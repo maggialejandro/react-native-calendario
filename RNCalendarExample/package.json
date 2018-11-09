@@ -20,8 +20,7 @@
     "glob-to-regexp": "^0.4.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.48.1",
-    "react-test-renderer": "16.6.0-alpha.8af6728",
-    "schedule": "^0.4.0"
+    "react-test-renderer": "16.6.0-alpha.8af6728"
   },
   "jest": {
     "preset": "react-native"
