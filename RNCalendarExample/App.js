@@ -33,6 +33,8 @@ const THEME = {
     fontWeight: '200',
     fontSize: 15,
   },
+  dayOutOfRangeContainerStyle: {},
+  dayOutOfRangeTextStyle: {},
   activeDayContainerStyle: {
     backgroundColor: '#6d95da',
   },
@@ -116,6 +118,7 @@ export default class App extends React.PureComponent<
               monthHeight={370}
               startingMonth="1980-01-01"
               startDate="1990-08-20"
+              minDate="1990-08-10"
               // endDate="1990-09-20"
               numberOfMonths={600}
               initialListSize={4}
