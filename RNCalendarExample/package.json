@@ -16,7 +16,7 @@
     "@babel/core": "7.1.2",
     "babel-jest": "23.6.0",
     "babel-plugin-module-resolver": "^3.1.1",
-    "flow-bin": "^0.84.0",
+    "flow-bin": "^0.87.0",
     "glob-to-regexp": "^0.4.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.48.1",
