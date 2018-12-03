@@ -33,6 +33,8 @@ const THEME = {
     fontWeight: '200',
     fontSize: 15,
   },
+  dayOutOfRangeContainerStyle: {},
+  dayOutOfRangeTextStyle: {},
   activeDayContainerStyle: {
     backgroundColor: '#6d95da',
   },
@@ -45,10 +47,7 @@ const THEME = {
 function CloseButton({ onClose, children }) {
   return (
     <View style={{ marginTop: iOS ? 40 : 0 }}>
-      <Text
-        style={{ fontSize: 20, marginLeft: 10 }}
-        onPress={onClose}
-      >
+      <Text style={{ fontSize: 20, marginLeft: 10 }} onPress={onClose}>
         Close
       </Text>
       {children}
@@ -114,11 +113,14 @@ export default class App extends React.PureComponent<
         >
           <CloseButton onClose={this.handleCloseCustomModal}>
             <Calendar
+              disableRange
+              locale="es"
               monthHeight={370}
-              startingMonth="2018-08-01"
-              startDate="2018-08-20"
-              endDate="2018-09-20"
-              numberOfMonths={100}
+              startingMonth="1980-01-01"
+              startDate="1990-08-20"
+              minDate="1990-08-10"
+              // endDate="1990-09-20"
+              numberOfMonths={600}
               initialListSize={4}
               onChange={console.log}
               theme={THEME}

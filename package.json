@@ -1,6 +1,6 @@
 {
   "name": "react-native-calendario",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "React Native Calendar",
   "main": "dist/index.js",
   "scripts": {
@@ -29,8 +29,8 @@
     "moment": "^2.22.2"
   },
   "peerDependencies": {
-    "react": "16.6.0",
-    "react-native": "^0.57.3"
+    "react": "16.6.0-alpha.8af6728",
+    "react-native": "^0.57.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -46,7 +46,7 @@
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-prettier": "^3.0.0",
     "eslint-plugin-react": "^7.11.1",
-    "flow-bin": "^0.83.0",
+    "flow-bin": "^0.84.0",
     "flow-copy-source": "^2.0.2",
     "prettier": "^1.14.3",
     "rimraf": "^2.6.2"
