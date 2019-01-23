@@ -29,8 +29,8 @@
     "moment": "^2.22.2"
   },
   "peerDependencies": {
-    "react": "16.6.0-alpha.8af6728",
-    "react-native": "^0.57.5"
+    "react": "16.7.0",
+    "react-native": "^0.57.8"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
