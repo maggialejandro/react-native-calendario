@@ -9,7 +9,7 @@
   "dependencies": {
     "@babel/runtime": "7.2.0",
     "moment": "^2.22.2",
-    "react": "16.6.0-alpha.8af6728",
+    "react": "16.7.0",
     "react-native": "0.57.8"
   },
   "devDependencies": {
@@ -20,7 +20,7 @@
     "glob-to-regexp": "^0.4.0",
     "jest": "23.6.0",
     "metro-react-native-babel-preset": "0.51.0",
-    "react-test-renderer": "16.6.0-alpha.8af6728"
+    "react-test-renderer": "16.7.0"
   },
   "jest": {
     "preset": "react-native"
