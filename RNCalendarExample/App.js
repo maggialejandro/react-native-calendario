@@ -35,6 +35,10 @@ const THEME = {
   },
   dayOutOfRangeContainerStyle: {},
   dayOutOfRangeTextStyle: {},
+  todayContainerStyle: {},
+  todayTextStyle: {
+    color: '#6d95da',
+  },
   activeDayContainerStyle: {
     backgroundColor: '#6d95da',
   },
@@ -113,13 +117,8 @@ export default class App extends React.PureComponent<
         >
           <CloseButton onClose={this.handleCloseCustomModal}>
             <Calendar
-              disableRange
               locale="es"
               monthHeight={370}
-              startingMonth="1980-01-01"
-              startDate="1990-08-20"
-              minDate="1990-08-10"
-              // endDate="1990-09-20"
               numberOfMonths={600}
               initialListSize={4}
               onChange={console.log}
