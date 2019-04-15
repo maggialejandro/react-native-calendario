@@ -29,8 +29,8 @@
     "moment": "^2.24.0"
   },
   "peerDependencies": {
-    "react": "16.7.0",
-    "react-native": "^0.57.8"
+    "react": "16.8.3",
+    "react-native": "^0.59.4"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
@@ -38,17 +38,17 @@
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-react-native": "^5.0.2",
     "babel-preset-react-native-syntax": "^1.0.0",
-    "eslint": "^5.12.1",
+    "eslint": "^5.16.0",
     "eslint-config-airbnb": "^17.1.0",
     "eslint-config-prettier": "^4.1.0",
-    "eslint-plugin-flowtype": "^3.2.1",
-    "eslint-plugin-import": "^2.15.0",
-    "eslint-plugin-jsx-a11y": "^6.1.2",
+    "eslint-plugin-flowtype": "^3.6.1",
+    "eslint-plugin-import": "^2.17.1",
+    "eslint-plugin-jsx-a11y": "^6.2.1",
     "eslint-plugin-prettier": "^3.0.1",
     "eslint-plugin-react": "^7.12.4",
-    "flow-bin": "^0.91.0",
-    "flow-copy-source": "^2.0.2",
-    "prettier": "^1.16.1",
+    "flow-bin": "^0.97.0",
+    "flow-copy-source": "^2.0.3",
+    "prettier": "^1.17.0",
     "rimraf": "^2.6.3"
   }
 }
