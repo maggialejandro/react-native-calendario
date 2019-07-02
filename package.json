@@ -30,7 +30,7 @@
   },
   "peerDependencies": {
     "react": "16.8.3",
-    "react-native": "^0.59.9"
+    "react-native": "^0.59.10"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
