@@ -19,7 +19,7 @@
     "flow-bin": "^0.102.0",
     "glob-to-regexp": "^0.4.1",
     "jest": "24.8.0",
-    "metro-react-native-babel-preset": "0.54.1",
+    "metro-react-native-babel-preset": "0.55.0",
     "react-test-renderer": "16.8.6"
   },
   "jest": {
