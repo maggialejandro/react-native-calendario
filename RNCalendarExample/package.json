@@ -7,7 +7,7 @@
     "test": "jest"
   },
   "dependencies": {
-    "@babel/runtime": "7.4.5",
+    "@babel/runtime": "7.5.0",
     "moment": "^2.24.0",
     "react": "16.8.3",
     "react-native": "0.59.9"
