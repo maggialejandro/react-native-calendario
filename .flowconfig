@@ -40,11 +40,11 @@
 [libs]
 node_modules/react-native/Libraries/react-native/react-native-interface.js
 node_modules/react-native/flow/
+node_modules/react-native/flow-github/
+
 
 [options]
 emoji=true
-
-module.system=haste
 
 munge_underscores=true
 
@@ -54,6 +54,21 @@ module.file_ext=.js
 module.file_ext=.jsx
 module.file_ext=.json
 module.file_ext=.native.js
+
+module.system=haste
+module.system.haste.use_name_reducers=true
+# get basename
+module.system.haste.name_reducers='^.*/\([a-zA-Z0-9$_.-]+\.js\(\.flow\)?\)$' -> '\1'
+# strip .js or .js.flow suffix
+module.system.haste.name_reducers='^\(.*\)\.js\(\.flow\)?$' -> '\1'
+# strip .ios suffix
+module.system.haste.name_reducers='^\(.*\)\.ios$' -> '\1'
+module.system.haste.name_reducers='^\(.*\)\.android$' -> '\1'
+module.system.haste.name_reducers='^\(.*\)\.native$' -> '\1'
+module.system.haste.paths.blacklist=.*/__tests__/.*
+module.system.haste.paths.blacklist=.*/__mocks__/.*
+module.system.haste.paths.blacklist=<PROJECT_ROOT>/node_modules/react-native/Libraries/Animated/src/polyfills/.*
+module.system.haste.paths.whitelist=<PROJECT_ROOT>/node_modules/react-native/Libraries/.*
 
 suppress_type=$FlowIssue
 suppress_type=$FlowFixMe
@@ -66,4 +81,4 @@ suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
 
 [version]
-^0.75.0
+^0.98.1

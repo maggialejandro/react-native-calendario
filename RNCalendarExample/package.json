@@ -1,5 +1,5 @@
 {
-  "name": "RNCalendarExample",
+  "name": "calendar-example",
   "version": "0.0.1",
   "private": true,
   "scripts": {
@@ -13,9 +13,10 @@
     "react-native": "0.59.9"
   },
   "devDependencies": {
-    "@babel/core": "7.4.5",
+    "@babel/core": "7.5.4",
     "babel-jest": "24.8.0",
     "babel-plugin-module-resolver": "^3.2.0",
+    "eslint-plugin-react-native": "^3.7.0",
     "flow-bin": "^0.98.1",
     "glob-to-regexp": "^0.4.1",
     "jest": "24.8.0",

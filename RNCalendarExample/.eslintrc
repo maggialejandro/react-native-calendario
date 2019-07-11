@@ -1,11 +1,11 @@
 {
-  "extends": '../.eslintrc',
+  "extends": "../.eslintrc",
 
   "settings": {
     "import/core-modules": ["react-native", "react-native-calendario"]
   },
 
   "rules": {
-    "react/prop-types": "off",
+    "react/prop-types": "off"
   }
 }
