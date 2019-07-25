@@ -2,14 +2,10 @@
   "name": "react-native-calendario",
   "version": "0.2.10",
   "description": "React Native Calendar",
-  "main": "dist/index.js",
+  "main": "lib/index.js",
   "scripts": {
     "lint": "eslint lib/**/*.js",
-    "clean": "rimraf dist/",
-    "build": "npm run build-lib && npm run build-flow",
-    "build-flow": "flow-copy-source lib dist",
-    "build-lib": "BABEL_ENV=publish babel lib -d dist --copy-files",
-    "prepublish": "npm run clean && npm run lint && npm run build"
+    "prepublish": "npm run lint"
   },
   "repository": {
     "type": "git",
@@ -29,10 +25,13 @@
     "moment": "^2.24.0"
   },
   "peerDependencies": {
-    "react": "16.8.3",
-    "react-native": "^0.59.9"
+    "react": "*",
+    "react-native": "*"
   },
   "devDependencies": {
+    "@types/expo": "^32.0.13",
+    "@types/react": "^16.8.20",
+    "@types/react-native": "^0.57.63",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.2",
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
@@ -46,8 +45,8 @@
     "eslint-plugin-react": "^7.14.2",
     "eslint-plugin-react-native": "^3.7.0",
     "flow-bin": "^0.102.0",
-    "flow-copy-source": "^2.0.7",
     "prettier": "^1.18.2",
-    "rimraf": "^2.6.3"
+    "react": "16.8.3",
+    "react-native": "~0.59.8"
   }
 }

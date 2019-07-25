@@ -1,0 +1,15 @@
+{
+  "presets": [
+    "expo"
+  ],
+  "plugins": [
+    [
+      "module-resolver",
+      {
+        "alias": {
+          "react-native-calendario": "../lib/index"
+        }
+      }
+    ]
+  ]
+}

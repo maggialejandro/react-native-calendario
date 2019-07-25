@@ -2,6 +2,12 @@
 ; We fork some components by platform
 .*/*[.]android.js
 
+; Ignore templates for 'react-native init'
+.*/local-cli/templates/.*
+
+; Ignore the Dangerfile
+<PROJECT_ROOT>/bots/dangerfile.js
+
 ; Ignore "BUCK" generated dirs
 <PROJECT_ROOT>/\.buckd/
 
@@ -12,51 +18,58 @@
 ; For RN Apps installed via npm, "Libraries" folder is inside
 ; "node_modules/react-native" but in the source repo it is in the root
 .*/Libraries/react-native/React.js
-.*/Libraries/react-native/ReactNative.js
 
 ; Ignore polyfills
 .*/Libraries/polyfills/.*
 
 ; Ignore metro
 .*/node_modules/metro/.*
+.*/node_modules/metro-config/.*
 
-# Ignore dist folder
-.*/dist/.*
+; These should not be required directly
+; require from fbjs/lib instead: require('fbjs/lib/invariant')
+.*/node_modules/invariant/.*
+.*/node_modules/warning/.*
 
-# Ignore tests project
-.*/tests/.*
+; Ignore duplicate modules under example/
+.*/example/node_modules/fbjs/.*
+.*/example/node_modules/fbemitter/.*
+.*/example/node_modules/react/.*
+.*/example/node_modules/react-native/.*
+.*/example/\.buckd/
 
-# Ignore bridge project
-.*/bridge/.*
+; Ignore duplicate modules under docs/
+.*/docs/node_modules/fbjs/.*
+.*/docs/node_modules/react/.*
 
-; Ignore duplicate modules under example folder/
-.*/RNCalendarExample/node_modules/fbjs
-.*/RNCalendarExample/node_modules/react
-.*/RNCalendarExample/node_modules/react-native
-.*/RNCalendarExample/\.buckd/
+; Ignore some modules we don't need to parse
+.*/node_modules/prettier/.*
+.*/node_modules/eslint.*
+
+; Ignore modules with errors
+.*/node_modules/@expo/.*
+
+[untyped]
+.*/node_modules/expo/.*
+.*/node_modules/xdl/.*
 
 [include]
 
 [libs]
 node_modules/react-native/Libraries/react-native/react-native-interface.js
-node_modules/react-native/flow/
-node_modules/react-native/flow-github/
-
+node_modules/react-native/flow-github
+node_modules/react-native/flow
+flow-typed
 
 [options]
 emoji=true
 
-munge_underscores=true
-
-module.name_mapper='^[./a-zA-Z0-9$_-]+\.\(bmp\|gif\|jpg\|jpeg\|png\|psd\|svg\|webp\|m4v\|mov\|mp4\|mpeg\|mpg\|webm\|aac\|aiff\|caf\|m4a\|mp3\|wav\|html\|pdf\)$' -> 'RelativeImageStub'
-
-module.file_ext=.js
-module.file_ext=.jsx
-module.file_ext=.json
-module.file_ext=.native.js
+esproposal.optional_chaining=enable
+esproposal.nullish_coalescing=enable
 
 module.system=haste
 module.system.haste.use_name_reducers=true
+# keep the following in sync with server/haste/hasteImpl.js
 # get basename
 module.system.haste.name_reducers='^.*/\([a-zA-Z0-9$_.-]+\.js\(\.flow\)?\)$' -> '\1'
 # strip .js or .js.flow suffix
@@ -67,18 +80,48 @@ module.system.haste.name_reducers='^\(.*\)\.android$' -> '\1'
 module.system.haste.name_reducers='^\(.*\)\.native$' -> '\1'
 module.system.haste.paths.blacklist=.*/__tests__/.*
 module.system.haste.paths.blacklist=.*/__mocks__/.*
-module.system.haste.paths.blacklist=<PROJECT_ROOT>/node_modules/react-native/Libraries/Animated/src/polyfills/.*
 module.system.haste.paths.whitelist=<PROJECT_ROOT>/node_modules/react-native/Libraries/.*
+module.system.haste.paths.whitelist=<PROJECT_ROOT>/node_modules/react-native/RNTester/.*
+module.system.haste.paths.whitelist=<PROJECT_ROOT>/node_modules/react-native/IntegrationTests/.*
+module.system.haste.paths.blacklist=<PROJECT_ROOT>/node_modules/react-native/Libraries/Animated/src/polyfills/.*
+
+munge_underscores=true
+
+module.name_mapper='^[./a-zA-Z0-9$_-]+\.\(bmp\|gif\|jpg\|jpeg\|png\|psd\|svg\|webp\|m4v\|mov\|mp4\|mpeg\|mpg\|webm\|aac\|aiff\|caf\|m4a\|mp3\|wav\|html\|pdf\)$' -> 'RelativeImageStub'
 
 suppress_type=$FlowIssue
 suppress_type=$FlowFixMe
 suppress_type=$FlowFixMeProps
 suppress_type=$FlowFixMeState
 
-suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(<VERSION>\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)
-suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(<VERSION>\\)? *\\(site=[a-z,_]*react_native[a-z,_]*\\)?)\\)?:? #[0-9]+
+suppress_comment=\\(.\\|\n\\)*\\$FlowFixMe\\($\\|[^(]\\|(\\(<VERSION>\\)? *\\(site=[a-z,_]*[react_native\\(_ios\\)?_oss|react_native\\(_ios\\)?_fb][a-z,_]*\\)?)\\)
+suppress_comment=\\(.\\|\n\\)*\\$FlowIssue\\((\\(<VERSION>\\)? *\\(site=[a-z,_]*[react_native\\(_ios\\)?_oss|react_native\\(_ios\\)?_fb][a-z,_]*\\)?)\\)?:? #[0-9]+
 suppress_comment=\\(.\\|\n\\)*\\$FlowFixedInNextDeploy
 suppress_comment=\\(.\\|\n\\)*\\$FlowExpectedError
+
+[lints]
+all=warn
+unnecessary-optional-chain=off
+
+# There is an ESLint rule for this
+unclear-type=off
+
+sketchy-null=off
+sketchy-null-number=warn
+sketchy-null-mixed=warn
+
+# This is noisy for now. We *do* still want to warn on importing types
+# from untyped files, which is covered by untyped-type-import
+untyped-import=off
+
+[strict]
+deprecated-type
+nonstrict-import
+sketchy-null
+unclear-type
+unsafe-getters-setters
+untyped-import
+untyped-type-import
 
 [version]
 ^0.102.0

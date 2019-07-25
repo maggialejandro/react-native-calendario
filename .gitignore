@@ -1,7 +1,5 @@
-dist
 .DS_Store
+.idea
+.vscode
 node_modules
 npm-debug.log
-.idea
-yarn.lock
-.vscode
