@@ -50,6 +50,13 @@ const THEME: ThemeType = {
   nonTouchableLastMonthDayTextStyle: {},
 };
 
+const truthyValue = true;
+
+const DISABLED_DAYS = {
+  '2019-11-20': truthyValue,
+  '2019-11-10': truthyValue,
+};
+
 function CloseButton({ onClose, children }) {
   return (
     <View style={{ marginTop: iOS ? 40 : 0 }}>
@@ -131,6 +138,7 @@ export default class App extends React.PureComponent<
               initialListSize={4}
               onChange={console.log}
               theme={THEME}
+              disabledDays={DISABLED_DAYS}
               // renderDayContent={this.renderDayContent}
             />
           </View>
