@@ -5,6 +5,7 @@
   "main": "lib/index.js",
   "scripts": {
     "lint": "eslint lib/**/*.js",
+    "test": "npm run lint",
     "prepublish": "npm run lint"
   },
   "repository": {
