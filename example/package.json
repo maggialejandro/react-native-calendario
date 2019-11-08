@@ -8,16 +8,16 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "expo": "^34.0.4",
-    "moment": "^2.24.0",
+    "expo": "35.0.0",
+    "moment": "2.24.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-34.0.0.tar.gz"
+    "react-native": "https://github.com/expo/react-native/archive/sdk-35.0.0.tar.gz"
   },
   "devDependencies": {
-    "babel-plugin-module-resolver": "^3.2.0",
-    "babel-preset-expo": "^5.1.1",
-    "flow-bin": "0.102.0"
+    "babel-plugin-module-resolver": "3.2.0",
+    "babel-preset-expo": "7.1.0",
+    "flow-bin": "0.92.0"
   },
   "resolutions": {
     "@babel/runtime": "7.3.1"

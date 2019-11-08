@@ -22,31 +22,27 @@
   },
   "homepage": "https://github.com/maggialejandro/react-native-calendario#readme",
   "dependencies": {
-    "moment": "^2.24.0"
+    "moment": "2.24.0"
   },
   "peerDependencies": {
     "react": "*",
     "react-native": "*"
   },
   "devDependencies": {
-    "@types/expo": "^32.0.13",
-    "@types/react": "^16.8.14",
-    "@types/react-native": "^0.57.46",
-    "babel-cli": "^6.26.0",
-    "babel-eslint": "^10.0.3",
-    "babel-plugin-transform-flow-strip-types": "^6.22.0",
-    "babel-preset-react-native": "^5.0.2",
-    "babel-preset-react-native-syntax": "^1.0.0",
-    "eslint": "^6.3.0",
-    "eslint-config-prettier": "^6.3.0",
-    "eslint-plugin-flowtype": "^4.3.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-prettier": "^3.1.0",
-    "eslint-plugin-react": "^7.14.3",
-    "eslint-plugin-react-native": "^3.7.0",
-    "flow-bin": "^0.102.0",
-    "prettier": "^1.18.2",
+    "@types/react": "16.8.14",
+    "@types/react-native": "0.57.46",
+    "babel-eslint": "10.0.3",
+    "eslint": "6.5.1",
+    "eslint-config-prettier": "6.4.0",
+    "eslint-plugin-flowtype": "4.3.0",
+    "eslint-plugin-import": "2.18.2",
+    "eslint-plugin-prettier": "3.1.1",
+    "eslint-plugin-react": "7.16.0",
+    "eslint-plugin-react-native": "3.7.0",
+    "flow-bin": "0.92.0",
+    "metro-react-native-babel-preset": "0.54.0",
+    "prettier": "1.18.2",
     "react": "16.8.3",
-    "react-native": "~0.59.8"
+    "react-native": "0.59.8"
   }
 }

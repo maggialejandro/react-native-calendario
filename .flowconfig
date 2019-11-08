@@ -2,12 +2,6 @@
 ; We fork some components by platform
 .*/*[.]android.js
 
-; Ignore templates for 'react-native init'
-.*/local-cli/templates/.*
-
-; Ignore the Dangerfile
-<PROJECT_ROOT>/bots/dangerfile.js
-
 ; Ignore "BUCK" generated dirs
 <PROJECT_ROOT>/\.buckd/
 
@@ -24,12 +18,6 @@
 
 ; Ignore metro
 .*/node_modules/metro/.*
-.*/node_modules/metro-config/.*
-
-; These should not be required directly
-; require from fbjs/lib instead: require('fbjs/lib/invariant')
-.*/node_modules/invariant/.*
-.*/node_modules/warning/.*
 
 ; Ignore duplicate modules under example/
 .*/example/node_modules/fbjs/.*
@@ -38,9 +26,9 @@
 .*/example/node_modules/react-native/.*
 .*/example/\.buckd/
 
-; Ignore duplicate modules under docs/
-.*/docs/node_modules/fbjs/.*
-.*/docs/node_modules/react/.*
+; ; Ignore duplicate modules under docs/
+; .*/docs/node_modules/fbjs/.*
+; .*/docs/node_modules/react/.*
 
 ; Ignore some modules we don't need to parse
 .*/node_modules/prettier/.*
@@ -124,4 +112,4 @@ untyped-import
 untyped-type-import
 
 [version]
-^0.102.0
+^0.92.0

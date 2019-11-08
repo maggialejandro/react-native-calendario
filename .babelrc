@@ -1,16 +1,3 @@
 {
-  "env": {
-    "development": {
-      "presets": ["react-native"],
-      "plugins": [
-        "transform-flow-strip-types"
-      ]
-    },
-    "publish": {
-      "presets": ["react-native-syntax"],
-      "plugins": [
-        "transform-flow-strip-types"
-      ]
-    }
-  }
+  "presets": ["module:metro-react-native-babel-preset"]
 }
