@@ -1,5 +1,4 @@
 /* @flow */
-/* eslint-disable import/prefer-default-export, no-restricted-globals */
 import type { LocaleType } from '../types';
 
 export function addDays(date: Date, days: number): Date {
@@ -21,7 +20,7 @@ function leapYear(year: number): boolean {
 
 export function getNumberOfDaysInMonth(
   monthIndex: number,
-  year: number,
+  year: number
 ): number {
   switch (monthIndex) {
     case 0:
@@ -53,7 +52,7 @@ export function getNumberOfDaysInMonth(
   }
 }
 
-export function getMonthNames(locale: LocaleType): Array<string> {
+export function getMonthNames(locale: LocaleType): string[] {
   switch (locale) {
     case 'es':
       return [
@@ -133,7 +132,7 @@ export function getMonthNames(locale: LocaleType): Array<string> {
   }
 }
 
-function getWeekdayNames(locale: LocaleType): Array<string> {
+function getWeekdayNames(locale: LocaleType): string[] {
   switch (locale) {
     case 'es':
       return ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sab'];
@@ -150,9 +149,9 @@ function getWeekdayNames(locale: LocaleType): Array<string> {
 
 export function getDayNames(
   locale: LocaleType,
-  firstDayMonday: boolean,
-): Array<string> {
-  const days: Array<string> = getWeekdayNames(locale);
+  firstDayMonday: boolean
+): string[] {
+  const days: string[] = getWeekdayNames(locale);
   if (firstDayMonday) {
     const sunday = days.shift();
     days.push(sunday);

@@ -1,16 +1,7 @@
 /* @flow */
 import moment from 'moment';
-import {
-  addDays,
-  getMonthNames,
-  getNumberOfDaysInMonth,
-} from '../../utils/date';
-import type {
-  ViewableItemsType,
-  LocaleType,
-  MonthType,
-  DayType,
-} from '../../types';
+import { addDays, getNumberOfDaysInMonth } from '../../utils/date';
+import type { DayType } from '../../types';
 
 const MONDAY_FIRST = [6, 0, 1, 2, 3, 4, 5];
 
@@ -19,7 +10,7 @@ function dayShouldBeActive(
   startDate: Date,
   endDate: Date,
   firstDayOfMonth: Date,
-  lastDayOfMonth: Date,
+  lastDayOfMonth: Date
 ): boolean {
   if (date > lastDayOfMonth) {
     return endDate > lastDayOfMonth && startDate < lastDayOfMonth;
@@ -37,12 +28,12 @@ export function getDaysOfMonth(
   maxDate?: ?Date,
   disableRange: boolean,
   firstDayMonday: boolean,
-  disabledDays: { [key: string]: any } = {},
-): Array<DayType> {
+  disabledDays: { [key: string]: any } = {}
+): DayType[] {
   const startDayOfMonth = moment([year, monthNumber]);
   const daysToAdd = getNumberOfDaysInMonth(monthNumber, year);
 
-  const days: Array<DayType> = [];
+  const days: DayType[] = [];
 
   const startWeekOffset = firstDayMonday
     ? MONDAY_FIRST[startDayOfMonth.day()]
@@ -91,7 +82,7 @@ export function getDaysOfMonth(
           startDate,
           endDate,
           firstDayOfMonth,
-          lastDayOfMonth,
+          lastDayOfMonth
         );
       } else {
         isActive = date >= startDate && date <= endDate;

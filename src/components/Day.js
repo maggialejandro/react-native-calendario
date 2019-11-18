@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable react/no-unused-prop-types */
 import * as React from 'react';
 import { TouchableOpacity, StyleSheet, View, Text } from 'react-native';
 // import { useWhyDidYouUpdate } from '../utils/hooks';
@@ -39,15 +40,7 @@ const NonTouchableDay = React.memo<NonTouchableDayPropsType>(
   (props: NonTouchableDayPropsType) => {
     // useWhyDidYouUpdate('NonTouchableDay', props);
 
-    const {
-      isMonthDate,
-      isActive,
-      isOutOfRange,
-      isVisible,
-      theme,
-      date,
-      isToday,
-    } = props;
+    const { isMonthDate, isActive, isOutOfRange, theme, date, isToday } = props;
 
     return (
       <View
@@ -80,7 +73,7 @@ const NonTouchableDay = React.memo<NonTouchableDayPropsType>(
       prevProps.isActive !== nextProps.isActive ||
       prevProps.isVisible !== nextProps.isVisible
     );
-  },
+  }
 );
 
 type PropsType = {
@@ -162,7 +155,7 @@ const Day = React.memo<PropsType>(
       prevProps.item.isEndDate !== nextProps.item.isEndDate ||
       prevProps.renderDayContent !== nextProps.renderDayContent
     );
-  },
+  }
 );
 
 export default Day;

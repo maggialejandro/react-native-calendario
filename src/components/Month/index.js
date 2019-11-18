@@ -1,4 +1,5 @@
 /* @flow */
+/* eslint-disable react/no-unused-prop-types */
 import * as React from 'react';
 import { View, Text } from 'react-native';
 import moment from 'moment';
@@ -32,7 +33,7 @@ const EmptyMonth = React.memo<EmptyMonthType>(
       </Text>
     </View>
   ),
-  () => true,
+  () => true
 );
 
 type WeekColumnType = { day: string, theme: ThemeType };
@@ -47,10 +48,10 @@ const WeekColumn = React.memo<WeekColumnType>(
       </Text>
     </View>
   ),
-  () => true,
+  () => true
 );
 
-type WeelColumnsType = { days: Array<string>, theme: ThemeType };
+type WeelColumnsType = { days: string[], theme: ThemeType };
 
 const WeekColumns = React.memo<WeelColumnsType>(
   (props: WeelColumnsType) => (
@@ -62,7 +63,7 @@ const WeekColumns = React.memo<WeelColumnsType>(
       ))}
     </View>
   ),
-  () => true,
+  () => true
 );
 
 type MonthTitleType = { name: string, theme: ThemeType };
@@ -79,7 +80,7 @@ const MonthTitle = React.memo<MonthTitleType>(
       {props.name}
     </Text>
   ),
-  () => true,
+  () => true
 );
 
 type Props = {
@@ -90,7 +91,7 @@ type Props = {
   showMonthTitle: boolean,
   firstDayMonday: boolean,
   locale: LocaleType,
-  dayNames: Array<string>,
+  dayNames: string[],
   height: number,
   renderDayContent?: (DayType) => React.Node,
   minDate?: string,
@@ -132,7 +133,7 @@ const getDayList = (props: Props) => {
     max,
     disableRange,
     firstDayMonday,
-    disabledDays,
+    disabledDays
   );
 };
 
@@ -167,11 +168,11 @@ export default React.memo<Props>(
       <View style={{ height }}>
         {showMonthTitle && <MonthTitle name={name} theme={theme} />}
         {showWeekdays && <WeekColumns days={DAY_NAMES} theme={theme} />}
-        {weeks.map((week: Array<DayType>, index: number) => (
-          <View key={index} style={{ flexDirection: 'row' }}>
+        {weeks.map((week: DayType[], index: number) => (
+          <View key={String(index)} style={{ flexDirection: 'row' }}>
             {week.map((day: DayType, index: number) => (
               <Day
-                key={index}
+                key={String(index)}
                 item={day}
                 onPress={props.onPress}
                 theme={props.theme}
@@ -192,5 +193,5 @@ export default React.memo<Props>(
       prevProps.endDate !== nextProps.endDate ||
       prevProps.extraData !== nextProps.extraData
     );
-  },
+  }
 );

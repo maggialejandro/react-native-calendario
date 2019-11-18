@@ -1,39 +1,10 @@
 {
-  "extends": [
-    "prettier",
-    "prettier/flowtype",
-    "prettier/react",
-    "plugin:react-native/all",
-    "plugin:flowtype/recommended",
-    "plugin:import/errors",
-    "plugin:import/warnings"
-  ],
-  "parser": "babel-eslint",
-  "plugins": ["flowtype", "prettier"],
-  "env": {
-    "es6": true,
-    "jasmine": true
-  },
+  "extends": "eslint-config-satya164",
+  "plugins": ["react-native-globals"],
   "rules": {
-    "prettier/prettier": [
-      "error",
-      {
-        "avoidEscape": true,
-        "trailingComma": "all",
-        "arrowParens": "always",
-        "singleQuote": true
-      }
-    ],
-    "react/destructuring-assignment": 0,
-    "react-native/no-inline-styles": "off",
-    "react-native/no-color-literals": "off",
-    "react/jsx-filename-extension": [
-      "off", { "extensions": [".js", ".jsx"] }
-    ],
-    "no-undef": 0
+    "flowtype/require-types-at-top": 0
   },
-  "globals": {
-    "__DEV__": true,
-    "window": true
+  "env": {
+    "react-native-globals/all": true
   }
 }

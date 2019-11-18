@@ -57,22 +57,11 @@ const DISABLED_DAYS = {
   '2019-11-10': truthyValue,
 };
 
-function CloseButton({ onClose, children }) {
-  return (
-    <View style={{ marginTop: iOS ? 40 : 0 }}>
-      <Text style={{ fontSize: 20, marginLeft: 10 }} onPress={onClose}>
-        Close
-      </Text>
-      {children}
-    </View>
-  );
-}
-
 export default class App extends React.PureComponent<
   {},
   {
     isVisibleModalCustom: boolean,
-  },
+  }
 > {
   state = {
     isVisibleModalCustom: false,

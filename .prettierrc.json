@@ -2,7 +2,7 @@
   "tabWidth": 2,
   "useTabs": false,
   "avoidEscape": true,
-  "trailingComma": "all",
+  "trailingComma": "es5",
   "arrowParens": "always",
   "singleQuote": true
 }

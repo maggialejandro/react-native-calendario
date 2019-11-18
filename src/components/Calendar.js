@@ -6,17 +6,10 @@ import moment from 'moment';
 import Month from './Month';
 import { getMonthsList, viewableItemsChanged } from '../utils';
 import { isValidDate } from '../utils/date';
-import type {
-  CalendarType,
-  MonthType,
-  ViewableItemsType,
-  ThemeType,
-  LocaleType,
-  DayType,
-} from '../types';
+import type { CalendarType, MonthType, ViewableItemsType } from '../types';
 
 type StateType = {
-  months: Array<MonthType>,
+  months: MonthType[],
   initialListSize: number,
   firstViewableIndex: number,
   lastViewableIndex: number,
@@ -37,8 +30,8 @@ const VIEWABILITY_CONFIG = {
 };
 
 function visibleMonthsChanged(
-  oldMonths: Array<MonthType>,
-  newMonths: Array<MonthType>,
+  oldMonths: MonthType[],
+  newMonths: MonthType[]
 ): boolean {
   for (let i = 0; i < oldMonths.length; i++) {
     if (newMonths[i].isVisible !== oldMonths[i].isVisible) {
@@ -65,8 +58,6 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
     monthHeight: MONTH_HEIGHT,
   };
 
-  listReference: React.ElementRef<typeof FlatList>;
-
   state = {
     months: [],
     initialListSize: 2,
@@ -77,7 +68,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
     endDate: null,
   };
 
-  componentWillMount() {
+  UNSAFE_componentWillMount() {
     const {
       initialListSize,
       numberOfMonths,
@@ -109,13 +100,13 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
         ? null
         : start;
 
-    const months: Array<MonthType> = getMonthsList(
+    const months: MonthType[] = getMonthsList(
       firstMonthToRender,
       numberOfMonths,
       initialListSize + DIFF_VISIBLE,
       start,
       locale,
-      monthNames,
+      monthNames
     );
 
     let firstMonthIndex = 0;
@@ -124,7 +115,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
         (m: MonthType): boolean =>
           !!start &&
           m.monthNumber === start.getMonth() &&
-          m.year === start.getFullYear(),
+          m.year === start.getFullYear()
       );
 
       firstMonthIndex = months.indexOf(firstMonth) || 0;
@@ -166,7 +157,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
             const index = months.findIndex(
               (m: MonthType): boolean =>
                 m.monthNumber === nextStartDate.getMonth() &&
-                m.year === nextStartDate.getFullYear(),
+                m.year === nextStartDate.getFullYear()
             );
 
             if (index !== -1) {
@@ -175,7 +166,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
                   ...month,
                   isVisible:
                     i + DIFF_VISIBLE >= index || i - DIFF_VISIBLE <= index,
-                }),
+                })
               );
 
               this.listReference.scrollToIndex({
@@ -186,14 +177,14 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
               });
             }
           }
-        },
+        }
       );
     }
   }
 
   shouldComponentUpdate(
     nextProps: CalendarType,
-    nextState: StateType,
+    nextState: StateType
   ): boolean {
     return (
       this.state.months.length !== nextState.months.length ||
@@ -206,9 +197,11 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
     );
   }
 
+  listReference: React.ElementRef<typeof FlatList>;
+
   getItemLayout = (
     data: any,
-    index: number,
+    index: number
   ): { length: number, offset: number, index: number } => ({
     length: this.props.monthHeight,
     offset: this.props.monthHeight * index,
@@ -283,7 +276,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
       {
         ...newRange,
       },
-      () => this.props.onChange(newRange),
+      () => this.props.onChange(newRange)
     );
   };
 

@@ -7,7 +7,7 @@
       "module-resolver",
       {
         "alias": {
-          "react-native-calendario": "../lib/index"
+          "react-native-calendario": "../src/index"
         }
       }
     ]

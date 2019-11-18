@@ -2,11 +2,27 @@
   "name": "react-native-calendario",
   "version": "0.4.0",
   "description": "React Native Calendar",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "scripts": {
-    "lint": "eslint lib/**/*.js",
+    "lint": "eslint src/**/*.js",
     "test": "npm run lint",
+    "flow": "flow",
     "prepublish": "npm run lint"
+  },
+  "lint-staged": {
+    "**/*.js": [
+      "prettier --write",
+      "git add"
+    ],
+    "**/*.{js,jsx}": [
+      "eslint --fix",
+      "git add"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
   },
   "repository": {
     "type": "git",
@@ -33,16 +49,13 @@
     "@types/react": "16.8.14",
     "@types/react-native": "0.57.46",
     "babel-eslint": "10.0.3",
-    "eslint": "6.5.1",
-    "eslint-config-prettier": "6.4.0",
-    "eslint-plugin-flowtype": "4.3.0",
-    "eslint-plugin-import": "2.18.2",
-    "eslint-plugin-prettier": "3.1.1",
-    "eslint-plugin-react": "7.16.0",
-    "eslint-plugin-react-native": "3.7.0",
+    "eslint": "6.6.0",
+    "eslint-config-satya164": "3.1.2",
     "flow-bin": "0.92.0",
+    "husky": "3.0.9",
+    "lint-staged": "9.4.2",
     "metro-react-native-babel-preset": "0.54.0",
-    "prettier": "1.18.2",
+    "prettier": "1.19.1",
     "react": "16.8.3",
     "react-native": "0.59.8"
   }
