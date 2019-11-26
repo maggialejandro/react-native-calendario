@@ -78,6 +78,7 @@ export type CalendarType = {
   viewableItemsChanged?: (ViewableItemsType) => void,
   calendarListRef?: (ref: React.ElementRef<typeof FlatList>) => void,
   disabledDays: { [key: string]: any },
+  disableOffsetDays: boolean,
 };
 
 export type MonthType = {

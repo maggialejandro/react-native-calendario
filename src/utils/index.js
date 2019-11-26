@@ -42,6 +42,7 @@ export function getMonthsList(
       year,
       name: `${MONTH_STRINGS[monthNumber]} ${year}`,
       isVisible,
+      indexList: monthCount,
     });
 
     year += monthNumber < 11 ? 0 : 1;

@@ -97,9 +97,14 @@ const Day = React.memo<PropsType>(
         isMonthDate,
         isOutOfRange,
         isToday,
+        shouldRender,
       },
       theme,
     } = props;
+
+    if (!shouldRender) {
+      return <View style={[styles.container]} />;
+    }
 
     if (!isVisible) {
       return (
