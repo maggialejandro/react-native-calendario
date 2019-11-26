@@ -33,6 +33,7 @@ import Calendar from 'react-native-calendario';
   minDate="2018-04-20"
   startDate="2018-04-30"
   endDate="2018-05-05"
+  disableOffsetDays= {true}
   theme={{
     activeDayColor: {},
     monthTitleTextStyle: {
@@ -102,7 +103,7 @@ import Calendar from 'react-native-calendario';
 | **`renderDayContent`**     | Render custom Day content                         | no                   | null          | Function         |
 | **`extraData`**            | FlatList extraData                                | no                   | null          | any              |
 | **`viewableItemsChanged`** | handleViewableItemsChange callback                | no                   | null          | Function         |
-
+| **`disableOffsetDays`**    | Remove offset Days.                               | no                   | false         | boolean         |
 ## License
 
 MIT
