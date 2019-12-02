@@ -79,7 +79,6 @@ export function getDaysOfMonth(
         isEndDate,
         isOutOfRange,
         isVisible: false,
-        shouldRender: indexList === 0,
       });
     } else {
       if (endDate && startDate && !disableRange) {
