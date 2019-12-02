@@ -1,7 +1,6 @@
-/* @flow */
 import moment from 'moment';
 import { addDays, getNumberOfDaysInMonth } from '../../utils/date';
-import type { DayType } from '../../types';
+import { DayType } from '../../types';
 
 const MONDAY_FIRST = [6, 0, 1, 2, 3, 4, 5];
 
@@ -22,13 +21,13 @@ function dayShouldBeActive(
 export function getDaysOfMonth(
   monthNumber: number,
   year: number,
-  startDate: ?Date,
-  endDate: ?Date,
-  minDate?: ?Date,
-  maxDate?: ?Date,
-  disableRange: boolean,
   firstDayMonday: boolean,
-  disabledDays: { [key: string]: any } = {}
+  disableRange: boolean,
+  disabledDays: { [key: string]: any } = {},
+  startDate?: Date,
+  endDate?: Date,
+  minDate?: Date,
+  maxDate?: Date
 ): DayType[] {
   const startDayOfMonth = moment([year, monthNumber]);
   const daysToAdd = getNumberOfDaysInMonth(monthNumber, year);

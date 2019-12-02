@@ -1,10 +1,6 @@
-// @flow
 import React from 'react';
 import { View, Modal, Text, Platform } from 'react-native';
-import Calendar, {
-  type DayType,
-  type ThemeType,
-} from 'react-native-calendario';
+import { Calendar, DayType, ThemeType } from 'react-native-calendario';
 
 const iOS = Platform.OS === 'ios';
 const THEME: ThemeType = {
@@ -60,7 +56,7 @@ const DISABLED_DAYS = {
 export default class App extends React.PureComponent<
   {},
   {
-    isVisibleModalCustom: boolean,
+    isVisibleModalCustom: boolean;
   }
 > {
   state = {

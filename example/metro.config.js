@@ -14,7 +14,7 @@ module.exports = {
   resolver: {
     blacklistRE: blacklist([
       new RegExp(
-        `^${escape(path.resolve(__dirname, '..', 'node_modules'))}\\/.*$`,
+        `^${escape(path.resolve(__dirname, '..', 'node_modules'))}\\/.*$`
       ),
     ]),
     providesModuleNodeModules: [
