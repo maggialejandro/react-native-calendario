@@ -16,7 +16,6 @@ type StateType = {
   initialScrollIndex: number,
   startDate: ?Date,
   endDate: ?Date,
-  disableOffsetDays: boolean,
 };
 
 const NUMBER_OF_MONTHS = 12;

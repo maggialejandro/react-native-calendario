@@ -101,12 +101,12 @@ type Props = {
   disableRange: boolean,
   disabledDays: { [key: string]: any },
   extraData: any,
-  disableOffsetDays: boolean,
+  disableOffsetDays?: boolean,
 };
 
 const getDayList = (props: Props) => {
   const {
-    month: { monthNumber, year, indexList },
+    month: { monthNumber, year },
     startDate,
     endDate,
     firstDayMonday,
@@ -137,7 +137,6 @@ const getDayList = (props: Props) => {
     disableRange,
     firstDayMonday,
     disabledDays,
-    indexList,
     disableOffsetDays
   );
 };
