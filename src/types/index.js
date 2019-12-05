@@ -48,6 +48,7 @@ export type DayType = {
   isEndDate: boolean,
   isVisible: boolean,
   isOutOfRange: boolean,
+  isHidden: boolean,
 };
 
 export type ViewableItemsType = {

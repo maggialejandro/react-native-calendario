@@ -29,7 +29,7 @@ export function getDaysOfMonth(
   disableRange: boolean,
   firstDayMonday: boolean,
   disabledDays: { [key: string]: any } = {},
-  disableOffsetDays: boolean
+  disableOffsetDays?: boolean
 ): DayType[] {
   const startDayOfMonth = moment([year, monthNumber]);
   const daysToAdd = getNumberOfDaysInMonth(monthNumber, year);
@@ -78,7 +78,7 @@ export function getDaysOfMonth(
         isEndDate,
         isOutOfRange,
         isVisible: false,
-        hidden: true,
+        isHidden: true,
       });
     } else {
       if (endDate && startDate && !disableRange) {
@@ -129,7 +129,7 @@ export function getDaysOfMonth(
           isOnSelectedRange &&
           isMonthDate &&
           !disabledDays[moment(date).format('YYYY-MM-DD')],
-        hidden: false,
+        isHidden: false,
       });
     }
   }
