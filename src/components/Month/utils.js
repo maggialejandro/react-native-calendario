@@ -28,7 +28,8 @@ export function getDaysOfMonth(
   maxDate?: ?Date,
   disableRange: boolean,
   firstDayMonday: boolean,
-  disabledDays: { [key: string]: any } = {}
+  disabledDays: { [key: string]: any } = {},
+  disableOffsetDays: boolean
 ): DayType[] {
   const startDayOfMonth = moment([year, monthNumber]);
   const daysToAdd = getNumberOfDaysInMonth(monthNumber, year);
@@ -38,6 +39,7 @@ export function getDaysOfMonth(
   const startWeekOffset = firstDayMonday
     ? MONDAY_FIRST[startDayOfMonth.day()]
     : startDayOfMonth.day();
+
   const firstMonthDay = startDayOfMonth.toDate();
   const daysToCompleteRows = (startWeekOffset + daysToAdd) % 7;
   const lastRowNextMonthDays = daysToCompleteRows ? 7 - daysToCompleteRows : 0;
@@ -65,55 +67,71 @@ export function getDaysOfMonth(
     let isEndDate = false;
     let isActive = false;
 
-    if (endDate && startDate && !disableRange) {
-      isStartDate = isMonthDate && date.getTime() === startDate.getTime();
-      isEndDate = isMonthDate && date.getTime() === endDate.getTime();
+    if (disableOffsetDays && (i < 0 || i >= daysToAdd)) {
+      days.push({
+        id: `${monthNumber}-${id}`,
+        date,
+        isToday: false,
+        isMonthDate,
+        isActive,
+        isStartDate,
+        isEndDate,
+        isOutOfRange,
+        isVisible: false,
+        hidden: true,
+      });
+    } else {
+      if (endDate && startDate && !disableRange) {
+        isStartDate = isMonthDate && date.getTime() === startDate.getTime();
+        isEndDate = isMonthDate && date.getTime() === endDate.getTime();
 
-      if (!isMonthDate) {
-        const lastDayOfMonth = moment(firstMonthDay)
-          .endOf('month')
-          .toDate();
-        const firstDayOfMonth = moment(firstMonthDay)
-          .startOf('month')
-          .toDate();
+        if (!isMonthDate) {
+          const lastDayOfMonth = moment(firstMonthDay)
+            .endOf('month')
+            .toDate();
+          const firstDayOfMonth = moment(firstMonthDay)
+            .startOf('month')
+            .toDate();
 
-        isActive = dayShouldBeActive(
-          date,
-          startDate,
-          endDate,
-          firstDayOfMonth,
-          lastDayOfMonth
-        );
-      } else {
-        isActive = date >= startDate && date <= endDate;
-      }
-    } else if (
-      isMonthDate &&
-      startDate &&
-      date.getTime() === startDate.getTime()
-    ) {
-      isStartDate = true;
-      isEndDate = true;
-      isActive = true;
-    }
-
-    const today = moment().format('YYYY-MM-DD');
-    const isToday = moment(date).format('YYYY-MM-DD') === today;
-
-    days.push({
-      id: `${monthNumber}-${id}`,
-      date,
-      isToday,
-      isMonthDate,
-      isActive,
-      isStartDate,
-      isEndDate,
-      isOutOfRange,
-      isVisible:
-        isOnSelectedRange &&
+          isActive = dayShouldBeActive(
+            date,
+            startDate,
+            endDate,
+            firstDayOfMonth,
+            lastDayOfMonth
+          );
+        } else {
+          isActive = date >= startDate && date <= endDate;
+        }
+      } else if (
         isMonthDate &&
-        !disabledDays[moment(date).format('YYYY-MM-DD')],
-    });
+        startDate &&
+        date.getTime() === startDate.getTime()
+      ) {
+        isStartDate = true;
+        isEndDate = true;
+        isActive = true;
+      }
+
+      const today = moment().format('YYYY-MM-DD');
+      const isToday = moment(date).format('YYYY-MM-DD') === today;
+
+      days.push({
+        id: `${monthNumber}-${id}`,
+        date,
+        isToday,
+        isMonthDate,
+        isActive,
+        isStartDate,
+        isEndDate,
+        isOutOfRange,
+        isVisible:
+          isOnSelectedRange &&
+          isMonthDate &&
+          !disabledDays[moment(date).format('YYYY-MM-DD')],
+        hidden: false,
+      });
+    }
   }
 
   return days;
