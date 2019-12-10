@@ -41,6 +41,7 @@ export type DayType = {
   isEndDate: boolean;
   isVisible: boolean;
   isOutOfRange: boolean;
+  isHidden: boolean;
 };
 
 export type ViewableItemsType = {
@@ -71,6 +72,7 @@ export type CalendarType = {
   viewableItemsChanged?: (viableItems: ViewableItemsType) => void;
   calendarListRef?: (ref: RefObject<FlatList<MonthType>>) => void;
   disabledDays?: { [key: string]: any };
+  disableOffsetDays?: boolean;
 };
 
 export type MonthType = {

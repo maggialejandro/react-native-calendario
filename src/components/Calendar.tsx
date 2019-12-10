@@ -55,6 +55,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
     disableRange: false,
     firstDayMonday: false,
     monthHeight: MONTH_HEIGHT,
+    disableOffsetDays: false,
   };
 
   state = {
@@ -253,7 +254,6 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
 
   handlePressDay = (date: Date) => {
     const { startDate, endDate } = this.state;
-    // const newRange = {};
     let newStartDate;
     let newEndDate;
 
@@ -313,6 +313,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
       disableRange={this.props.disableRange}
       extraData={this.props.extraData}
       disabledDays={this.props.disabledDays}
+      disableOffsetDays={this.props.disableOffsetDays}
     />
   );
 

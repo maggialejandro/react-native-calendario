@@ -13,6 +13,7 @@ const defaultDay = {
   isEndDate: false,
   isVisible: true,
   isOutOfRange: false,
+  isHidden: false,
 };
 
 describe('Day', () => {

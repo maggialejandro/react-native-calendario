@@ -99,6 +99,7 @@ type Props = {
   disableRange: boolean;
   disabledDays?: { [key: string]: any };
   extraData: any;
+  disableOffsetDays?: boolean;
 };
 
 const getDayList = (props: Props) => {
@@ -111,6 +112,7 @@ const getDayList = (props: Props) => {
     maxDate,
     disableRange,
     disabledDays,
+    disableOffsetDays,
   } = props;
 
   const min =
@@ -131,7 +133,8 @@ const getDayList = (props: Props) => {
     startDate,
     endDate,
     min,
-    max
+    max,
+    disableOffsetDays
   );
 };
 
