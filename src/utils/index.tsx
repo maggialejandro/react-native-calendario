@@ -1,15 +1,14 @@
-/* @flow */
 import moment from 'moment';
 import { getMonthNames } from './date';
-import type { ViewableItemsType, LocaleType, MonthType } from '../types';
+import { ViewableItemsType, LocaleType, MonthType } from '../types';
 
 export function getMonthsList(
+  locale: LocaleType,
+  monthsStrings: string[],
   startingMonth: Date,
   monthsLength: number,
   visibleMonthsCount: number,
-  startDate?: ?Date,
-  locale: LocaleType,
-  monthsStrings: string[]
+  startDate?: Date
 ): MonthType[] {
   const months: MonthType[] = [];
   const MONTH_STRINGS = monthsStrings.length
@@ -42,7 +41,6 @@ export function getMonthsList(
       year,
       name: `${MONTH_STRINGS[monthNumber]} ${year}`,
       isVisible,
-      indexList: monthCount,
     });
 
     year += monthNumber < 11 ? 0 : 1;

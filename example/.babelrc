@@ -1,7 +1,5 @@
 {
-  "presets": [
-    "expo"
-  ],
+  "presets": ["expo"],
   "plugins": [
     [
       "module-resolver",

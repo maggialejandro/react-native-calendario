@@ -2,27 +2,20 @@
   "name": "react-native-calendario",
   "version": "0.6.0",
   "description": "React Native Calendar",
-  "main": "src/index.js",
+  "main": "lib/commonjs/index.js",
+  "react-native": "lib/module/index.js",
+  "module": "lib/module/index.js",
+  "types": "lib/typescript/src/index.d.ts",
+  "files": [
+    "lib",
+    "babel.js"
+  ],
   "scripts": {
-    "lint": "eslint src/**/*.js",
-    "test": "npm run lint",
-    "flow": "flow",
-    "prepublish": "npm run lint"
-  },
-  "lint-staged": {
-    "**/*.js": [
-      "prettier --write",
-      "git add"
-    ],
-    "**/*.{js,jsx}": [
-      "eslint --fix",
-      "git add"
-    ]
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
+    "typescript": "tsc --noEmit",
+    "lint": "eslint --ext .ts,.tsx src/",
+    "test": "jest",
+    "prepublish": "npm run test",
+    "prepare": "bob build"
   },
   "repository": {
     "type": "git",
@@ -46,17 +39,80 @@
     "react-native": "*"
   },
   "devDependencies": {
+    "@babel/core": "7.7.4",
+    "@babel/runtime": "7.7.4",
+    "@react-native-community/bob": "0.7.0",
+    "@types/enzyme": "3.10.3",
+    "@types/jest": "24.0.23",
     "@types/react": "16.8.14",
     "@types/react-native": "0.57.46",
+    "@types/react-test-renderer": "16.8.3",
+    "@typescript-eslint/eslint-plugin": "2.8.0",
+    "@typescript-eslint/parser": "2.8.0",
+    "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.0.3",
-    "eslint": "6.6.0",
+    "babel-jest": "24.9.0",
+    "babel-test": "0.2.3",
+    "enzyme": "3.10.0",
+    "enzyme-adapter-react-16": "1.15.1",
+    "eslint": "6.7.0",
     "eslint-config-satya164": "3.1.2",
-    "flow-bin": "0.92.0",
-    "husky": "3.0.9",
-    "lint-staged": "9.4.2",
+    "husky": "3.1.0",
+    "jest": "24.9.0",
+    "jest-enzyme": "7.1.2",
+    "jsdom": "15.2.1",
     "metro-react-native-babel-preset": "0.54.0",
     "prettier": "1.19.1",
     "react": "16.8.3",
-    "react-native": "0.59.8"
+    "react-dom": "16.8.3",
+    "react-native": "0.59.8",
+    "react-test-renderer": "16.8.3",
+    "ts-jest": "24.2.0",
+    "typescript": "3.7.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "yarn lint && yarn typescript && yarn test"
+    }
+  },
+  "jest": {
+    "preset": "react-native",
+    "setupFilesAfterEnv": [
+      "<rootDir>setup-tests.js"
+    ],
+    "testMatch": [
+      "**/__tests__/**/*.+(ts|tsx|js)",
+      "**/?(*.)+(spec|test).+(ts|tsx|js)"
+    ],
+    "transform": {
+      ".+\\.(ts|tsx)$": "ts-jest"
+    },
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "json",
+      "jsx",
+      "node"
+    ],
+    "modulePathIgnorePatterns": [
+      "<rootDir>/example/node_modules",
+      "<rootDir>/lib/"
+    ],
+    "watchPathIgnorePatterns": [
+      "__fixtures__\\/[/]+\\/(output|error)\\.js"
+    ]
+  },
+  "@react-native-community/bob": {
+    "source": "src",
+    "output": "lib",
+    "targets": [
+      "commonjs",
+      "module",
+      "typescript"
+    ],
+    "files": [
+      "src/"
+    ]
   }
 }

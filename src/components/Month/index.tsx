@@ -1,14 +1,12 @@
-/* @flow */
-/* eslint-disable react/no-unused-prop-types */
-import * as React from 'react';
+import React, { ComponentType } from 'react';
 import { View, Text } from 'react-native';
 import moment from 'moment';
 import Day from '../Day';
 import { getDayNames, isValidDate } from '../../utils/date';
 import { getDaysOfMonth } from './utils';
-import type { MonthType, DayType, ThemeType, LocaleType } from '../../types';
+import { MonthType, DayType, ThemeType, LocaleType } from '../../types';
 
-type EmptyMonthType = { name: string, theme: ThemeType, height: number };
+type EmptyMonthType = { name: string; theme: ThemeType; height: number };
 
 const EmptyMonth = React.memo<EmptyMonthType>(
   (props: EmptyMonthType) => (
@@ -36,7 +34,7 @@ const EmptyMonth = React.memo<EmptyMonthType>(
   () => true
 );
 
-type WeekColumnType = { day: string, theme: ThemeType };
+type WeekColumnType = { day: string; theme: ThemeType };
 
 const WeekColumn = React.memo<WeekColumnType>(
   (props: WeekColumnType) => (
@@ -51,7 +49,7 @@ const WeekColumn = React.memo<WeekColumnType>(
   () => true
 );
 
-type WeelColumnsType = { days: string[], theme: ThemeType };
+type WeelColumnsType = { days: string[]; theme: ThemeType };
 
 const WeekColumns = React.memo<WeelColumnsType>(
   (props: WeelColumnsType) => (
@@ -66,7 +64,7 @@ const WeekColumns = React.memo<WeelColumnsType>(
   () => true
 );
 
-type MonthTitleType = { name: string, theme: ThemeType };
+type MonthTitleType = { name: string; theme: ThemeType };
 
 const MonthTitle = React.memo<MonthTitleType>(
   (props: MonthTitleType) => (
@@ -84,24 +82,24 @@ const MonthTitle = React.memo<MonthTitleType>(
 );
 
 type Props = {
-  onPress: (Date) => void,
-  month: MonthType,
-  theme: ThemeType,
-  showWeekdays: boolean,
-  showMonthTitle: boolean,
-  firstDayMonday: boolean,
-  locale: LocaleType,
-  dayNames: string[],
-  height: number,
-  renderDayContent?: (DayType) => React.Node,
-  minDate?: string,
-  maxDate?: string,
-  startDate: ?Date,
-  endDate: ?Date,
-  disableRange: boolean,
-  disabledDays: { [key: string]: any },
-  extraData: any,
-  disableOffsetDays?: boolean,
+  onPress: (date: Date) => void;
+  month: MonthType;
+  theme: ThemeType;
+  showWeekdays: boolean;
+  showMonthTitle: boolean;
+  firstDayMonday: boolean;
+  locale: LocaleType;
+  dayNames: string[];
+  height: number;
+  renderDayContent?: (day: DayType) => ComponentType;
+  minDate?: string;
+  maxDate?: string;
+  startDate?: Date;
+  endDate?: Date;
+  disableRange: boolean;
+  disabledDays?: { [key: string]: any };
+  extraData: any;
+  disableOffsetDays?: boolean;
 };
 
 const getDayList = (props: Props) => {
@@ -120,23 +118,22 @@ const getDayList = (props: Props) => {
   const min =
     minDate && isValidDate(new Date(minDate))
       ? moment(minDate, 'YYYY-MM-DD').toDate()
-      : null;
-
+      : undefined;
   const max =
     maxDate && isValidDate(new Date(maxDate))
       ? moment(maxDate, 'YYYY-MM-DD').toDate()
-      : null;
+      : undefined;
 
   return getDaysOfMonth(
     monthNumber,
     year,
+    firstDayMonday,
+    disableRange,
+    disabledDays,
     startDate,
     endDate,
     min,
     max,
-    disableRange,
-    firstDayMonday,
-    disabledDays,
     disableOffsetDays
   );
 };

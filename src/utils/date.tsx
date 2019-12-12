@@ -1,5 +1,4 @@
-/* @flow */
-import type { LocaleType } from '../types';
+import { LocaleType } from '../types';
 
 export function addDays(date: Date, days: number): Date {
   const result = new Date(date);
@@ -151,9 +150,9 @@ export function getDayNames(
   locale: LocaleType,
   firstDayMonday: boolean
 ): string[] {
-  const days: string[] = getWeekdayNames(locale);
+  const days = getWeekdayNames(locale);
   if (firstDayMonday) {
-    const sunday = days.shift();
+    const sunday = days.shift() as string;
     days.push(sunday);
     return days;
   }

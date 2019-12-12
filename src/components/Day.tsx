@@ -1,9 +1,6 @@
-/* @flow */
-/* eslint-disable react/no-unused-prop-types */
-import * as React from 'react';
+import React, { ComponentType } from 'react';
 import { TouchableOpacity, StyleSheet, View, Text } from 'react-native';
-// import { useWhyDidYouUpdate } from '../utils/hooks';
-import type { DayType, ThemeType } from '../types';
+import { DayType, ThemeType } from '../types';
 
 const styles = StyleSheet.create({
   activeDate: {
@@ -27,19 +24,17 @@ const styles = StyleSheet.create({
 });
 
 type NonTouchableDayPropsType = {
-  date: Date,
-  isActive: boolean,
-  theme: ThemeType,
-  isMonthDate: boolean,
-  isOutOfRange: boolean,
-  isVisible: boolean,
-  isToday: boolean,
+  date: Date;
+  isActive: boolean;
+  theme: ThemeType;
+  isMonthDate: boolean;
+  isOutOfRange: boolean;
+  isVisible: boolean;
+  isToday: boolean;
 };
 
 const NonTouchableDay = React.memo<NonTouchableDayPropsType>(
   (props: NonTouchableDayPropsType) => {
-    // useWhyDidYouUpdate('NonTouchableDay', props);
-
     const { isMonthDate, isActive, isOutOfRange, theme, date, isToday } = props;
 
     return (
@@ -77,16 +72,14 @@ const NonTouchableDay = React.memo<NonTouchableDayPropsType>(
 );
 
 type PropsType = {
-  onPress: (Date) => void,
-  item: DayType,
-  theme: ThemeType,
-  renderDayContent?: (DayType) => React.Node,
+  onPress: (date: Date) => void;
+  item: DayType;
+  theme: ThemeType;
+  renderDayContent?: (day: DayType) => ComponentType;
 };
 
 const Day = React.memo<PropsType>(
   (props: PropsType) => {
-    // useWhyDidYouUpdate('Day', props);
-
     const {
       item: {
         date,

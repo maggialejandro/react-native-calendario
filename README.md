@@ -33,7 +33,6 @@ import Calendar from 'react-native-calendario';
   minDate="2018-04-20"
   startDate="2018-04-30"
   endDate="2018-05-05"
-  disableOffsetDays= {true}
   theme={{
     activeDayColor: {},
     monthTitleTextStyle: {
@@ -82,28 +81,29 @@ import Calendar from 'react-native-calendario';
 
 ## API
 
-| Prop                       | Description                                       | Required?            | Default       | Type             |
-| -------------------------- | ------------------------------------------------- | -------------------- | ------------- | ---------------- |
-| **`onChange`**             | Callback called when a day is pressed.            | yes                  |               | Function         |
-| **`minDate`**              | Minimum date that can be selected.                | no                   | null          | 'YYYY-MM-DD'     |
-| **`maxDate`**              | Maximum date that can be selected.                | no                   | null          | 'YYYY-MM-DD'     |
-| **`startDate`**            | Selected start date                               | no                   | null          | 'YYYY-MM-DD'     |
-| **`endDate`**              | Selected end date                                 | requires _startDate_ | null          | 'YYYY-MM-DD'     |
-| **`theme`**                | Calendar StyleSheet                               | no                   | null          | Object           |
-| **`locale`**               | Calendar language (es|en|fr|br)                   | 'en'                 | string        |                  |
-| **`showWeekdays`**         | Show Week columns                                 | no                   | true          | boolean          |
-| **`showMonthTitle`**       | Show Month title                                  | no                   | true          | boolean          |
-| **`initialListSize`**      | FlatList initialNumToRender                       | no                   | 2             | number           |
-| **`startingMonth`**        | First month to render                             | no                   | current month | 'YYYY-MM-DD'     |
-| **`numberOfMonths`**       | Number of months to render                        | no                   | 12            | number           |
-| **`disableRange`**         | Turn off range date selection                     | no                   | false         | boolean          |
-| **`firstDayMonday`**       | Monday as first day of the week                   | no                   | false         | boolean          |
-| **`monthHeight`**          | Change Month row height                           | no                   | 370           | number           |
-| **`disabledDays`**         | Disabled days                                     | no                   | null          | {[string]: any } |
-| **`renderDayContent`**     | Render custom Day content                         | no                   | null          | Function         |
-| **`extraData`**            | FlatList extraData                                | no                   | null          | any              |
-| **`viewableItemsChanged`** | handleViewableItemsChange callback                | no                   | null          | Function         |
-| **`disableOffsetDays`**    | Remove offset Days.                               | no                   | false         | boolean         |
+| Prop                       | Description                            | Required?            | Default       | Type             |
+| -------------------------- | -------------------------------------- | -------------------- | ------------- | ---------------- |
+| **`onChange`**             | Callback called when a day is pressed. | yes                  |               | Function         |
+| **`minDate`**              | Minimum date that can be selected.     | no                   | null          | 'YYYY-MM-DD'     |
+| **`maxDate`**              | Maximum date that can be selected.     | no                   | null          | 'YYYY-MM-DD'     |
+| **`startDate`**            | Selected start date                    | no                   | null          | 'YYYY-MM-DD'     |
+| **`endDate`**              | Selected end date                      | requires _startDate_ | null          | 'YYYY-MM-DD'     |
+| **`theme`**                | Calendar StyleSheet                    | no                   | null          | Object           |
+| **`locale`**               | Calendar language (es                  | en                   | fr            | br)              | 'en' | string |  |
+| **`showWeekdays`**         | Show Week columns                      | no                   | true          | boolean          |
+| **`showMonthTitle`**       | Show Month title                       | no                   | true          | boolean          |
+| **`initialListSize`**      | FlatList initialNumToRender            | no                   | 2             | number           |
+| **`startingMonth`**        | First month to render                  | no                   | current month | 'YYYY-MM-DD'     |
+| **`numberOfMonths`**       | Number of months to render             | no                   | 12            | number           |
+| **`disableRange`**         | Turn off range date selection          | no                   | false         | boolean          |
+| **`firstDayMonday`**       | Monday as first day of the week        | no                   | false         | boolean          |
+| **`monthHeight`**          | Change Month row height                | no                   | 370           | number           |
+| **`disabledDays`**         | Disabled days                          | no                   | null          | {[string]: any } |
+| **`renderDayContent`**     | Render custom Day content              | no                   | null          | Function         |
+| **`extraData`**            | FlatList extraData                     | no                   | null          | any              |
+| **`viewableItemsChanged`** | handleViewableItemsChange callback     | no                   | null          | Function         |
+| **`disableOffsetDays`**    | Remove offset Days.                    | no                   | false         | boolean          |
+
 ## License
 
 MIT
