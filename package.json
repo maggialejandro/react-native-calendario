@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.7.7",
-    "@babel/runtime": "7.7.4",
+    "@babel/runtime": "7.7.7",
     "@react-native-community/bob": "0.7.0",
     "@types/enzyme": "3.10.3",
     "@types/jest": "24.0.23",
