@@ -71,6 +71,8 @@ const MonthTitle = React.memo(
   () => true
 );
 
+const disabledArray = [0, 6];
+
 const getDayList = (props) => {
   const {
     month: { monthNumber, year },
@@ -142,7 +144,7 @@ export default React.memo(
           <View key={String(index)} style={{ flexDirection: 'row' }}>
             {week.map((day, index) => (
               <Day
-                disabled={index === 1}
+                disabled={disabledArray.includes(index)}
                 key={String(index)}
                 item={day}
                 onPress={props.onPress}

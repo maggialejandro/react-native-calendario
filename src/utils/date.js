@@ -145,7 +145,7 @@ export function getDayNames(locale, firstDayMonday) {
   const days = getWeekdayNames(locale);
   if (firstDayMonday) {
     const sunday = days.shift();
-    days.push(sunday);
+    days.push(`${sunday}`);
     return days;
   }
 

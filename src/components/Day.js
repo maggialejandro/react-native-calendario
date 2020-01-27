@@ -78,8 +78,6 @@ const Day = React.memo(
       disabled,
     } = props;
 
-    console.log('disabled', disabled);
-
     if (isHidden) {
       return <View style={[styles.container]} />;
     }
