@@ -1,6 +1,5 @@
-import React, { ComponentType } from 'react';
+import React from 'react';
 import { TouchableOpacity, StyleSheet, View, Text } from 'react-native';
-import { DayType, ThemeType } from '../types';
 
 const styles = StyleSheet.create({
   activeDate: {
@@ -23,18 +22,8 @@ const styles = StyleSheet.create({
   },
 });
 
-type NonTouchableDayPropsType = {
-  date: Date;
-  isActive: boolean;
-  theme: ThemeType;
-  isMonthDate: boolean;
-  isOutOfRange: boolean;
-  isVisible: boolean;
-  isToday: boolean;
-};
-
-const NonTouchableDay = React.memo<NonTouchableDayPropsType>(
-  (props: NonTouchableDayPropsType) => {
+const NonTouchableDay = React.memo(
+  (props) => {
     const { isMonthDate, isActive, isOutOfRange, theme, date, isToday } = props;
 
     return (
@@ -71,15 +60,8 @@ const NonTouchableDay = React.memo<NonTouchableDayPropsType>(
   }
 );
 
-type PropsType = {
-  onPress: (date: Date) => void;
-  item: DayType;
-  theme: ThemeType;
-  renderDayContent?: (day: DayType) => ComponentType;
-};
-
-const Day = React.memo<PropsType>(
-  (props: PropsType) => {
+const Day = React.memo(
+  (props) => {
     const {
       item: {
         date,
@@ -93,7 +75,10 @@ const Day = React.memo<PropsType>(
         isHidden,
       },
       theme,
+      disabled,
     } = props;
+
+    console.log('disabled', disabled);
 
     if (isHidden) {
       return <View style={[styles.container]} />;
@@ -137,6 +122,7 @@ const Day = React.memo<PropsType>(
               theme.dayTextStyle,
               isToday ? theme.todayTextStyle : {},
               isActive ? theme.activeDayTextStyle : {},
+              { color: disabled ? 'red' : 'black' },
             ]}
           >
             {date.getDate()}
@@ -151,7 +137,9 @@ const Day = React.memo<PropsType>(
       prevProps.item.isVisible !== nextProps.item.isVisible ||
       prevProps.item.isStartDate !== nextProps.item.isStartDate ||
       prevProps.item.isEndDate !== nextProps.item.isEndDate ||
-      prevProps.renderDayContent !== nextProps.renderDayContent
+      prevProps.renderDayContent !== nextProps.renderDayContent ||
+      nextProps.disabled ||
+      prevProps.disabled
     );
   }
 );

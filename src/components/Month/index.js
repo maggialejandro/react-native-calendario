@@ -1,15 +1,12 @@
-import React, { ComponentType } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
 import moment from 'moment';
 import Day from '../Day';
 import { getDayNames, isValidDate } from '../../utils/date';
 import { getDaysOfMonth } from './utils';
-import { MonthType, DayType, ThemeType, LocaleType } from '../../types';
 
-type EmptyMonthType = { name: string; theme: ThemeType; height: number };
-
-const EmptyMonth = React.memo<EmptyMonthType>(
-  (props: EmptyMonthType) => (
+const EmptyMonth = React.memo(
+  (props) => (
     <View
       style={[
         {
@@ -34,10 +31,8 @@ const EmptyMonth = React.memo<EmptyMonthType>(
   () => true
 );
 
-type WeekColumnType = { day: string; theme: ThemeType };
-
-const WeekColumn = React.memo<WeekColumnType>(
-  (props: WeekColumnType) => (
+const WeekColumn = React.memo(
+  (props) => (
     <View
       style={[{ flex: 1, alignItems: 'center' }, props.theme.weekColumnStyle]}
     >
@@ -48,15 +43,12 @@ const WeekColumn = React.memo<WeekColumnType>(
   ),
   () => true
 );
-
-type WeelColumnsType = { days: string[]; theme: ThemeType };
-
-const WeekColumns = React.memo<WeelColumnsType>(
-  (props: WeelColumnsType) => (
+const WeekColumns = React.memo(
+  (props) => (
     <View
       style={[{ flexDirection: 'row' }, props.theme.weekColumnsContainerStyle]}
     >
-      {props.days.map((day: string) => (
+      {props.days.map((day) => (
         <WeekColumn key={day} day={day} theme={props.theme} />
       ))}
     </View>
@@ -64,10 +56,8 @@ const WeekColumns = React.memo<WeelColumnsType>(
   () => true
 );
 
-type MonthTitleType = { name: string; theme: ThemeType };
-
-const MonthTitle = React.memo<MonthTitleType>(
-  (props: MonthTitleType) => (
+const MonthTitle = React.memo(
+  (props) => (
     <Text
       allowFontScaling={false}
       style={[
@@ -81,28 +71,7 @@ const MonthTitle = React.memo<MonthTitleType>(
   () => true
 );
 
-type Props = {
-  onPress: (date: Date) => void;
-  month: MonthType;
-  theme: ThemeType;
-  showWeekdays: boolean;
-  showMonthTitle: boolean;
-  firstDayMonday: boolean;
-  locale: LocaleType;
-  dayNames: string[];
-  height: number;
-  renderDayContent?: (day: DayType) => ComponentType;
-  minDate?: string;
-  maxDate?: string;
-  startDate?: Date;
-  endDate?: Date;
-  disableRange: boolean;
-  disabledDays?: { [key: string]: any };
-  extraData: any;
-  disableOffsetDays?: boolean;
-};
-
-const getDayList = (props: Props) => {
+const getDayList = (props) => {
   const {
     month: { monthNumber, year },
     startDate,
@@ -138,8 +107,8 @@ const getDayList = (props: Props) => {
   );
 };
 
-export default React.memo<Props>(
-  (props: Props) => {
+export default React.memo(
+  (props) => {
     const {
       month: { name, isVisible },
       showWeekdays,
@@ -169,10 +138,11 @@ export default React.memo<Props>(
       <View style={{ height }}>
         {showMonthTitle && <MonthTitle name={name} theme={theme} />}
         {showWeekdays && <WeekColumns days={DAY_NAMES} theme={theme} />}
-        {weeks.map((week: DayType[], index: number) => (
+        {weeks.map((week, index) => (
           <View key={String(index)} style={{ flexDirection: 'row' }}>
-            {week.map((day: DayType, index: number) => (
+            {week.map((day, index) => (
               <Day
+                disabled={index === 1}
                 key={String(index)}
                 item={day}
                 onPress={props.onPress}

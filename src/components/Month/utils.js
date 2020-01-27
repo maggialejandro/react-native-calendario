@@ -1,16 +1,15 @@
 import moment from 'moment';
 import { addDays, getNumberOfDaysInMonth } from '../../utils/date';
-import { DayType } from '../../types';
 
 const MONDAY_FIRST = [6, 0, 1, 2, 3, 4, 5];
 
 function dayShouldBeActive(
-  date: Date,
-  startDate: Date,
-  endDate: Date,
-  firstDayOfMonth: Date,
-  lastDayOfMonth: Date
-): boolean {
+  date,
+  startDate,
+  endDate,
+  firstDayOfMonth,
+  lastDayOfMonth
+) {
   if (date > lastDayOfMonth) {
     return endDate > lastDayOfMonth && startDate < lastDayOfMonth;
   }
@@ -19,21 +18,21 @@ function dayShouldBeActive(
 }
 
 export function getDaysOfMonth(
-  monthNumber: number,
-  year: number,
-  firstDayMonday: boolean,
-  disableRange: boolean,
-  disabledDays: { [key: string]: any } = {},
-  startDate?: Date,
-  endDate?: Date,
-  minDate?: Date,
-  maxDate?: Date,
-  disableOffsetDays?: boolean
-): DayType[] {
+  monthNumber,
+  year,
+  firstDayMonday,
+  disableRange,
+  disabledDays,
+  startDate,
+  endDate,
+  minDate,
+  maxDate,
+  disableOffsetDays
+) {
   const startDayOfMonth = moment([year, monthNumber]);
   const daysToAdd = getNumberOfDaysInMonth(monthNumber, year);
 
-  const days: DayType[] = [];
+  const days = [];
 
   const startWeekOffset = firstDayMonday
     ? MONDAY_FIRST[startDayOfMonth.day()]
@@ -44,12 +43,12 @@ export function getDaysOfMonth(
   const lastRowNextMonthDays = daysToCompleteRows ? 7 - daysToCompleteRows : 0;
 
   for (let i = -startWeekOffset; i < daysToAdd + lastRowNextMonthDays; i++) {
-    const date: Date = addDays(firstMonthDay, i);
-    const day: number = date.getDate();
-    const month: number = date.getMonth();
-    const fullDay: string = day < 10 ? `0${day}` : String(day);
-    const fullMonth: string = month < 10 ? `0${month}` : String(month);
-    const id: string = `${date.getFullYear()}-${fullMonth}-${fullDay}`;
+    const date = addDays(firstMonthDay, i);
+    const day = date.getDate();
+    const month = date.getMonth();
+    const fullDay = day < 10 ? `0${day}` : String(day);
+    const fullMonth = month < 10 ? `0${month}` : String(month);
+    const id = `${date.getFullYear()}-${fullMonth}-${fullDay}`;
 
     let isOnSelectedRange = !minDate && !maxDate;
 

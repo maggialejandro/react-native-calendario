@@ -1,118 +1,27 @@
 {
-  "name": "react-native-calendario",
-  "version": "0.6.0",
-  "description": "React Native Calendar",
-  "main": "lib/commonjs/index.js",
-  "react-native": "lib/module/index.js",
-  "module": "lib/module/index.js",
-  "types": "lib/typescript/src/index.d.ts",
-  "files": [
-    "lib",
-    "babel.js"
-  ],
+  "name": "react-native-better-touchable",
+  "version": "0.1.0",
+  "description": "Calendar",
+  "main": "src/index.js",
   "scripts": {
-    "typescript": "tsc --noEmit",
-    "lint": "eslint --ext .ts,.tsx src/",
-    "test": "jest",
-    "prepublish": "npm run test",
-    "prepare": "bob build"
+    "lint": "eslint .",
+    "prettier": "eslint . --fix"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/maggialejandro/react-native-calendario.git"
-  },
+  "files": [
+    "src"
+  ],
   "keywords": [
     "react-native",
-    "calendar"
+    "react"
   ],
-  "author": "Alejandro Maggi",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/qwerydev/react-native-calendario"
+  },
+  "author": "Alexander Pataridze <s.pataridze@gmailcom>",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/maggialejandro/react-native-calendario/issues"
-  },
-  "homepage": "https://github.com/maggialejandro/react-native-calendario#readme",
-  "dependencies": {
-    "moment": "2.24.0"
-  },
-  "peerDependencies": {
-    "react": "*",
-    "react-native": "*"
-  },
   "devDependencies": {
-    "@babel/core": "7.7.4",
-    "@babel/runtime": "7.7.4",
-    "@react-native-community/bob": "0.7.0",
-    "@types/enzyme": "3.10.3",
-    "@types/jest": "24.0.23",
-    "@types/react": "16.8.14",
-    "@types/react-native": "0.57.46",
-    "@types/react-test-renderer": "16.8.3",
-    "@typescript-eslint/eslint-plugin": "2.8.0",
-    "@typescript-eslint/parser": "2.8.0",
-    "babel-core": "7.0.0-bridge.0",
-    "babel-eslint": "10.0.3",
-    "babel-jest": "24.9.0",
-    "babel-test": "0.2.3",
-    "enzyme": "3.10.0",
-    "enzyme-adapter-react-16": "1.15.1",
-    "eslint": "6.7.0",
-    "eslint-config-satya164": "3.1.2",
-    "husky": "3.1.0",
-    "jest": "24.9.0",
-    "jest-enzyme": "7.1.2",
-    "jsdom": "15.2.1",
-    "metro-react-native-babel-preset": "0.54.0",
-    "prettier": "1.19.1",
-    "react": "16.8.3",
-    "react-dom": "16.8.3",
-    "react-native": "0.59.8",
-    "react-test-renderer": "16.8.3",
-    "ts-jest": "24.2.0",
-    "typescript": "3.7.2"
-  },
-  "husky": {
-    "hooks": {
-      "pre-commit": "yarn lint && yarn typescript && yarn test"
-    }
-  },
-  "jest": {
-    "preset": "react-native",
-    "setupFilesAfterEnv": [
-      "<rootDir>setup-tests.js"
-    ],
-    "testMatch": [
-      "**/__tests__/**/*.+(ts|tsx|js)",
-      "**/?(*.)+(spec|test).+(ts|tsx|js)"
-    ],
-    "transform": {
-      ".+\\.(ts|tsx)$": "ts-jest"
-    },
-    "moduleFileExtensions": [
-      "ts",
-      "tsx",
-      "js",
-      "json",
-      "jsx",
-      "node"
-    ],
-    "modulePathIgnorePatterns": [
-      "<rootDir>/example/node_modules",
-      "<rootDir>/lib/"
-    ],
-    "watchPathIgnorePatterns": [
-      "__fixtures__\\/[/]+\\/(output|error)\\.js"
-    ]
-  },
-  "@react-native-community/bob": {
-    "source": "src",
-    "output": "lib",
-    "targets": [
-      "commonjs",
-      "module",
-      "typescript"
-    ],
-    "files": [
-      "src/"
-    ]
+    "eslint": "^6.8.0",
+    "eslint-config-react-native-prettier": "^1.0.1"
   }
 }

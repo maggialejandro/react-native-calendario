@@ -5,17 +5,6 @@ import moment from 'moment';
 import Month from './Month';
 import { getMonthsList, viewableItemsChanged } from '../utils';
 import { isValidDate } from '../utils/date';
-import { CalendarType, MonthType, ViewableItemsType } from '../types';
-
-type StateType = {
-  months: MonthType[];
-  initialListSize: number;
-  firstViewableIndex: number;
-  lastViewableIndex: number;
-  initialScrollIndex: number;
-  startDate?: Date;
-  endDate?: Date;
-};
 
 const NUMBER_OF_MONTHS = 12;
 const MONTH_HEIGHT = 370;
@@ -28,10 +17,7 @@ const VIEWABILITY_CONFIG = {
   minimumViewTime: 300,
 };
 
-function visibleMonthsChanged(
-  oldMonths: MonthType[],
-  newMonths: MonthType[]
-): boolean {
+function visibleMonthsChanged(oldMonths, newMonths) {
   for (let i = 0; i < oldMonths.length; i++) {
     if (newMonths[i].isVisible !== oldMonths[i].isVisible) {
       return true;
@@ -41,7 +27,7 @@ function visibleMonthsChanged(
   return false;
 }
 
-export default class Calendar extends React.Component<CalendarType, StateType> {
+export default class Calendar extends React.Component {
   static defaultProps = {
     numberOfMonths: NUMBER_OF_MONTHS,
     startingMonth: moment().format('YYYY-MM-DD'),
@@ -103,7 +89,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
       }
     }
 
-    const months: MonthType[] = getMonthsList(
+    const months = getMonthsList(
       locale,
       monthNames,
       firstMonthToRender,
@@ -115,11 +101,11 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
     let firstMonthIndex = 0;
     if (start) {
       const firstMonth = months.find(
-        (m: MonthType): boolean =>
+        (m) =>
           !!start &&
           m.monthNumber === start.getMonth() &&
           m.year === start.getFullYear()
-      ) as MonthType;
+      );
 
       firstMonthIndex = months.indexOf(firstMonth) || 0;
     }
@@ -133,7 +119,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
     });
   }
 
-  componentWillReceiveProps(nextProps: CalendarType) {
+  UNSAFE_componentWillReceiveProps(nextProps) {
     const { startDate } = this.state;
     const nextStartDate =
       nextProps.startDate && isValidDate(new Date(nextProps.startDate))
@@ -158,19 +144,17 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
           ) {
             const { months } = this.state;
             const index = months.findIndex(
-              (m: MonthType): boolean =>
+              (m) =>
                 m.monthNumber === nextStartDate.getMonth() &&
                 m.year === nextStartDate.getFullYear()
             );
 
             if (index !== -1) {
-              const nextVisibleMonths = months.map(
-                (month: MonthType, i: number) => ({
-                  ...month,
-                  isVisible:
-                    i + DIFF_VISIBLE >= index || i - DIFF_VISIBLE <= index,
-                })
-              );
+              const nextVisibleMonths = months.map((month, i) => ({
+                ...month,
+                isVisible:
+                  i + DIFF_VISIBLE >= index || i - DIFF_VISIBLE <= index,
+              }));
 
               this.listReference.scrollToIndex({
                 index,
@@ -185,10 +169,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
     }
   }
 
-  shouldComponentUpdate(
-    nextProps: CalendarType,
-    nextState: StateType
-  ): boolean {
+  shouldComponentUpdate(nextProps, nextState) {
     return (
       this.state.months.length !== nextState.months.length ||
       visibleMonthsChanged(this.state.months, nextState.months) ||
@@ -200,20 +181,15 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
     );
   }
 
-  private listReference?: FlatList<MonthType> | null | undefined;
-
-  getItemLayout = (
-    _data: any,
-    index: number
-  ): { length: number; offset: number; index: number } => ({
+  getItemLayout = (_data, index) => ({
     length: this.props.monthHeight,
     offset: this.props.monthHeight * index,
     index,
   });
 
-  keyExtractor = (item: MonthType): string => String(item.id);
+  keyExtractor = (item) => String(item.id);
 
-  handleViewableItemsChange = (info: ViewableItemsType) => {
+  handleViewableItemsChange = (info) => {
     let { firstViewableIndex, lastViewableIndex } = this.state;
     if (viewableItemsChanged(firstViewableIndex, lastViewableIndex, info)) {
       if (this.props.viewableItemsChanged) {
@@ -232,7 +208,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
           : this.state.lastViewableIndex;
 
       this.setState((state) => {
-        const months = state.months.map((month: MonthType, i: number) => {
+        const months = state.months.map((month, i) => {
           const isVisible =
             i >= firstViewableIndex - DIFF_VISIBLE &&
             i <= lastViewableIndex + DIFF_VISIBLE + 1;
@@ -252,7 +228,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
     }
   };
 
-  handlePressDay = (date: Date) => {
+  handlePressDay = (date) => {
     const { startDate, endDate } = this.state;
     let newStartDate;
     let newEndDate;
@@ -264,9 +240,9 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
       if (endDate) {
         newStartDate = date;
         newEndDate = undefined;
-      } else if (date < startDate!) {
+      } else if (date < startDate) {
         newStartDate = date;
-      } else if (date > startDate!) {
+      } else if (date > startDate) {
         newStartDate = startDate;
         newEndDate = date;
       } else {
@@ -278,14 +254,14 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
     }
 
     const newRange = {
-      startDate: newStartDate as Date,
+      startDate: newStartDate,
       endDate: newEndDate,
     };
 
     this.setState(newRange, () => this.props.onChange(newRange));
   };
 
-  setReference = (ref: any) => {
+  setReference = (ref) => {
     if (ref) {
       this.listReference = ref;
       if (this.props.calendarListRef) {
@@ -294,7 +270,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
     }
   };
 
-  renderMonth = ({ item }: { item: MonthType }) => (
+  renderMonth = ({ item }) => (
     <Month
       onPress={this.handlePressDay}
       month={item}

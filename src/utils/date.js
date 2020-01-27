@@ -1,26 +1,21 @@
-import { LocaleType } from '../types';
-
-export function addDays(date: Date, days: number): Date {
+export function addDays(date, days) {
   const result = new Date(date);
   result.setDate(result.getDate() + days);
   return result;
 }
 
-export function isValidDate(date: Date): boolean {
+export function isValidDate(date) {
   return (
     Object.prototype.toString.call(date) === '[object Date]' &&
     !isNaN(date.getTime())
   );
 }
 
-function leapYear(year: number): boolean {
+function leapYear(year) {
   return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 }
 
-export function getNumberOfDaysInMonth(
-  monthIndex: number,
-  year: number
-): number {
+export function getNumberOfDaysInMonth(monthIndex, year) {
   switch (monthIndex) {
     case 0:
       return 31;
@@ -51,7 +46,7 @@ export function getNumberOfDaysInMonth(
   }
 }
 
-export function getMonthNames(locale: LocaleType): string[] {
+export function getMonthNames(locale) {
   switch (locale) {
     case 'es':
       return [
@@ -131,7 +126,7 @@ export function getMonthNames(locale: LocaleType): string[] {
   }
 }
 
-function getWeekdayNames(locale: LocaleType): string[] {
+function getWeekdayNames(locale) {
   switch (locale) {
     case 'es':
       return ['Dom', 'Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sab'];
@@ -146,13 +141,10 @@ function getWeekdayNames(locale: LocaleType): string[] {
   }
 }
 
-export function getDayNames(
-  locale: LocaleType,
-  firstDayMonday: boolean
-): string[] {
+export function getDayNames(locale, firstDayMonday) {
   const days = getWeekdayNames(locale);
   if (firstDayMonday) {
-    const sunday = days.shift() as string;
+    const sunday = days.shift();
     days.push(sunday);
     return days;
   }

@@ -1,21 +1,20 @@
 import moment from 'moment';
 import { getMonthNames } from './date';
-import { ViewableItemsType, LocaleType, MonthType } from '../types';
 
 export function getMonthsList(
-  locale: LocaleType,
-  monthsStrings: string[],
-  startingMonth: Date,
-  monthsLength: number,
-  visibleMonthsCount: number,
-  startDate?: Date
-): MonthType[] {
-  const months: MonthType[] = [];
+  locale,
+  monthsStrings,
+  startingMonth,
+  monthsLength,
+  visibleMonthsCount,
+  startDate
+) {
+  const months = [];
   const MONTH_STRINGS = monthsStrings.length
     ? monthsStrings
     : getMonthNames(locale);
 
-  let year: number = startingMonth.getFullYear();
+  let year = startingMonth.getFullYear();
   let monthNumber = startingMonth.getMonth();
   let count = 0;
 
@@ -50,11 +49,7 @@ export function getMonthsList(
   return months;
 }
 
-export function viewableItemsChanged(
-  first: number,
-  last: number,
-  info: ViewableItemsType
-): boolean {
+export function viewableItemsChanged(first, last, info) {
   try {
     const firstItemVisible = info.viewableItems[0];
     const lastVisibleItem = info.viewableItems[info.viewableItems.length - 1];
