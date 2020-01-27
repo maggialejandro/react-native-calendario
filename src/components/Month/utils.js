@@ -126,7 +126,7 @@ export function getDaysOfMonth(
         isVisible:
           isOnSelectedRange &&
           isMonthDate &&
-          !disabledDays[moment(date).format('YYYY-MM-DD')],
+          (!disabledDays || disabledDays[moment(date).format('YYYY-MM-DD')]),
         isHidden: false,
       });
     }
