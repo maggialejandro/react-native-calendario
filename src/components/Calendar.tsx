@@ -107,7 +107,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
     });
   }
 
-  componentWillReceiveProps(nextProps: CalendarType) {
+  UNSAFE_componentWillReceiveProps(nextProps: CalendarType) {
     const { startDate, months, firstMonthToRender } = this.state;
     const nextStartDate =
       nextProps.startDate && isValidDate(new Date(nextProps.startDate))
