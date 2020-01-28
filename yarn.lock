@@ -1199,12 +1199,11 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
-"@types/react-native@0.57.46":
-  version "0.57.46"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.57.46.tgz#a209b0878ceed10dd6aaa4c19e0a13cb092a81a8"
-  integrity sha512-ldA3P77u6ROmKxVQixCfNoJI/O2qrk+eFRtlenKeZc720gfi1kBBRdT1SzeFgQJAUjmiJf5JCDr69KaBglqWeQ==
+"@types/react-native@0.61.6":
+  version "0.61.6"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.61.6.tgz#bdfd29992031c1b8e1c2752506eed1d1c5ae1887"
+  integrity sha512-RMF5RmTsWvkftDdxIpGgV3Y/4wd2JbZcYuu9yJIz/r9aGjbnjscl3BeTXoMssfKlF3XwiBiGvyBZ3x4pbvd+3w==
   dependencies:
-    "@types/prop-types" "*"
     "@types/react" "*"
 
 "@types/react-test-renderer@16.8.3":
