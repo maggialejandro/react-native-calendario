@@ -70,15 +70,8 @@ export type CalendarType = {
   renderDayContent?: (day: DayType) => ComponentType;
   extraData?: any;
   viewableItemsChanged?: (viableItems: ViewableItemsType) => void;
-  calendarListRef?: (ref: RefObject<FlatList<MonthType>>) => void;
+  calendarListRef?: (ref: RefObject<FlatList<any>>) => void;
   disabledDays?: { [key: string]: any };
   disableOffsetDays?: boolean;
-};
-
-export type MonthType = {
-  id: string;
-  name: string;
-  monthNumber: number;
-  year: number;
-  isVisible: boolean;
+  viewableRangeOffset?: number;
 };

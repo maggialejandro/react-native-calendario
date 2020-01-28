@@ -2,11 +2,13 @@ import React, { ComponentType } from 'react';
 import { View, Text } from 'react-native';
 import moment from 'moment';
 import Day from '../Day';
-import { getDayNames, isValidDate } from '../../utils/date';
-import { getDaysOfMonth } from './utils';
-import { MonthType, DayType, ThemeType, LocaleType } from '../../types';
+import { getDayNames, isValidDate, getMonthNames } from '../../utils/date';
+import { getMonthDays, monthBetweenRange, shouldRenderMonth } from './utils';
+import { DayType, ThemeType, LocaleType } from '../../types';
 
 type EmptyMonthType = { name: string; theme: ThemeType; height: number };
+
+const SHOULD_NOT_UPDATE = true;
 
 const EmptyMonth = React.memo<EmptyMonthType>(
   (props: EmptyMonthType) => (
@@ -31,7 +33,7 @@ const EmptyMonth = React.memo<EmptyMonthType>(
       </Text>
     </View>
   ),
-  () => true
+  () => SHOULD_NOT_UPDATE
 );
 
 type WeekColumnType = { day: string; theme: ThemeType };
@@ -46,7 +48,7 @@ const WeekColumn = React.memo<WeekColumnType>(
       </Text>
     </View>
   ),
-  () => true
+  () => SHOULD_NOT_UPDATE
 );
 
 type WeelColumnsType = { days: string[]; theme: ThemeType };
@@ -61,7 +63,7 @@ const WeekColumns = React.memo<WeelColumnsType>(
       ))}
     </View>
   ),
-  () => true
+  () => SHOULD_NOT_UPDATE
 );
 
 type MonthTitleType = { name: string; theme: ThemeType };
@@ -78,12 +80,14 @@ const MonthTitle = React.memo<MonthTitleType>(
       {props.name}
     </Text>
   ),
-  () => true
+  () => SHOULD_NOT_UPDATE
 );
 
 type Props = {
   onPress: (date: Date) => void;
-  month: MonthType;
+  index: number;
+  monthNames: string[];
+  firstMonthToRender: Date;
   theme: ThemeType;
   showWeekdays: boolean;
   showMonthTitle: boolean;
@@ -100,9 +104,14 @@ type Props = {
   disabledDays?: { [key: string]: any };
   extraData: any;
   disableOffsetDays?: boolean;
+  firstViewableIndex: number;
+  lastViewableIndex: number;
+  viewableRangeOffset: number;
 };
 
-const getDayList = (props: Props) => {
+const getDayList = (
+  props: Props & { month: { monthNumber: number; year: number } }
+) => {
   const {
     month: { monthNumber, year },
     startDate,
@@ -124,7 +133,7 @@ const getDayList = (props: Props) => {
       ? moment(maxDate, 'YYYY-MM-DD').toDate()
       : undefined;
 
-  return getDaysOfMonth(
+  return getMonthDays(
     monthNumber,
     year,
     firstDayMonday,
@@ -141,24 +150,44 @@ const getDayList = (props: Props) => {
 export default React.memo<Props>(
   (props: Props) => {
     const {
-      month: { name, isVisible },
       showWeekdays,
       showMonthTitle,
+      monthNames,
+      firstMonthToRender,
       firstDayMonday,
       theme,
       dayNames,
       height,
       locale,
+      index,
     } = props;
 
-    if (!isVisible) {
-      return <EmptyMonth name={name} theme={theme} height={height} />;
-    }
+    const month = moment(firstMonthToRender).add(index, 'months');
 
+    const MONTH_STRINGS = monthNames.length
+      ? monthNames
+      : getMonthNames(locale);
     const DAY_NAMES = dayNames.length
       ? dayNames
       : getDayNames(locale, firstDayMonday);
-    const days = getDayList(props);
+
+    const monthName = `${MONTH_STRINGS[month.month()]} ${month.year()}`;
+
+    if (
+      index < props.firstViewableIndex - props.viewableRangeOffset ||
+      index > props.lastViewableIndex
+    ) {
+      return <EmptyMonth name={monthName} height={height} theme={theme} />;
+    }
+
+    const days = getDayList({
+      ...props,
+      month: {
+        monthNumber: month.month(),
+        year: month.year(),
+      },
+    });
+
     const weeks = [];
 
     while (days.length) {
@@ -167,7 +196,7 @@ export default React.memo<Props>(
 
     return (
       <View style={{ height }}>
-        {showMonthTitle && <MonthTitle name={name} theme={theme} />}
+        {showMonthTitle && <MonthTitle name={monthName} theme={theme} />}
         {showWeekdays && <WeekColumns days={DAY_NAMES} theme={theme} />}
         {weeks.map((week: DayType[], index: number) => (
           <View key={String(index)} style={{ flexDirection: 'row' }}>
@@ -186,13 +215,104 @@ export default React.memo<Props>(
     );
   },
   (prevProps, nextProps) => {
-    return !(
-      prevProps.month.isVisible !== nextProps.month.isVisible ||
+    if (
       prevProps.startDate !== nextProps.startDate ||
+      prevProps.endDate !== nextProps.endDate ||
       prevProps.minDate !== nextProps.minDate ||
       prevProps.maxDate !== nextProps.maxDate ||
-      prevProps.endDate !== nextProps.endDate ||
-      prevProps.extraData !== nextProps.extraData
+      prevProps.disableRange !== nextProps.disableRange ||
+      prevProps.locale !== nextProps.locale ||
+      prevProps.firstViewableIndex !== nextProps.firstViewableIndex ||
+      prevProps.lastViewableIndex !== nextProps.lastViewableIndex
+    ) {
+      return false;
+    }
+
+    if (
+      (!nextProps.dayNames || !nextProps.monthNames) &&
+      prevProps.locale !== nextProps.locale
+    ) {
+      return false;
+    }
+
+    const currentMonth = moment(nextProps.firstMonthToRender).add(
+      nextProps.index,
+      'months'
     );
+
+    if (prevProps.disableRange === nextProps.disableRange) {
+      if (nextProps.disableRange) {
+        if (prevProps.startDate !== nextProps.startDate) {
+          if (
+            !prevProps.startDate &&
+            moment(nextProps.startDate).isSame(currentMonth, 'month')
+          ) {
+            return false;
+          }
+
+          if (
+            prevProps.startDate &&
+            (moment(prevProps.startDate).isSame(currentMonth, 'month') ||
+              moment(nextProps.startDate).isSame(currentMonth, 'month'))
+          ) {
+            return false;
+          }
+        }
+      } else {
+        if (nextProps.endDate) {
+          const monthBetweenNextRange = monthBetweenRange(
+            currentMonth,
+            nextProps.startDate!,
+            nextProps.endDate!
+          );
+
+          if (prevProps.endDate) {
+            const monthBetweenPreviousRange = monthBetweenRange(
+              currentMonth,
+              prevProps.startDate!,
+              prevProps.endDate!
+            );
+
+            if (monthBetweenPreviousRange !== monthBetweenNextRange) {
+              return false;
+            }
+          } else if (
+            moment(prevProps.startDate).isSame(currentMonth, 'month') ||
+            monthBetweenNextRange
+          ) {
+            return false;
+          }
+        } else if (prevProps.endDate) {
+          const monthBetweenPreviousRange = monthBetweenRange(
+            currentMonth,
+            prevProps.startDate!,
+            prevProps.endDate!
+          );
+
+          if (monthBetweenPreviousRange) {
+            return false;
+          }
+        } else if (
+          prevProps.startDate !== nextProps.startDate &&
+          ((prevProps.startDate &&
+            moment(prevProps.startDate).isSame(currentMonth, 'month')) ||
+            (nextProps.startDate &&
+              moment(nextProps.startDate).isSame(currentMonth, 'month')))
+        ) {
+          return false;
+        }
+      }
+    } else {
+      return false;
+    }
+
+    if (
+      shouldRenderMonth(currentMonth, prevProps.minDate, nextProps.minDate) ||
+      shouldRenderMonth(currentMonth, prevProps.maxDate, nextProps.maxDate)
+    ) {
+      return false;
+    }
+
+    return true;
   }
 );

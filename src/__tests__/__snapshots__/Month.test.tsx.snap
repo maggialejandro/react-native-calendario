@@ -25,7 +25,7 @@ exports[`Month should render out of range content 1`] = `
       ]
     }
   >
-    April
+    October 2019
   </Text>
 </View>
 `;

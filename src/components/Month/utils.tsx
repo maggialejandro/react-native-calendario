@@ -1,4 +1,4 @@
-import moment from 'moment';
+import moment, { Moment } from 'moment';
 import { addDays, getNumberOfDaysInMonth } from '../../utils/date';
 import { DayType } from '../../types';
 
@@ -18,7 +18,7 @@ function dayShouldBeActive(
   return startDate < firstDayOfMonth && endDate >= firstDayOfMonth;
 }
 
-export function getDaysOfMonth(
+export function getMonthDays(
   monthNumber: number,
   year: number,
   firstDayMonday: boolean,
@@ -105,7 +105,8 @@ export function getDaysOfMonth(
       } else if (
         isMonthDate &&
         startDate &&
-        date.getTime() === startDate.getTime()
+        date.getTime() === startDate.getTime() &&
+        isOnSelectedRange
       ) {
         isStartDate = true;
         isEndDate = true;
@@ -134,4 +135,59 @@ export function getDaysOfMonth(
   }
 
   return days;
+}
+
+export function monthBetweenRange(month: Moment, start: Date, end: Date) {
+  const firstDayOfMonth = month.startOf('month').toDate();
+  const lastDayOfMonth = month.endOf('month').toDate();
+
+  return (
+    (firstDayOfMonth <= end && firstDayOfMonth >= start) ||
+    (lastDayOfMonth >= start && lastDayOfMonth <= end) ||
+    (start <= lastDayOfMonth && end >= firstDayOfMonth)
+  );
+}
+
+export function shouldRenderMonth(
+  currentMonth: Moment,
+  pervMinMax?: string,
+  nextMinMax?: string
+) {
+  if (pervMinMax !== nextMinMax) {
+    if (pervMinMax) {
+      if (nextMinMax) {
+        if (
+          moment(pervMinMax, 'YYYY-MM-DD').isSame(currentMonth, 'month') ||
+          moment(nextMinMax, 'YYYY-MM-DD').isSame(currentMonth, 'month')
+        ) {
+          return true;
+        }
+
+        const monthBetweenMinRange =
+          pervMinMax < nextMinMax
+            ? monthBetweenRange(
+                currentMonth,
+                moment(pervMinMax, 'YYYY-MM-DD').toDate(),
+                moment(nextMinMax, 'YYYY-MM-DD').toDate()
+              )
+            : monthBetweenRange(
+                currentMonth,
+                moment(nextMinMax, 'YYYY-MM-DD').toDate(),
+                moment(pervMinMax, 'YYYY-MM-DD').toDate()
+              );
+
+        if (monthBetweenMinRange) {
+          return true;
+        }
+      } else if (
+        moment(pervMinMax, 'YYYY-MM-DD').isSame(currentMonth, 'month')
+      ) {
+        return true;
+      }
+    } else if (moment(nextMinMax, 'YYYY-MM-DD').isSame(currentMonth, 'month')) {
+      return true;
+    }
+  }
+
+  return false;
 }
