@@ -67,7 +67,7 @@
     "react-dom": "16.8.3",
     "react-native": "0.59.8",
     "react-test-renderer": "16.8.3",
-    "ts-jest": "24.2.0",
+    "ts-jest": "25.1.0",
     "typescript": "3.7.2"
   },
   "husky": {
