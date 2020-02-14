@@ -24,7 +24,7 @@ yarn add react-native-calendario
 ## Usage
 
 ```js
-import Calendar from 'react-native-calendario';
+import { Calendar } from 'react-native-calendario';
 ```
 
 ```js
