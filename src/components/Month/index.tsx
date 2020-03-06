@@ -164,14 +164,12 @@ export default React.memo<Props>(
 
     const month = moment(firstMonthToRender).add(index, 'months');
 
-    const MONTH_STRINGS = monthNames.length
-      ? monthNames
-      : getMonthNames(locale);
+    const MONTH_NAMES = monthNames.length ? monthNames : getMonthNames(locale);
     const DAY_NAMES = dayNames.length
       ? dayNames
       : getDayNames(locale, firstDayMonday);
 
-    const monthName = `${MONTH_STRINGS[month.month()]} ${month.year()}`;
+    const monthName = `${MONTH_NAMES[month.month()]} ${month.year()}`;
 
     if (
       index < props.firstViewableIndex - props.viewableRangeOffset ||
@@ -215,15 +213,16 @@ export default React.memo<Props>(
     );
   },
   (prevProps, nextProps) => {
+    if (prevProps.disableRange !== nextProps.disableRange) {
+      return false;
+    }
+
     if (
-      prevProps.startDate !== nextProps.startDate ||
-      prevProps.endDate !== nextProps.endDate ||
-      prevProps.minDate !== nextProps.minDate ||
-      prevProps.maxDate !== nextProps.maxDate ||
-      prevProps.disableRange !== nextProps.disableRange ||
-      prevProps.locale !== nextProps.locale ||
-      prevProps.firstViewableIndex !== nextProps.firstViewableIndex ||
-      prevProps.lastViewableIndex !== nextProps.lastViewableIndex
+      (prevProps.index <
+        prevProps.firstViewableIndex - prevProps.viewableRangeOffset ||
+        prevProps.index > prevProps.lastViewableIndex) &&
+      nextProps.index >= nextProps.firstViewableIndex &&
+      nextProps.index <= nextProps.lastViewableIndex
     ) {
       return false;
     }
@@ -290,6 +289,16 @@ export default React.memo<Props>(
           );
 
           if (monthBetweenPreviousRange) {
+            return false;
+          }
+
+          const monthBetweenNextRange = monthBetweenRange(
+            currentMonth,
+            nextProps.startDate!,
+            nextProps.startDate!
+          );
+
+          if (monthBetweenNextRange) {
             return false;
           }
         } else if (
