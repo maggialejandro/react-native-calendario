@@ -1,10 +1,7 @@
 {
   "groups": {
     "default": {
-      "packages": [
-        "RNCalendarExample/package.json",
-        "package.json"
-      ]
+      "packages": ["example/package.json", "package.json"]
     }
   },
   "ignore": ["react-native", "react", "flow-bin"]

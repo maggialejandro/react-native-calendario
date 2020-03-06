@@ -1,9 +1,6 @@
 {
   "extends": "eslint-config-satya164",
   "plugins": ["react-native-globals"],
-  "rules": {
-    "flowtype/require-types-at-top": 0
-  },
   "env": {
     "react-native-globals/all": true
   }
