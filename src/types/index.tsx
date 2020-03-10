@@ -2,46 +2,46 @@ import { ComponentType, RefObject } from 'react';
 import { FlatList, ViewStyle, TextStyle, ViewToken } from 'react-native';
 
 type RangeType = {
-  startDate: Date;
   endDate?: Date;
+  startDate: Date;
 };
 
 export type LocaleType = 'es' | 'en' | 'fr' | 'br';
 
 export type ThemeType = {
   activeDayColor?: string;
-  monthTitleTextStyle?: TextStyle;
+  activeDayContainerStyle?: ViewStyle;
+  activeDayTextStyle?: TextStyle;
+  dayContainerStyle?: ViewStyle;
+  dayOutOfRangeContainerStyle?: ViewStyle;
+  dayOutOfRangeTextStyle?: TextStyle;
+  dayTextStyle?: TextStyle;
   emptyMonthContainerStyle?: ViewStyle;
   emptyMonthTextStyle?: TextStyle;
+  endDateContainerStyle?: ViewStyle;
+  monthTitleTextStyle?: TextStyle;
+  nonTouchableDayContainerStyle?: ViewStyle;
+  nonTouchableDayTextStyle?: TextStyle;
+  nonTouchableLastMonthDayTextStyle?: TextStyle;
+  startDateContainerStyle?: ViewStyle;
+  todayContainerStyle?: ViewStyle;
+  todayTextStyle?: TextStyle;
   weekColumnsContainerStyle?: ViewStyle;
   weekColumnStyle?: ViewStyle;
   weekColumnTextStyle?: TextStyle;
-  nonTouchableDayContainerStyle?: ViewStyle;
-  nonTouchableDayTextStyle?: TextStyle;
-  startDateContainerStyle?: ViewStyle;
-  endDateContainerStyle?: ViewStyle;
-  dayContainerStyle?: ViewStyle;
-  dayTextStyle?: TextStyle;
-  dayOutOfRangeTextStyle?: TextStyle;
-  dayOutOfRangeContainerStyle?: ViewStyle;
-  activeDayContainerStyle?: ViewStyle;
-  activeDayTextStyle?: TextStyle;
-  nonTouchableLastMonthDayTextStyle?: TextStyle;
-  todayContainerStyle?: ViewStyle;
-  todayTextStyle?: TextStyle;
 };
 
 export type DayType = {
-  id: string;
   date: Date;
-  isToday: boolean;
+  id: string;
   isActive: boolean;
-  isMonthDate: boolean;
-  isStartDate: boolean;
   isEndDate: boolean;
-  isVisible: boolean;
-  isOutOfRange: boolean;
   isHidden: boolean;
+  isMonthDate: boolean;
+  isOutOfRange: boolean;
+  isStartDate: boolean;
+  isToday: boolean;
+  isVisible: boolean;
 };
 
 export type ViewableItemsType = {
@@ -49,29 +49,29 @@ export type ViewableItemsType = {
   viewableItems: ViewToken[];
 };
 
-export type CalendarType = {
-  onChange: (range: RangeType) => void;
-  initialListSize?: number;
-  numberOfMonths: number;
-  startingMonth?: string;
-  minDate?: string;
-  maxDate?: string;
-  startDate?: string;
-  endDate?: string;
-  theme: ThemeType;
-  showWeekdays: boolean;
-  showMonthTitle: boolean;
-  locale: LocaleType;
-  monthNames: string[];
-  dayNames: string[];
-  disableRange: boolean;
-  monthHeight: number;
-  firstDayMonday: boolean;
-  renderDayContent?: (day: DayType) => ComponentType;
-  extraData?: any;
-  viewableItemsChanged?: (viableItems: ViewableItemsType) => void;
+export interface CalendarProps {
   calendarListRef?: (ref: RefObject<FlatList<any>>) => void;
+  dayNames: string[];
   disabledDays?: { [key: string]: any };
   disableOffsetDays?: boolean;
+  disableRange: boolean;
+  endDate?: string;
+  extraData?: any;
+  firstDayMonday: boolean;
+  initialListSize?: number;
+  locale: LocaleType;
+  maxDate?: string;
+  minDate?: string;
+  monthHeight: number;
+  monthNames: string[];
+  numberOfMonths: number;
+  onChange: (range: RangeType) => void;
+  renderDayContent?: (day: DayType) => ComponentType;
+  showMonthTitle: boolean;
+  showWeekdays: boolean;
+  startDate?: string;
+  startingMonth?: string;
+  theme: ThemeType;
+  viewableItemsChanged?: (viableItems: ViewableItemsType) => void;
   viewableRangeOffset?: number;
-};
+}

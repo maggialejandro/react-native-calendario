@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
   },
 });
 
-type NonTouchableDayPropsType = {
+interface NonTouchableDayProps {
   date: Date;
   isActive: boolean;
   theme: ThemeType;
@@ -31,10 +31,10 @@ type NonTouchableDayPropsType = {
   isOutOfRange: boolean;
   isVisible: boolean;
   isToday: boolean;
-};
+}
 
-const NonTouchableDay = React.memo<NonTouchableDayPropsType>(
-  (props: NonTouchableDayPropsType) => {
+const NonTouchableDay = React.memo<NonTouchableDayProps>(
+  (props: NonTouchableDayProps) => {
     const { isMonthDate, isActive, isOutOfRange, theme, date, isToday } = props;
 
     return (
@@ -71,15 +71,15 @@ const NonTouchableDay = React.memo<NonTouchableDayPropsType>(
   }
 );
 
-type PropsType = {
+interface Props {
   onPress: (date: Date) => void;
   item: DayType;
   theme: ThemeType;
   renderDayContent?: (day: DayType) => ComponentType;
-};
+}
 
-const Day = React.memo<PropsType>(
-  (props: PropsType) => {
+const Day = React.memo<Props>(
+  (props: Props) => {
     const {
       item: {
         date,

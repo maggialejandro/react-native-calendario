@@ -4,9 +4,9 @@ import moment from 'moment';
 
 import Month from './Month';
 import { isValidDate } from '../utils/date';
-import { CalendarType, ViewableItemsType } from '../types';
+import { CalendarProps, ViewableItemsType } from '../types';
 
-type StateType = {
+interface State {
   firstMonthToRender: Date;
   months: any[];
   firstViewableIndex: number;
@@ -14,7 +14,7 @@ type StateType = {
   initialScrollIndex: number;
   startDate?: Date;
   endDate?: Date;
-};
+}
 
 const NUMBER_OF_MONTHS = 12;
 const MONTH_HEIGHT = 370;
@@ -27,7 +27,7 @@ const VIEWABILITY_CONFIG = {
   minimumViewTime: 32,
 };
 
-export default class Calendar extends React.Component<CalendarType, StateType> {
+export default class Calendar extends React.Component<CalendarProps, State> {
   static defaultProps = {
     numberOfMonths: NUMBER_OF_MONTHS,
     startingMonth: moment().format('YYYY-MM-DD'),
@@ -45,7 +45,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
     viewableRangeOffset: VIEWABLE_RANGE_OFFSET,
   };
 
-  constructor(props: CalendarType) {
+  constructor(props: CalendarProps) {
     super(props);
 
     this.state = {
@@ -107,7 +107,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
     });
   }
 
-  UNSAFE_componentWillReceiveProps(nextProps: CalendarType) {
+  UNSAFE_componentWillReceiveProps(nextProps: CalendarProps) {
     const { startDate, months, firstMonthToRender } = this.state;
     const nextStartDate =
       nextProps.startDate && isValidDate(new Date(nextProps.startDate))
@@ -144,10 +144,7 @@ export default class Calendar extends React.Component<CalendarType, StateType> {
     }
   }
 
-  shouldComponentUpdate(
-    nextProps: CalendarType,
-    nextState: StateType
-  ): boolean {
+  shouldComponentUpdate(nextProps: CalendarProps, nextState: State): boolean {
     return (
       this.state.months.length !== nextState.months.length ||
       this.state.startDate !== nextState.startDate ||

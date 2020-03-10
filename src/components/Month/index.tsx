@@ -6,12 +6,16 @@ import { getDayNames, isValidDate, getMonthNames } from '../../utils/date';
 import { getMonthDays, monthBetweenRange, shouldRenderMonth } from './utils';
 import { DayType, ThemeType, LocaleType } from '../../types';
 
-type EmptyMonthType = { name: string; theme: ThemeType; height: number };
+interface EmptyMonthProps {
+  height: number;
+  name: string;
+  theme: ThemeType;
+}
 
 const SHOULD_NOT_UPDATE = true;
 
-const EmptyMonth = React.memo<EmptyMonthType>(
-  (props: EmptyMonthType) => (
+const EmptyMonth = React.memo<EmptyMonthProps>(
+  (props: EmptyMonthProps) => (
     <View
       style={[
         {
@@ -36,10 +40,13 @@ const EmptyMonth = React.memo<EmptyMonthType>(
   () => SHOULD_NOT_UPDATE
 );
 
-type WeekColumnType = { day: string; theme: ThemeType };
+interface WeekColumnProps {
+  day: string;
+  theme: ThemeType;
+}
 
-const WeekColumn = React.memo<WeekColumnType>(
-  (props: WeekColumnType) => (
+const WeekColumn = React.memo<WeekColumnProps>(
+  (props: WeekColumnProps) => (
     <View
       style={[{ flex: 1, alignItems: 'center' }, props.theme.weekColumnStyle]}
     >
@@ -51,10 +58,13 @@ const WeekColumn = React.memo<WeekColumnType>(
   () => SHOULD_NOT_UPDATE
 );
 
-type WeelColumnsType = { days: string[]; theme: ThemeType };
+interface WeelColumnsProps {
+  days: string[];
+  theme: ThemeType;
+}
 
-const WeekColumns = React.memo<WeelColumnsType>(
-  (props: WeelColumnsType) => (
+const WeekColumns = React.memo<WeelColumnsProps>(
+  (props: WeelColumnsProps) => (
     <View
       style={[{ flexDirection: 'row' }, props.theme.weekColumnsContainerStyle]}
     >
@@ -66,10 +76,13 @@ const WeekColumns = React.memo<WeelColumnsType>(
   () => SHOULD_NOT_UPDATE
 );
 
-type MonthTitleType = { name: string; theme: ThemeType };
+interface MonthTitleProps {
+  name: string;
+  theme: ThemeType;
+}
 
-const MonthTitle = React.memo<MonthTitleType>(
-  (props: MonthTitleType) => (
+const MonthTitle = React.memo<MonthTitleProps>(
+  (props: MonthTitleProps) => (
     <Text
       allowFontScaling={false}
       style={[
@@ -83,31 +96,31 @@ const MonthTitle = React.memo<MonthTitleType>(
   () => SHOULD_NOT_UPDATE
 );
 
-type Props = {
-  onPress: (date: Date) => void;
-  index: number;
-  monthNames: string[];
-  firstMonthToRender: Date;
-  theme: ThemeType;
-  showWeekdays: boolean;
-  showMonthTitle: boolean;
-  firstDayMonday: boolean;
-  locale: LocaleType;
+interface Props {
   dayNames: string[];
-  height: number;
-  renderDayContent?: (day: DayType) => ComponentType;
-  minDate?: string;
-  maxDate?: string;
-  startDate?: Date;
-  endDate?: Date;
-  disableRange: boolean;
   disabledDays?: { [key: string]: any };
-  extraData: any;
   disableOffsetDays?: boolean;
+  disableRange: boolean;
+  endDate?: Date;
+  extraData: any;
+  firstDayMonday: boolean;
+  firstMonthToRender: Date;
   firstViewableIndex: number;
+  height: number;
+  index: number;
   lastViewableIndex: number;
+  locale: LocaleType;
+  maxDate?: string;
+  minDate?: string;
+  monthNames: string[];
+  onPress: (date: Date) => void;
+  renderDayContent?: (day: DayType) => ComponentType;
+  showMonthTitle: boolean;
+  showWeekdays: boolean;
+  startDate?: Date;
+  theme: ThemeType;
   viewableRangeOffset: number;
-};
+}
 
 const getDayList = (
   props: Props & { month: { monthNumber: number; year: number } }
