@@ -8,7 +8,7 @@ const defaultProps = {
   index: 1,
   monthNames: [],
   dayNames: [],
-  firstMonthToRender: new Date('2019-10-01'),
+  firstMonthToRender: new Date(2019, 10, 1),
   theme: {},
   locale: 'en' as LocaleType,
   showWeekdays: true,
