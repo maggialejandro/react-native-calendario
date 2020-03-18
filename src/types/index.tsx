@@ -1,3 +1,4 @@
+/* eslint-disable flowtype/no-types-missing-file-annotation */
 import { ComponentType, RefObject } from 'react';
 import { FlatList, ViewStyle, TextStyle, ViewToken } from 'react-native';
 
