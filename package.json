@@ -62,7 +62,7 @@
     "jest-enzyme": "7.1.2",
     "jsdom": "15.2.1",
     "metro-react-native-babel-preset": "0.54.0",
-    "prettier": "1.19.1",
+    "prettier": "2.0.0",
     "react": "16.8.3",
     "react-dom": "16.8.3",
     "react-native": "0.59.8",
