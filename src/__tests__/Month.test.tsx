@@ -4,16 +4,13 @@ import renderer from 'react-test-renderer';
 import Month from '../components/Month';
 import { LocaleType } from '../types';
 
-const defaultMonth = {
-  id: 'id',
-  name: 'April',
-  monthNumber: 3,
-  year: 2019,
-  isVisible: false,
-};
-
 const defaultProps = {
-  month: defaultMonth,
+  index: 1,
+  month: 2,
+  year: 2020,
+  monthNames: [],
+  dayNames: [],
+  firstMonthToRender: new Date(2019, 10, 1),
   theme: {},
   locale: 'en' as LocaleType,
   showWeekdays: true,
@@ -22,6 +19,9 @@ const defaultProps = {
   height: 260,
   disableRange: false,
   extraData: {},
+  firstViewableIndex: 4,
+  lastViewableIndex: 6,
+  viewableRangeOffset: 2,
 };
 
 describe('Month', () => {
@@ -29,7 +29,6 @@ describe('Month', () => {
     const onPressHandler = jest.fn((date) => date);
     const props = {
       ...defaultProps,
-      dayNames: [],
       onPress: onPressHandler,
     };
     const tree = renderer.create(<Month {...props} />).toJSON();

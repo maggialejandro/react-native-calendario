@@ -84,12 +84,12 @@ import { Calendar } from 'react-native-calendario';
 | Prop                       | Description                            | Required?            | Default       | Type             |
 | -------------------------- | -------------------------------------- | -------------------- | ------------- | ---------------- |
 | **`onChange`**             | Callback called when a day is pressed. | yes                  |               | Function         |
-| **`minDate`**              | Minimum date that can be selected.     | no                   | null          | 'YYYY-MM-DD'     |
-| **`maxDate`**              | Maximum date that can be selected.     | no                   | null          | 'YYYY-MM-DD'     |
-| **`startDate`**            | Selected start date                    | no                   | null          | 'YYYY-MM-DD'     |
-| **`endDate`**              | Selected end date                      | requires _startDate_ | null          | 'YYYY-MM-DD'     |
-| **`theme`**                | Calendar StyleSheet                    | no                   | null          | Object           |
-| **`locale`**               | Calendar language                      | es, en, fr, br       | 'en'          | string           |
+| **`minDate`**              | Minimum date that can be selected.     | no                   | null          | Date             |
+| **`maxDate`**              | Maximum date that can be selected.     | no                   | null          | Date             |
+| **`startDate`**            | Selected start date                    | no                   | null          | Date             |
+| **`endDate`**              | Selected end date                      | requires _startDate_ | null          | Date             |
+| **`theme`**                | Calendar StyleSheet                    | no                   | null          | ThemeType        |
+| **`locale`**               | Calendar language                      | es, en, fr, br       | 'en'          | LocaleType       |
 | **`showWeekdays`**         | Show Week columns                      | no                   | true          | boolean          |
 | **`showMonthTitle`**       | Show Month title                       | no                   | true          | boolean          |
 | **`initialListSize`**      | FlatList initialNumToRender            | no                   | 2             | number           |

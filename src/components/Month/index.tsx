@@ -1,15 +1,21 @@
-import React, { ComponentType } from 'react';
+import React from 'react';
 import { View, Text } from 'react-native';
+import { Month, MonthProps } from 'react-native-month';
 import moment from 'moment';
-import Day from '../Day';
-import { getDayNames, isValidDate } from '../../utils/date';
-import { getDaysOfMonth } from './utils';
-import { MonthType, DayType, ThemeType, LocaleType } from '../../types';
+import { isValidDate, getMonthNames, isSameDate } from '../../utils/date';
+import { shouldRenderMonth, isMonthDrawn } from './utils';
+import { ThemeType } from '../../types';
 
-type EmptyMonthType = { name: string; theme: ThemeType; height: number };
+interface EmptyMonthProps {
+  height: number;
+  name: string;
+  theme: ThemeType;
+}
 
-const EmptyMonth = React.memo<EmptyMonthType>(
-  (props: EmptyMonthType) => (
+const SHOULD_NOT_UPDATE = true;
+
+const EmptyMonth = React.memo<EmptyMonthProps>(
+  (props: EmptyMonthProps) => (
     <View
       style={[
         {
@@ -31,43 +37,16 @@ const EmptyMonth = React.memo<EmptyMonthType>(
       </Text>
     </View>
   ),
-  () => true
+  () => SHOULD_NOT_UPDATE
 );
 
-type WeekColumnType = { day: string; theme: ThemeType };
+interface MonthTitleProps {
+  name: string;
+  theme: ThemeType;
+}
 
-const WeekColumn = React.memo<WeekColumnType>(
-  (props: WeekColumnType) => (
-    <View
-      style={[{ flex: 1, alignItems: 'center' }, props.theme.weekColumnStyle]}
-    >
-      <Text allowFontScaling={false} style={props.theme.weekColumnTextStyle}>
-        {props.day}
-      </Text>
-    </View>
-  ),
-  () => true
-);
-
-type WeelColumnsType = { days: string[]; theme: ThemeType };
-
-const WeekColumns = React.memo<WeelColumnsType>(
-  (props: WeelColumnsType) => (
-    <View
-      style={[{ flexDirection: 'row' }, props.theme.weekColumnsContainerStyle]}
-    >
-      {props.days.map((day: string) => (
-        <WeekColumn key={day} day={day} theme={props.theme} />
-      ))}
-    </View>
-  ),
-  () => true
-);
-
-type MonthTitleType = { name: string; theme: ThemeType };
-
-const MonthTitle = React.memo<MonthTitleType>(
-  (props: MonthTitleType) => (
+const MonthTitle = React.memo<MonthTitleProps>(
+  (props: MonthTitleProps) => (
     <Text
       allowFontScaling={false}
       style={[
@@ -78,121 +57,181 @@ const MonthTitle = React.memo<MonthTitleType>(
       {props.name}
     </Text>
   ),
-  () => true
+  () => SHOULD_NOT_UPDATE
 );
 
-type Props = {
-  onPress: (date: Date) => void;
-  month: MonthType;
-  theme: ThemeType;
-  showWeekdays: boolean;
+interface Props extends MonthProps {
+  monthNames: string[];
+  firstMonthToRender: Date;
+  firstViewableIndex: number;
+  lastViewableIndex: number;
+  viewableRangeOffset: number;
   showMonthTitle: boolean;
-  firstDayMonday: boolean;
-  locale: LocaleType;
-  dayNames: string[];
   height: number;
-  renderDayContent?: (day: DayType) => ComponentType;
-  minDate?: string;
-  maxDate?: string;
-  startDate?: Date;
-  endDate?: Date;
-  disableRange: boolean;
-  disabledDays?: { [key: string]: any };
+  index: number;
   extraData: any;
-  disableOffsetDays?: boolean;
-};
-
-const getDayList = (props: Props) => {
-  const {
-    month: { monthNumber, year },
-    startDate,
-    endDate,
-    firstDayMonday,
-    minDate,
-    maxDate,
-    disableRange,
-    disabledDays,
-    disableOffsetDays,
-  } = props;
-
-  const min =
-    minDate && isValidDate(new Date(minDate))
-      ? moment(minDate, 'YYYY-MM-DD').toDate()
-      : undefined;
-  const max =
-    maxDate && isValidDate(new Date(maxDate))
-      ? moment(maxDate, 'YYYY-MM-DD').toDate()
-      : undefined;
-
-  return getDaysOfMonth(
-    monthNumber,
-    year,
-    firstDayMonday,
-    disableRange,
-    disabledDays,
-    startDate,
-    endDate,
-    min,
-    max,
-    disableOffsetDays
-  );
-};
+}
 
 export default React.memo<Props>(
   (props: Props) => {
     const {
-      month: { name, isVisible },
-      showWeekdays,
+      month,
+      year,
+      minDate,
+      maxDate,
       showMonthTitle,
-      firstDayMonday,
-      theme,
-      dayNames,
+      monthNames,
+      theme = {},
       height,
       locale,
+      index,
     } = props;
 
-    if (!isVisible) {
-      return <EmptyMonth name={name} theme={theme} height={height} />;
+    const MONTH_NAMES =
+      Array.isArray(monthNames) && monthNames.length === 12
+        ? monthNames
+        : getMonthNames(locale);
+    const monthName = `${MONTH_NAMES[month]} ${year}`;
+
+    if (
+      index < props.firstViewableIndex - props.viewableRangeOffset ||
+      index > props.lastViewableIndex
+    ) {
+      return <EmptyMonth name={monthName} height={height} theme={theme} />;
     }
 
-    const DAY_NAMES = dayNames.length
-      ? dayNames
-      : getDayNames(locale, firstDayMonday);
-    const days = getDayList(props);
-    const weeks = [];
-
-    while (days.length) {
-      weeks.push(days.splice(0, 7));
-    }
+    const min =
+      minDate && isValidDate(new Date(minDate))
+        ? moment(minDate, 'YYYY-MM-DD').toDate()
+        : undefined;
+    const max =
+      maxDate && isValidDate(new Date(maxDate))
+        ? moment(maxDate, 'YYYY-MM-DD').toDate()
+        : undefined;
 
     return (
       <View style={{ height }}>
-        {showMonthTitle && <MonthTitle name={name} theme={theme} />}
-        {showWeekdays && <WeekColumns days={DAY_NAMES} theme={theme} />}
-        {weeks.map((week: DayType[], index: number) => (
-          <View key={String(index)} style={{ flexDirection: 'row' }}>
-            {week.map((day: DayType, index: number) => (
-              <Day
-                key={String(index)}
-                item={day}
-                onPress={props.onPress}
-                theme={props.theme}
-                renderDayContent={props.renderDayContent}
-              />
-            ))}
-          </View>
-        ))}
+        {showMonthTitle && <MonthTitle name={monthName} theme={theme} />}
+        <Month
+          month={month}
+          year={year}
+          disabledDays={props.disabledDays}
+          disableOffsetDays={props.disableOffsetDays}
+          disableRange={props.disableRange}
+          startDate={props.startDate}
+          endDate={props.endDate}
+          firstDayMonday={props.firstDayMonday}
+          locale={props.locale}
+          maxDate={max}
+          minDate={min}
+          onPress={props.onPress}
+          renderDayContent={props.renderDayContent}
+          showWeekdays={props.showWeekdays}
+          theme={props.theme}
+          dayNames={props.dayNames}
+        />
       </View>
     );
   },
   (prevProps, nextProps) => {
-    return !(
-      prevProps.month.isVisible !== nextProps.month.isVisible ||
-      prevProps.startDate !== nextProps.startDate ||
-      prevProps.minDate !== nextProps.minDate ||
-      prevProps.maxDate !== nextProps.maxDate ||
-      prevProps.endDate !== nextProps.endDate ||
-      prevProps.extraData !== nextProps.extraData
+    if (prevProps.disableRange !== nextProps.disableRange) {
+      return false;
+    }
+
+    if (
+      (prevProps.index <
+        prevProps.firstViewableIndex - prevProps.viewableRangeOffset ||
+        prevProps.index > prevProps.lastViewableIndex) &&
+      nextProps.index >= nextProps.firstViewableIndex &&
+      nextProps.index <= nextProps.lastViewableIndex
+    ) {
+      return false;
+    }
+
+    if (
+      (!nextProps.dayNames || !nextProps.monthNames) &&
+      prevProps.locale !== nextProps.locale
+    ) {
+      return false;
+    }
+
+    const currentMonth = moment(nextProps.firstMonthToRender).add(
+      nextProps.index,
+      'months'
     );
+
+    if (prevProps.disableRange === nextProps.disableRange) {
+      if (nextProps.disableRange) {
+        if (prevProps.startDate !== nextProps.startDate) {
+          if (
+            !prevProps.startDate &&
+            moment(nextProps.startDate).isSame(currentMonth, 'month')
+          ) {
+            return false;
+          }
+
+          if (
+            prevProps.startDate &&
+            (moment(prevProps.startDate).isSame(currentMonth, 'month') ||
+              moment(nextProps.startDate).isSame(currentMonth, 'month'))
+          ) {
+            return false;
+          }
+        }
+      } else {
+        const startDateChanged =
+          (prevProps.startDate instanceof Date &&
+            nextProps.startDate instanceof Date &&
+            !isSameDate(prevProps.startDate, nextProps.startDate)) ||
+          prevProps.startDate !== nextProps.startDate;
+        const endDateChanged =
+          (prevProps.endDate instanceof Date &&
+            nextProps.endDate instanceof Date &&
+            !isSameDate(prevProps.endDate, nextProps.endDate)) ||
+          prevProps.endDate !== nextProps.endDate;
+
+        if (startDateChanged || endDateChanged) {
+          if (
+            isMonthDrawn(
+              currentMonth.year(),
+              currentMonth.month(),
+              prevProps.startDate,
+              prevProps.endDate
+            ) !==
+              isMonthDrawn(
+                currentMonth.year(),
+                currentMonth.month(),
+                nextProps.startDate,
+                nextProps.endDate
+              ) ||
+            (prevProps.startDate instanceof Date &&
+              moment(prevProps.startDate).isSame(currentMonth, 'month') &&
+              (startDateChanged || endDateChanged)) ||
+            (nextProps.startDate instanceof Date &&
+              moment(nextProps.startDate).isSame(currentMonth, 'month') &&
+              startDateChanged) ||
+            (prevProps.endDate instanceof Date &&
+              moment(prevProps.endDate).isSame(currentMonth, 'month') &&
+              endDateChanged) ||
+            (nextProps.endDate instanceof Date &&
+              moment(nextProps.endDate).isSame(currentMonth, 'month') &&
+              endDateChanged)
+          ) {
+            return false;
+          }
+        }
+      }
+    } else {
+      return false;
+    }
+
+    if (
+      shouldRenderMonth(currentMonth, prevProps.minDate, nextProps.minDate) ||
+      shouldRenderMonth(currentMonth, prevProps.maxDate, nextProps.maxDate)
+    ) {
+      return false;
+    }
+
+    return true;
   }
 );
