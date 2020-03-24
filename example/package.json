@@ -8,8 +8,8 @@
     "eject": "expo eject"
   },
   "dependencies": {
-    "eslint-config-satya164": "3.1.2",
-    "expo": "36.0.0",
+    "eslint-config-satya164": "3.1.6",
+    "expo": "36.0.2",
     "moment": "2.24.0",
     "react": "16.9.0",
     "react-dom": "16.9.0",
