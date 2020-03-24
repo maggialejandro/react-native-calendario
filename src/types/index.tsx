@@ -2,7 +2,7 @@
 import { ComponentType, RefObject } from 'react';
 import { FlatList, ViewStyle, TextStyle, ViewToken } from 'react-native';
 
-type RangeType = {
+export type RangeType = {
   endDate?: Date;
   startDate: Date;
 };
@@ -56,13 +56,14 @@ export interface CalendarProps {
   disabledDays?: { [key: string]: any };
   disableOffsetDays?: boolean;
   disableRange: boolean;
-  endDate?: string;
+  startDate?: Date;
+  endDate?: Date;
   extraData?: any;
   firstDayMonday: boolean;
   initialListSize?: number;
   locale: LocaleType;
-  maxDate?: string;
-  minDate?: string;
+  maxDate?: Date;
+  minDate?: Date;
   monthHeight: number;
   monthNames: string[];
   numberOfMonths: number;
@@ -70,7 +71,6 @@ export interface CalendarProps {
   renderDayContent?: (day: DayType) => ComponentType;
   showMonthTitle: boolean;
   showWeekdays: boolean;
-  startDate?: string;
   startingMonth?: string;
   theme: ThemeType;
   viewableItemsChanged?: (viableItems: ViewableItemsType) => void;

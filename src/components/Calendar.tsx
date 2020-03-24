@@ -110,12 +110,12 @@ export default class Calendar extends React.Component<CalendarProps, State> {
   UNSAFE_componentWillReceiveProps(nextProps: CalendarProps) {
     const { startDate, months, firstMonthToRender } = this.state;
     const nextStartDate =
-      nextProps.startDate && isValidDate(new Date(nextProps.startDate))
-        ? moment(nextProps.startDate, 'YYYY-MM-DD').toDate()
+      nextProps.startDate && nextProps.startDate instanceof Date
+        ? nextProps.startDate
         : undefined;
     const endDate =
-      nextProps.endDate && isValidDate(new Date(nextProps.endDate))
-        ? moment(nextProps.endDate, 'YYYY-MM-DD').toDate()
+      nextProps.endDate && nextProps.endDate instanceof Date
+        ? nextProps.endDate
         : undefined;
 
     if (startDate !== nextStartDate || this.state.endDate !== endDate) {
@@ -259,33 +259,40 @@ export default class Calendar extends React.Component<CalendarProps, State> {
     return null;
   };
 
-  renderMonth = ({ index }: { index: number }) => (
-    <Month
-      index={index}
-      firstMonthToRender={this.state.firstMonthToRender}
-      monthNames={this.props.monthNames}
-      onPress={this.handlePressDay}
-      theme={this.props.theme}
-      showWeekdays={this.props.showWeekdays}
-      showMonthTitle={this.props.showMonthTitle}
-      locale={this.props.locale}
-      dayNames={this.props.dayNames}
-      height={this.props.monthHeight}
-      firstDayMonday={this.props.firstDayMonday}
-      renderDayContent={this.props.renderDayContent}
-      minDate={this.props.minDate}
-      maxDate={this.props.maxDate}
-      startDate={this.state.startDate}
-      endDate={this.state.endDate}
-      disableRange={this.props.disableRange}
-      extraData={this.props.extraData}
-      disabledDays={this.props.disabledDays}
-      disableOffsetDays={this.props.disableOffsetDays}
-      firstViewableIndex={this.state.firstViewableIndex}
-      lastViewableIndex={this.state.lastViewableIndex}
-      viewableRangeOffset={this.props.viewableRangeOffset!}
-    />
-  );
+  renderMonth = ({ index }: { index: number }) => {
+    const { firstMonthToRender } = this.state;
+    const month = moment(firstMonthToRender).add(index, 'months');
+
+    return (
+      <Month
+        month={month.month()}
+        year={month.year()}
+        index={index}
+        firstMonthToRender={this.state.firstMonthToRender}
+        monthNames={this.props.monthNames}
+        onPress={this.handlePressDay}
+        theme={this.props.theme}
+        showWeekdays={this.props.showWeekdays}
+        showMonthTitle={this.props.showMonthTitle}
+        locale={this.props.locale}
+        dayNames={this.props.dayNames}
+        height={this.props.monthHeight}
+        firstDayMonday={this.props.firstDayMonday}
+        renderDayContent={this.props.renderDayContent}
+        minDate={this.props.minDate}
+        maxDate={this.props.maxDate}
+        startDate={this.state.startDate}
+        endDate={this.state.endDate}
+        disableRange={this.props.disableRange}
+        extraData={this.props.extraData}
+        disabledDays={this.props.disabledDays}
+        disableOffsetDays={this.props.disableOffsetDays}
+        firstViewableIndex={this.state.firstViewableIndex}
+        lastViewableIndex={this.state.lastViewableIndex}
+        viewableRangeOffset={this.props.viewableRangeOffset!}
+      />
+    );
+  };
 
   render() {
     return (

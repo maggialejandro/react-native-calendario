@@ -4,5 +4,13 @@
       "packages": ["example/package.json", "package.json"]
     }
   },
-  "ignore": ["react-native", "react", "react-dom", "react-test-renderer"]
+  "ignore": [
+    "@babel/core",
+    "@babel/runtime",
+    "react-native",
+    "react",
+    "react-dom",
+    "react-test-renderer",
+    "metro-react-native-babel-preset"
+  ]
 }

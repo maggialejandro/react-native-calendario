@@ -32,7 +32,8 @@
   },
   "homepage": "https://github.com/maggialejandro/react-native-calendario#readme",
   "dependencies": {
-    "moment": "2.24.0"
+    "moment": "2.24.0",
+    "react-native-month": "1.0.2"
   },
   "peerDependencies": {
     "react": "*",

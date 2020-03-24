@@ -6,6 +6,8 @@ import { LocaleType } from '../types';
 
 const defaultProps = {
   index: 1,
+  month: 2,
+  year: 2020,
   monthNames: [],
   dayNames: [],
   firstMonthToRender: new Date(2019, 10, 1),

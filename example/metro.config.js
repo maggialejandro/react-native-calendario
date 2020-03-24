@@ -12,7 +12,6 @@ const pak = JSON.parse(
 
 const modules = [
   '@babel/runtime',
-  'moment',
   ...Object.keys({
     ...pak.dependencies,
     ...pak.peerDependencies,
