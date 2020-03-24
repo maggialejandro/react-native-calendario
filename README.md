@@ -30,9 +30,9 @@ import { Calendar } from 'react-native-calendario';
 ```js
 <Calendar
   onChange={(range) => console.log(range)}
-  minDate="2018-04-20"
-  startDate="2018-04-30"
-  endDate="2018-05-05"
+  minDate={new Date(2018, 3, 20)}
+  startDate={new Date(2018, 3, 30)}
+  endDate={new Date(2018, 4, 5)}
   theme={{
     activeDayColor: {},
     monthTitleTextStyle: {
