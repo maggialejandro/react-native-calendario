@@ -5090,10 +5090,10 @@ react-is@^16.8.4:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.12.0.tgz#2cc0fe0fba742d97fd527c42a13bec4eeb06241c"
   integrity sha512-rPCkf/mWBtKc97aLL9/txD8DZdemK0vkA3JMLShjlJB3Pj3s+lpf1KaBzMfQrAmhMQB0n1cU/SUGgKKBCe837Q==
 
-react-native-month@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-native-month/-/react-native-month-1.0.2.tgz#7e99158e4d77efc7444ec5587ef107e141b06e39"
-  integrity sha512-/EzwCLGKiP1XJaIkfKssatdSzbR2zlyNXvEnLzIKdubQ0k7M3PZDnwM2S0RCuHT9R5DiIM2D7U82Dq/c0cIX6A==
+react-native-month@1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-native-month/-/react-native-month-1.0.3.tgz#76738fd77f8abe704fa5312f4ad0350822f0c309"
+  integrity sha512-RoD7/ingkugJ1T+bu2Q9+40AKfbhfjuwQwNtkPjxekOWQYXp8PDQvSgPsVcV9KlhwIKyFWroaOfyBp1XgvjaDw==
 
 react-native-view-shot@3.0.2:
   version "3.0.2"
