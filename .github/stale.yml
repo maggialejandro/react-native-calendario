@@ -3,9 +3,14 @@ daysUntilClose: 7
 exemptLabels:
   - pinned
   - security
-staleLabel: wontfix
+  - discussion
+staleLabel: stale
 markComment: >
   This issue has been automatically marked as stale because it has not had
   recent activity. It will be closed if no further activity occurs. Thank you
-  for your contributions.
-closeComment: false
+  for your contributions. You may also mark this issue as a "discussion" and I
+  will leave this open.
+closeComment: >
+  Closing this issue after a prolonged period of inactivity. Fell free to reopen
+  this issue, if this still affecting you.
+only: issues 
