@@ -2002,10 +2002,10 @@
     "@nodelib/fs.scandir" "2.1.3"
     fastq "^1.6.0"
 
-"@react-native-community/bob@0.10.0":
-  version "0.10.0"
-  resolved "https://registry.yarnpkg.com/@react-native-community/bob/-/bob-0.10.0.tgz#193c516b5be75319af8509849c8c82d6414fafa9"
-  integrity sha512-yod4BUN7B6IU8sAXLZa88hjLeAgDXApKW40go3wEgGAJhSXRNnThYY4zcqYiVnk3QouuW2A5gvi+1NdAdpwWtg==
+"@react-native-community/bob@0.10.1":
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/@react-native-community/bob/-/bob-0.10.1.tgz#e90269fe1ce9c71fcca6e906966db301c17b712d"
+  integrity sha512-g7GuRJv6fFpOtv8T/sfWkT0A4q9Aa+iyOy/tSIdxTYZXtO2fYn7axVGRqG7iY/19gU4p1X5JD6CYxYeLKEaInQ==
   dependencies:
     "@babel/core" "^7.8.4"
     "@babel/plugin-proposal-class-properties" "^7.8.3"
