@@ -18,7 +18,7 @@
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "4.0.0",
-    "babel-preset-expo": "8.0.0"
+    "babel-preset-expo": "8.1.0"
   },
   "resolutions": {
     "@babel/runtime": "7.3.1"
