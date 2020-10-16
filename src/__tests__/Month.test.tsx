@@ -1,4 +1,3 @@
-/* @jest-environment jsdom */
 import * as React from 'react';
 import renderer from 'react-test-renderer';
 import Month from '../components/Month';
