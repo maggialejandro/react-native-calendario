@@ -151,6 +151,7 @@ export default class Calendar extends React.Component<CalendarProps, State> {
       this.state.endDate !== nextState.endDate ||
       this.props.minDate !== nextProps.minDate ||
       this.props.maxDate !== nextProps.maxDate ||
+      this.props.startingMonth !== nextProps.startingMonth ||
       this.props.renderDayContent !== nextProps.renderDayContent
     );
   }
