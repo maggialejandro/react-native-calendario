@@ -1,4 +1,3 @@
-/* eslint-disable flowtype/no-types-missing-file-annotation */
 import { ComponentType, RefObject } from 'react';
 import { FlatList, ViewStyle, TextStyle, ViewToken } from 'react-native';
 
@@ -7,7 +6,7 @@ export type RangeType = {
   startDate: Date;
 };
 
-export type LocaleType = 'es' | 'en' | 'fr' | 'br' |'zh';
+export type LocaleType = 'es' | 'en' | 'fr' | 'br' | 'zh';
 
 export type ThemeType = {
   activeDayColor?: string;

@@ -74,9 +74,7 @@ export default class Calendar extends React.Component<CalendarProps, State> {
 
       if (
         start >
-        moment(firstMonthToRender)
-          .add(numberOfMonths, 'months')
-          .toDate()
+        moment(firstMonthToRender).add(numberOfMonths, 'months').toDate()
       ) {
         start = undefined;
       }
@@ -284,7 +282,6 @@ export default class Calendar extends React.Component<CalendarProps, State> {
         startDate={this.state.startDate}
         endDate={this.state.endDate}
         disableRange={this.props.disableRange}
-        extraData={this.props.extraData}
         disabledDays={this.props.disabledDays}
         disableOffsetDays={this.props.disableOffsetDays}
         firstViewableIndex={this.state.firstViewableIndex}

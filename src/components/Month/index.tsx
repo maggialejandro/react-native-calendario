@@ -62,6 +62,7 @@ const MonthTitle = React.memo<MonthTitleProps>(
 
 interface Props extends MonthProps {
   monthNames: string[];
+  // eslint-disable-next-line react/no-unused-prop-types
   firstMonthToRender: Date;
   firstViewableIndex: number;
   lastViewableIndex: number;
@@ -69,7 +70,6 @@ interface Props extends MonthProps {
   showMonthTitle: boolean;
   height: number;
   index: number;
-  extraData: any;
 }
 
 export default React.memo<Props>(
@@ -133,7 +133,7 @@ export default React.memo<Props>(
       </View>
     );
   },
-  (prevProps, nextProps) => {
+  (prevProps: Props, nextProps: Props) => {
     if (prevProps.disableRange !== nextProps.disableRange) {
       return false;
     }
