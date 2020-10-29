@@ -52,7 +52,7 @@
     "babel-core": "7.0.0-bridge.0",
     "babel-eslint": "10.1.0",
     "babel-jest": "25.1.0",
-    "babel-test": "0.2.3",
+    "babel-test": "0.2.4",
     "eslint": "7.11.0",
     "eslint-config-satya164": "3.1.8",
     "husky": "4.3.0",
