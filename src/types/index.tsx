@@ -6,7 +6,7 @@ export type RangeType = {
   startDate: Date;
 };
 
-export type LocaleType = 'es' | 'en' | 'fr' | 'br' | 'zh';
+export type LocaleType = 'es' | 'en' | 'fr' | 'br' | 'zh' | 'ko';
 
 export type ThemeType = {
   activeDayColor?: string;
