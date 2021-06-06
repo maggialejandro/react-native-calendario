@@ -57,7 +57,7 @@
     "eslint-config-satya164": "3.1.8",
     "husky": "4.3.0",
     "jest": "25.1.0",
-    "jsdom": "16.2.1",
+    "jsdom": "16.6.0",
     "metro-react-native-babel-preset": "0.56.0",
     "prettier": "2.1.2",
     "react": "16.13.1",
