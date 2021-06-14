@@ -40,8 +40,8 @@
     "react-native": "*"
   },
   "devDependencies": {
-    "@babel/core": "7.9.6",
-    "@babel/runtime": "7.9.6",
+    "@babel/core": "7.14.6",
+    "@babel/runtime": "7.14.6",
     "@react-native-community/bob": "0.16.2",
     "@types/jest": "25.1.4",
     "@types/react": "16.9.52",
