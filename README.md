@@ -98,6 +98,7 @@ import { Calendar } from 'react-native-calendario';
 | **`disableRange`**         | Turn off range date selection          | no                   | false         | boolean          |
 | **`firstDayMonday`**       | Monday as first day of the week        | no                   | false         | boolean          |
 | **`monthHeight`**          | Change Month row height                | no                   | 370           | number           |
+| **`markedDays`**           | Multi-dot support on Day component     | no                   | undefined     | MarkedDays       |
 | **`disabledDays`**         | Disabled days                          | no                   | null          | {[string]: any } |
 | **`renderDayContent`**     | Render custom Day content              | no                   | null          | Function         |
 | **`extraData`**            | FlatList extraData                     | no                   | null          | any              |

@@ -122,6 +122,7 @@ export default React.memo<Props>(
           endDate={props.endDate}
           firstDayMonday={props.firstDayMonday}
           locale={props.locale}
+          markedDays={props.markedDays}
           maxDate={max}
           minDate={min}
           onPress={props.onPress}

@@ -278,6 +278,7 @@ export default class Calendar extends React.Component<CalendarProps, State> {
         height={this.props.monthHeight}
         firstDayMonday={this.props.firstDayMonday}
         renderDayContent={this.props.renderDayContent}
+        markedDays={this.props.markedDays}
         minDate={this.props.minDate}
         maxDate={this.props.maxDate}
         startDate={this.state.startDate}

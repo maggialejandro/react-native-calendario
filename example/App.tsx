@@ -15,6 +15,7 @@ import {
   RangeType,
 } from 'react-native-calendario';
 import moment from 'moment';
+import { MarkedDays } from 'react-native-month';
 
 const THEME: ThemeType = {
   monthTitleTextStyle: {
@@ -100,6 +101,21 @@ const ALTERNATIVE_STATE = {
   endDate: moment(END_DATE_2, FORMAT).toDate(),
   minDate: moment(MIN_DATE_2, FORMAT).toDate(),
   maxDate: moment(MAX_DATE_2, FORMAT).toDate(),
+};
+
+const markedDays: MarkedDays = {
+  '2020-03-12': {
+    dots: [
+      {
+        color: 'red',
+        selectedColor: 'green',
+      },
+      {
+        color: 'blue',
+        selectedColor: 'yellow',
+      },
+    ],
+  },
 };
 
 export default class App extends React.PureComponent<Props, State> {
@@ -266,6 +282,7 @@ export default class App extends React.PureComponent<Props, State> {
                   startDate={this.state.startDate}
                   endDate={this.state.endDate}
                   startingMonth="2020-01-10"
+                  markedDays={markedDays}
                   monthHeight={370}
                   numberOfMonths={12}
                   initialListSize={4}
