@@ -1,5 +1,6 @@
 import { ComponentType, RefObject } from 'react';
 import { FlatList, ViewStyle, TextStyle, ViewToken } from 'react-native';
+import { MarkedDays, ThemeType as MonthThemeType } from 'react-native-month';
 
 export type RangeType = {
   endDate?: Date;
@@ -8,7 +9,7 @@ export type RangeType = {
 
 export type LocaleType = 'es' | 'en' | 'fr' | 'br' | 'zh';
 
-export type ThemeType = {
+export interface ThemeType extends MonthThemeType {
   activeDayColor?: string;
   activeDayContainerStyle?: ViewStyle;
   activeDayTextStyle?: TextStyle;
@@ -26,10 +27,7 @@ export type ThemeType = {
   startDateContainerStyle?: ViewStyle;
   todayContainerStyle?: ViewStyle;
   todayTextStyle?: TextStyle;
-  weekColumnsContainerStyle?: ViewStyle;
-  weekColumnStyle?: ViewStyle;
-  weekColumnTextStyle?: TextStyle;
-};
+}
 
 export type DayType = {
   date: Date;
@@ -61,6 +59,7 @@ export interface CalendarProps {
   firstDayMonday: boolean;
   initialListSize?: number;
   locale: LocaleType;
+  markedDays?: MarkedDays;
   maxDate?: Date;
   minDate?: Date;
   monthHeight: number;

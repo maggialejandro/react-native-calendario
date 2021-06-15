@@ -14,7 +14,7 @@
     "react": "16.13.1",
     "react-dom": "16.13.1",
     "react-native": "https://github.com/expo/react-native/archive/sdk-39.0.3.tar.gz",
-    "react-native-month": "1.0.3"
+    "react-native-month": "1.0.4"
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "4.0.0",
