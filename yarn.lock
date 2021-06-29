@@ -8134,10 +8134,10 @@ react-is@^16.8.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.10.2.tgz#984120fd4d16800e9a738208ab1fba422d23b5ab"
   integrity sha512-INBT1QEgtcCCgvccr5/86CfD71fw9EPmDxgiJX4I2Ddr6ZsV6iFXsuby+qWJPtmNuMY0zByTsG4468P7nHuNWA==
 
-react-native-month@1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-native-month/-/react-native-month-1.0.4.tgz#7c55f35e7adacc071e56530350b60718d5722a89"
-  integrity sha512-oABtBzkGgS/QIURzXfW5TZUoMDeNSEruQEcO6HEY+L86zgyfxRoc38vHjh0y6CkZj0qvKHBC4oVQqk99ExnrBQ==
+react-native-month@1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/react-native-month/-/react-native-month-1.0.5.tgz#d39ad8d08485f03c21fb12bac818093120f3ee38"
+  integrity sha512-uWpCaxARPY0hSqz+Aty0Xk04wnCUEy4JhgieaL03wi7aTse4Bvt4+B7jWxREGC/ibDip40ZLeBqwXcVHGWgYbA==
 
 react-native@0.63.3:
   version "0.63.3"
