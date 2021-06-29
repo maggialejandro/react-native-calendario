@@ -64,7 +64,7 @@
     "react-native": "0.63.3",
     "react-native-builder-bob": "^0.18.1",
     "react-test-renderer": "16.9.0",
-    "ts-jest": "25.2.1",
+    "ts-jest": "27.0.3",
     "typescript": "3.8.3"
   },
   "husky": {
