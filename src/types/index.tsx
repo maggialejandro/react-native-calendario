@@ -53,7 +53,6 @@ export interface CalendarProps {
   disabledDays?: { [key: string]: any };
   disableOffsetDays?: boolean;
   disableRange: boolean;
-  startDate?: Date;
   endDate?: Date;
   extraData?: any;
   firstDayMonday: boolean;
@@ -69,7 +68,16 @@ export interface CalendarProps {
   renderDayContent?: (day: DayType) => ComponentType;
   showMonthTitle: boolean;
   showWeekdays: boolean;
+  startDate?: Date;
   startingMonth?: string;
+
+  /**
+   * On Web FlatList's onViewableItemsChanged is not trigger, use this prop to render all months.
+   *
+   * @type {boolean}
+   * @memberof CalendarProps
+   */
+  renderAllMonths?: boolean;
   theme: ThemeType;
   viewableItemsChanged?: (viableItems: ViewableItemsType) => void;
   viewableRangeOffset?: number;

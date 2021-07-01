@@ -174,6 +174,10 @@ export default class Calendar extends React.Component<CalendarProps, State> {
       this.props.viewableItemsChanged(info);
     }
 
+    if (this.props.renderAllMonths) {
+      return;
+    }
+
     const { viewableItems } = info;
 
     if (viewableItems.length > 0) {
@@ -271,6 +275,7 @@ export default class Calendar extends React.Component<CalendarProps, State> {
         monthNames={this.props.monthNames}
         onPress={this.handlePressDay}
         theme={this.props.theme}
+        renderAllMonths={this.props.renderAllMonths}
         showWeekdays={this.props.showWeekdays}
         showMonthTitle={this.props.showMonthTitle}
         locale={this.props.locale}

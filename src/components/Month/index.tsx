@@ -67,6 +67,7 @@ interface Props extends MonthProps {
   firstViewableIndex: number;
   lastViewableIndex: number;
   viewableRangeOffset: number;
+  renderAllMonths?: boolean;
   showMonthTitle: boolean;
   height: number;
   index: number;
@@ -80,6 +81,7 @@ export default React.memo<Props>(
       minDate,
       maxDate,
       showMonthTitle,
+      renderAllMonths,
       monthNames,
       theme = {},
       height,
@@ -94,8 +96,9 @@ export default React.memo<Props>(
     const monthName = `${MONTH_NAMES[month]} ${year}`;
 
     if (
-      index < props.firstViewableIndex - props.viewableRangeOffset ||
-      index > props.lastViewableIndex
+      !renderAllMonths &&
+      (index < props.firstViewableIndex - props.viewableRangeOffset ||
+        index > props.lastViewableIndex)
     ) {
       return <EmptyMonth name={monthName} height={height} theme={theme} />;
     }
