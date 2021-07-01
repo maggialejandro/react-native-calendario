@@ -101,6 +101,7 @@ import { Calendar } from 'react-native-calendario';
 | **`markedDays`**           | Multi-dot support on Day component     | no                   | undefined     | MarkedDays       |
 | **`disabledDays`**         | Disabled days                          | no                   | null          | {[string]: any } |
 | **`renderDayContent`**     | Render custom Day content              | no                   | null          | Function         |
+| **`renderAllMonths`**      | Use this for web, render all months    | no                   | null          | boolean          |
 | **`extraData`**            | FlatList extraData                     | no                   | null          | any              |
 | **`viewableItemsChanged`** | handleViewableItemsChange callback     | no                   | null          | Function         |
 | **`disableOffsetDays`**    | Remove offset Days.                    | no                   | false         | boolean          |

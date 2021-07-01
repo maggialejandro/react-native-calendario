@@ -284,7 +284,7 @@ export default class App extends React.PureComponent<Props, State> {
                   startingMonth="2020-01-10"
                   markedDays={markedDays}
                   monthHeight={370}
-                  numberOfMonths={12}
+                  numberOfMonths={100}
                   initialListSize={4}
                   onChange={this.onChange}
                   theme={THEME}
