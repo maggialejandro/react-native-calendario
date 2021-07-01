@@ -17,7 +17,7 @@
     "react-native-month": "1.0.5"
   },
   "devDependencies": {
-    "babel-plugin-module-resolver": "4.0.0",
+    "babel-plugin-module-resolver": "4.1.0",
     "babel-preset-expo": "8.3.0"
   },
   "resolutions": {
