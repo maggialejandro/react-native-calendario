@@ -1,1 +1,5 @@
-export * from './App.tsx';
+import { registerRootComponent } from 'expo';
+
+import App from './App';
+
+registerRootComponent(App);
