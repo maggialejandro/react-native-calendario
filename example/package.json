@@ -19,7 +19,7 @@
   "devDependencies": {
     "babel-plugin-module-resolver": "4.0.0",
     "babel-preset-expo": "8.4.1",
-    "expo-cli": "^4.9.1"
+    "expo-cli": "4.9.1"
   },
   "resolutions": {
     "@babel/runtime": "7.3.1"
