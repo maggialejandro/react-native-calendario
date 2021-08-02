@@ -36,7 +36,7 @@
     "moment": "2.29.1",
     "react-dom": "16.13.1",
     "react-native-month": "1.0.5",
-    "react-native-web": "0.13.12"
+    "react-native-web": "0.17.1"
   },
   "peerDependencies": {
     "react": "*",
