@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { FlatList } from 'react-native';
+import { FlatList, Platform } from 'react-native';
 import moment from 'moment';
 
 import Month from './Month';
@@ -299,14 +299,18 @@ export default class Calendar extends React.Component<CalendarProps, State> {
   };
 
   render() {
+    const { numberOfMonths, initialListSize } = this.props;
+    const isWeb = Platform.OS === 'web';
+    const initialNumToRender = isWeb ? numberOfMonths : initialListSize;
+
     return (
       <FlatList
-        getItemLayout={this.getItemLayout}
+        getItemLayout={!isWeb ? this.getItemLayout : undefined}
         initialScrollIndex={this.state.initialScrollIndex}
         viewabilityConfig={VIEWABILITY_CONFIG}
         removeClippedSubviews
         onViewableItemsChanged={this.handleViewableItemsChange}
-        initialNumToRender={this.props.initialListSize}
+        initialNumToRender={initialNumToRender}
         keyExtractor={this.keyExtractor}
         renderItem={this.renderMonth}
         extraData={{
