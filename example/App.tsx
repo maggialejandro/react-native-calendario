@@ -145,7 +145,7 @@ export default class App extends React.PureComponent<Props, State> {
             monthHeight={370}
             numberOfMonths={24}
             renderAllMonths
-            initialListSize={24}
+            initialListSize={4}
             onChange={this.onChange}
             theme={THEME}
             disabledDays={DISABLED_DAYS}
