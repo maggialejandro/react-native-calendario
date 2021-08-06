@@ -1,6 +1,6 @@
 {
   "name": "react-native-calendario",
-  "version": "2.1.5",
+  "version": "2.1.6",
   "description": "React Native Calendar",
   "main": "lib/commonjs/index.js",
   "react-native": "src/index.tsx",
