@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { View, Text } from 'react-native';
 import { Month, MonthProps } from 'react-native-month';
 import moment from 'moment';
 import { isValidDate, getMonthNames, isSameDate } from '../../utils/date';
 import { shouldRenderMonth, isMonthDrawn } from './utils';
+import styles from './styles';
 import { ThemeType } from '../../types';
 
 interface EmptyMonthProps {
@@ -15,28 +16,26 @@ interface EmptyMonthProps {
 const SHOULD_NOT_UPDATE = true;
 
 const EmptyMonth = React.memo<EmptyMonthProps>(
-  (props: EmptyMonthProps) => (
-    <View
-      style={[
-        {
-          height: props.height,
-          justifyContent: 'center',
-          alignItems: 'center',
-        },
-        props.theme.emptyMonthContainerStyle,
-      ]}
-    >
-      <Text
-        style={[
-          { fontSize: 25, fontWeight: '300' },
-          props.theme.emptyMonthTextStyle,
-        ]}
-        allowFontScaling={false}
-      >
-        {props.name}
-      </Text>
-    </View>
-  ),
+  (props: EmptyMonthProps) => {
+    const content = useMemo(
+      () => ({
+        height: props.height,
+        justifyContent: 'center' as const,
+        alignItems: 'center' as const,
+      }),
+      [props.height]
+    );
+    return (
+      <View style={[content, props.theme.emptyMonthContainerStyle]}>
+        <Text
+          style={[styles.emptyMonthText, props.theme.emptyMonthTextStyle]}
+          allowFontScaling={false}
+        >
+          {props.name}
+        </Text>
+      </View>
+    );
+  },
   () => SHOULD_NOT_UPDATE
 );
 
@@ -49,10 +48,7 @@ const MonthTitle = React.memo<MonthTitleProps>(
   (props: MonthTitleProps) => (
     <Text
       allowFontScaling={false}
-      style={[
-        { textAlign: 'center', paddingVertical: 10 },
-        props.theme.monthTitleTextStyle,
-      ]}
+      style={[styles.monthTitleText, props.theme.monthTitleTextStyle]}
     >
       {props.name}
     </Text>
@@ -62,7 +58,6 @@ const MonthTitle = React.memo<MonthTitleProps>(
 
 interface Props extends MonthProps {
   monthNames: string[];
-  // eslint-disable-next-line react/no-unused-prop-types
   firstMonthToRender: Date;
   firstViewableIndex: number;
   lastViewableIndex: number;
