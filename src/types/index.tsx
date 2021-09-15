@@ -48,27 +48,155 @@ export type ViewableItemsType = {
 };
 
 export interface CalendarProps {
+  /**
+   * FlatList's ref
+   *
+   * @memberof CalendarProps
+   */
   calendarListRef?: (ref: RefObject<FlatList<any>>) => void;
+
+  /**
+   * Array of names of the days of the week
+   *
+   * @type {string[]}
+   * @memberof CalendarProps
+   */
   dayNames: string[];
+
+  /**
+   * Use this prop to disable individual days
+   * key format: DD-MM-YYYY
+   * value: truthy value
+   *
+   * @type {{ [key: string]: any }}
+   * @memberof CalendarProps
+   */
   disabledDays?: { [key: string]: any };
+
+  /**
+   * Hide days that do not belong to the month
+   *
+   * @type {boolean}
+   * @default false
+   * @memberof MonthProps
+   */
   disableOffsetDays?: boolean;
+
+  /**
+   * Disable range selection
+   *
+   * @type {boolean}
+   * @default false
+   * @memberof MonthProps
+   */
   disableRange: boolean;
+
+  /**
+   * Selected end date
+   *
+   * @type {Date}
+   * @memberof CalendarProps
+   */
   endDate?: Date;
   extraData?: any;
+
+  /**
+   * Monday as first day of the week
+   *
+   * @type {boolean}
+   * @memberof CalendarProps
+   */
   firstDayMonday: boolean;
+
+  /**
+   * FlatList initialNumToRender
+   *
+   * @type {number}
+   * @memberof CalendarProps
+   */
   initialListSize?: number;
   locale: LocaleType;
+
+  /**
+   * Multi-dot support on Day component
+   *
+   * @type {MarkedDays}
+   * @memberof CalendarProps
+   */
   markedDays?: MarkedDays;
+
+  /**
+   * Maximum date that can be selected.
+   *
+   * @type {Date}
+   * @memberof CalendarProps
+   */
   maxDate?: Date;
+
+  /**
+   * Minimum date that can be selected.
+   *
+   * @type {Date}
+   * @memberof CalendarProps
+   */
   minDate?: Date;
+
+  /**
+   * Change Month row height
+   *
+   * @type {number}
+   * @memberof CalendarProps
+   */
   monthHeight: number;
+
+  /**
+   * Array of names of each month
+   *
+   * @type {string[]}
+   * @memberof CalendarProps
+   */
   monthNames: string[];
+
+  /**
+   * Number of months to render
+   *
+   * @type {number}
+   * @memberof CalendarProps
+   */
   numberOfMonths: number;
   onChange: (range: RangeType) => void;
   renderDayContent?: (day: DayType) => ComponentType;
+
+  /**
+   * Show Month title
+   *
+   * @type {boolean}
+   * @memberof CalendarProps
+   */
   showMonthTitle: boolean;
+
+  /**
+   * Show Week columns
+   *
+   * @type {boolean}
+   * @memberof CalendarProps
+   */
   showWeekdays: boolean;
+
+  /**
+   * Selected start date
+   *
+   * @type {Date}
+   * @memberof CalendarProps
+   */
   startDate?: Date;
+
+  /**
+   * First month to render
+   *
+   * @type {string}
+   * @memberof CalendarProps
+   */
   startingMonth?: string;
 
   /**
