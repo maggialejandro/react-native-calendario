@@ -22,20 +22,20 @@ export default function useRange({
 }: Input): Result {
   return useMemo(() => {
     let start: Date | undefined;
+    const lastMonth = moment(firstMonthToRender)
+      .add(numberOfMonths, 'months')
+      .toDate();
 
     if (startDate && isValidDate(new Date(startDate))) {
       start = moment(startDate, 'YYYY-MM-DD').toDate();
 
-      if (
-        start >
-        moment(firstMonthToRender).add(numberOfMonths, 'months').toDate()
-      ) {
+      if (start > lastMonth) {
         start = undefined;
       }
     }
 
-    const end =
-      endDate && isValidDate(new Date(endDate))
+    let end =
+      endDate && isValidDate(new Date(endDate)) && endDate <= lastMonth
         ? moment(endDate, 'YYYY-MM-DD').toDate()
         : undefined;
 
