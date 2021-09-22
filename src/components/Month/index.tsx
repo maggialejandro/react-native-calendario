@@ -57,7 +57,7 @@ const MonthTitle = React.memo<MonthTitleProps>(
 );
 
 interface Props extends MonthProps {
-  monthNames: string[];
+  monthNames?: string[];
   firstMonthToRender: Date;
   firstViewableIndex: number;
   lastViewableIndex: number;

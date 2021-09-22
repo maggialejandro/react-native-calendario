@@ -1,13 +1,15 @@
 import React from 'react';
-import { View, Text, StatusBar, SafeAreaView } from 'react-native';
-import {
-  Calendar,
-  DayType,
-  ThemeType,
-  RangeType,
-} from 'react-native-calendario';
+import { View, Text, StatusBar, SafeAreaView, StyleSheet } from 'react-native';
+import { Calendar, DayType, ThemeType } from 'react-native-calendario';
 import moment from 'moment';
 import { MarkedDays } from 'react-native-month';
+
+const styles = StyleSheet.create({
+  customDayContent: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
 
 const THEME: ThemeType = {
   monthTitleTextStyle: {
@@ -60,20 +62,21 @@ const DISABLED_DAYS = {
 type Props = {};
 
 type State = {
-  minDate: Date;
-  maxDate: Date;
-  startDate: Date;
+  minDate?: Date;
+  maxDate?: Date;
+  startDate?: Date;
   endDate?: Date;
 };
 
-const START_DATE_1 = '2020-03-10';
+const START_DATE_1 = '2020-01-10';
 const END_DATE_1 = '2020-04-15';
-const MIN_DATE_1 = '2020-03-12';
-const MAX_DATE_1 = '2020-04-10';
+const MIN_DATE_1 = '2020-01-02';
+const MAX_DATE_1 = '2020-04-20';
 
 const FORMAT = 'YYYY-MM-DD';
 
 const INITIAL_STATE = {
+  disableRange: false,
   startDate: moment(START_DATE_1, FORMAT).toDate(),
   endDate: moment(END_DATE_1, FORMAT).toDate(),
   minDate: moment(MIN_DATE_1, FORMAT).toDate(),
@@ -100,18 +103,33 @@ export default class App extends React.PureComponent<Props, State> {
     ...INITIAL_STATE,
   };
 
-  onChange = ({ startDate, endDate }: RangeType) =>
-    this.setState({ startDate, endDate });
+  handlePress = (date: Date) => {
+    const { disableRange, startDate, endDate } = this.state;
+
+    if (disableRange) {
+      this.setState({ startDate: date });
+    } else {
+      if (startDate) {
+        if (endDate) {
+          this.setState({ startDate: date, endDate: undefined });
+        } else if (date < startDate!) {
+          this.setState({ startDate: date });
+        } else if (date > startDate!) {
+          this.setState({ endDate: date });
+        } else {
+          this.setState({ startDate: date, endDate: date });
+          console.log('update 4');
+        }
+      } else {
+        this.setState({ startDate: date });
+      }
+    }
+  };
 
   renderDayContent = (item: DayType) => {
     const { isActive, date } = item;
     return (
-      <View
-        style={{
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
+      <View style={styles.customDayContent}>
         <Text
           style={[
             { color: isActive ? 'green' : 'grey' },
@@ -121,7 +139,7 @@ export default class App extends React.PureComponent<Props, State> {
         >
           {date.getDate()}
         </Text>
-        <Text style={{ fontSize: 7 }}>asd</Text>
+        <Text>{item.date.getDate()}</Text>
       </View>
     );
   };
@@ -135,18 +153,18 @@ export default class App extends React.PureComponent<Props, State> {
           }}
         >
           <Calendar
-            disableRange
+            onPress={this.handlePress}
+            disableRange={this.state.disableRange}
             minDate={this.state.minDate}
             maxDate={this.state.maxDate}
             startDate={this.state.startDate}
             endDate={this.state.endDate}
-            startingMonth="2020-01-10"
+            startingMonth="2019-11-10"
             markedDays={markedDays}
             monthHeight={370}
-            numberOfMonths={24}
-            renderAllMonths
+            numberOfMonths={100}
             initialListSize={4}
-            onChange={this.onChange}
+            firstDayMonday
             theme={THEME}
             disabledDays={DISABLED_DAYS}
             // renderDayContent={this.renderDayContent}

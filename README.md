@@ -79,30 +79,32 @@ import { Calendar } from 'react-native-calendario';
 
 ## API
 
-| Prop                       | Description                            | Required?            | Default       | Type             |
-| -------------------------- | -------------------------------------- | -------------------- | ------------- | ---------------- |
-| **`onChange`**             | Callback called when a day is pressed. | yes                  |               | Function         |
-| **`minDate`**              | Minimum date that can be selected.     | no                   | null          | Date             |
-| **`maxDate`**              | Maximum date that can be selected.     | no                   | null          | Date             |
-| **`startDate`**            | Selected start date                    | no                   | null          | Date             |
-| **`endDate`**              | Selected end date                      | requires _startDate_ | null          | Date             |
-| **`theme`**                | Calendar StyleSheet                    | no                   | null          | ThemeType        |
-| **`locale`**               | Calendar language                      | es, en, fr, br       | 'en'          | LocaleType       |
-| **`showWeekdays`**         | Show Week columns                      | no                   | true          | boolean          |
-| **`showMonthTitle`**       | Show Month title                       | no                   | true          | boolean          |
-| **`initialListSize`**      | FlatList initialNumToRender            | no                   | 2             | number           |
-| **`startingMonth`**        | First month to render                  | no                   | current month | 'YYYY-MM-DD'     |
-| **`numberOfMonths`**       | Number of months to render             | no                   | 12            | number           |
-| **`disableRange`**         | Turn off range date selection          | no                   | false         | boolean          |
-| **`firstDayMonday`**       | Monday as first day of the week        | no                   | false         | boolean          |
-| **`monthHeight`**          | Change Month row height                | no                   | 370           | number           |
-| **`markedDays`**           | Multi-dot support on Day component     | no                   | undefined     | MarkedDays       |
-| **`disabledDays`**         | Disabled days                          | no                   | null          | {[string]: any } |
-| **`renderDayContent`**     | Render custom Day content              | no                   | null          | Function         |
-| **`renderAllMonths`**      | Use this for web, render all months    | no                   | null          | boolean          |
-| **`extraData`**            | FlatList extraData                     | no                   | null          | any              |
-| **`viewableItemsChanged`** | handleViewableItemsChange callback     | no                   | null          | Function         |
-| **`disableOffsetDays`**    | Remove offset Days.                    | no                   | false         | boolean          |
+| Prop                        | Description                            | Required?            | Default       | Type             |
+| --------------------------- | -------------------------------------- | -------------------- | ------------- | ---------------- |
+| **`onChange`** (deprecated) | Callback called when a day is pressed. | no                   |               | Function         |
+| **`onPress`**               | Callback called when a day is pressed. | yes                  |               | (Date) => void   |
+| **`minDate`**               | Minimum date that can be selected.     | no                   | null          | Date             |
+| **`maxDate`**               | Maximum date that can be selected.     | no                   | null          | Date             |
+| **`startDate`**             | Selected start date                    | no                   | null          | Date             |
+| **`endDate`**               | Selected end date                      | requires _startDate_ | null          | Date             |
+| **`theme`**                 | Calendar StyleSheet                    | no                   | null          | ThemeType        |
+| **`locale`**                | Calendar language                      | es, en, fr, br       | 'en'          | LocaleType       |
+| **`dayNames`**              | Array of day names                     | no                   | []            | string[]         |
+| **`monthNames`**            | Array of names of each mo              | no                   | []            | string[]         |
+| **`showWeekdays`**          | Show Week columns                      | no                   | true          | boolean          |
+| **`showMonthTitle`**        | Show Month title                       | no                   | true          | boolean          |
+| **`initialListSize`**       | FlatList initialNumToRender            | no                   | 2             | number           |
+| **`startingMonth`**         | First month to render                  | no                   | current month | 'YYYY-MM-DD'     |
+| **`numberOfMonths`**        | Number of months to render             | no                   | 12            | number           |
+| **`disableRange`**          | Turn off range date selection          | no                   | false         | boolean          |
+| **`firstDayMonday`**        | Monday as first day of the week        | no                   | false         | boolean          |
+| **`monthHeight`**           | Change Month row height                | no                   | 370           | number           |
+| **`markedDays`**            | Multi-dot support on Day component     | no                   | undefined     | MarkedDays       |
+| **`disabledDays`**          | Disabled days                          | no                   | null          | {[string]: any } |
+| **`renderDayContent`**      | Render custom Day content              | no                   | null          | Function         |
+| **`renderAllMonths`**       | Use this for web, render all months    | no                   | null          | boolean          |
+| **`viewableItemsChanged`**  | handleViewableItemsChange callback     | no                   | null          | Function         |
+| **`disableOffsetDays`**     | Remove offset Days.                    | no                   | false         | boolean          |
 
 ## License
 

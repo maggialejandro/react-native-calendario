@@ -51,6 +51,7 @@ export interface CalendarProps {
   /**
    * FlatList's ref
    *
+   * @deprecated
    * @memberof CalendarProps
    */
   calendarListRef?: (ref: RefObject<FlatList<any>>) => void;
@@ -61,7 +62,7 @@ export interface CalendarProps {
    * @type {string[]}
    * @memberof CalendarProps
    */
-  dayNames: string[];
+  dayNames?: string[];
 
   /**
    * Use this prop to disable individual days
@@ -89,7 +90,7 @@ export interface CalendarProps {
    * @default false
    * @memberof MonthProps
    */
-  disableRange: boolean;
+  disableRange?: boolean;
 
   /**
    * Selected end date
@@ -98,12 +99,21 @@ export interface CalendarProps {
    * @memberof CalendarProps
    */
   endDate?: Date;
+
+  /**
+   * FlatList's extraData prop
+   *
+   * @type {*}
+   * @deprecated
+   * @memberof CalendarProps
+   */
   extraData?: any;
 
   /**
    * Monday as first day of the week
    *
    * @type {boolean}
+   * @default false
    * @memberof CalendarProps
    */
   firstDayMonday: boolean;
@@ -115,7 +125,15 @@ export interface CalendarProps {
    * @memberof CalendarProps
    */
   initialListSize?: number;
-  locale: LocaleType;
+
+  /**
+   * Calendar language
+   *
+   * @type {LocaleType}
+   * @default en
+   * @memberof CalendarProps
+   */
+  locale?: LocaleType;
 
   /**
    * Multi-dot support on Day component
@@ -155,7 +173,7 @@ export interface CalendarProps {
    * @type {string[]}
    * @memberof CalendarProps
    */
-  monthNames: string[];
+  monthNames?: string[];
 
   /**
    * Number of months to render
@@ -164,7 +182,20 @@ export interface CalendarProps {
    * @memberof CalendarProps
    */
   numberOfMonths: number;
-  onChange: (range: RangeType) => void;
+
+  /**
+   * Day pressed
+   *
+   * @memberof CalendarProps
+   */
+  onPress: (date: Date) => void;
+
+  /**
+   * Use onPress
+   * @deprecated
+   * @memberof CalendarProps
+   */
+  onChange?: (range: RangeType) => void;
   renderDayContent?: (day: DayType) => ComponentType;
 
   /**
@@ -173,7 +204,7 @@ export interface CalendarProps {
    * @type {boolean}
    * @memberof CalendarProps
    */
-  showMonthTitle: boolean;
+  showMonthTitle?: boolean;
 
   /**
    * Show Week columns
@@ -181,7 +212,7 @@ export interface CalendarProps {
    * @type {boolean}
    * @memberof CalendarProps
    */
-  showWeekdays: boolean;
+  showWeekdays?: boolean;
 
   /**
    * Selected start date
@@ -206,7 +237,7 @@ export interface CalendarProps {
    * @memberof CalendarProps
    */
   renderAllMonths?: boolean;
-  theme: ThemeType;
+  theme?: ThemeType;
   viewableItemsChanged?: (viableItems: ViewableItemsType) => void;
   viewableRangeOffset?: number;
 }
