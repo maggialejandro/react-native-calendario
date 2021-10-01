@@ -138,6 +138,7 @@ const App = () => {
           theme={THEME}
           disabledDays={DISABLED_DAYS}
           showsVerticalScrollIndicator={false}
+          calculateMonthHeightDynamically
         />
       </View>
     </SafeAreaView>

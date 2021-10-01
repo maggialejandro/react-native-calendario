@@ -102,7 +102,7 @@ export interface CalendarProps {
    * @default false
    * @memberof CalendarProps
    */
-  firstDayMonday: boolean;
+  firstDayMonday?: boolean;
 
   /**
    * FlatList initialNumToRender
@@ -231,6 +231,18 @@ export interface CalendarProps {
    * @memberof CalendarProps
    */
   renderAllMonths?: boolean;
+
+  /**
+   * Calculate Month's height dynamically.
+   * Use this if you won't render too many months as this affects the performance
+   * This is an experimental feature
+   *
+   * @type {boolean}
+   * @default false
+   * @memberof CalendarProps
+   */
+  calculateMonthHeightDynamically?: boolean;
+
   theme?: ThemeType;
   viewableItemsChanged?: (viableItems: ViewableItemsType) => void;
   viewableRangeOffset?: number;
