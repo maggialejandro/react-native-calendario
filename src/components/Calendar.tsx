@@ -3,10 +3,11 @@ import React, {
   useRef,
   useState,
   useMemo,
+  useEffect,
   forwardRef,
   Ref,
 } from 'react';
-import { FlatList, Platform } from 'react-native';
+import { FlatList, LayoutChangeEvent, Platform } from 'react-native';
 import moment from 'moment';
 
 import Month from './Month';
@@ -26,7 +27,7 @@ const VIEWABILITY_CONFIG = {
   minimumViewTime: 32,
 };
 
-const Calendar = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
+const Calendario = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
   const {
     numberOfMonths = NUMBER_OF_MONTHS,
     startingMonth = moment().format('YYYY-MM-DD'),
@@ -41,6 +42,7 @@ const Calendar = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
     disableOffsetDays = false,
     viewableRangeOffset = VIEWABLE_RANGE_OFFSET,
     showsVerticalScrollIndicator,
+    calculateMonthHeightDynamically,
     monthNames,
     onPress,
     dayNames,
@@ -48,10 +50,17 @@ const Calendar = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
     endDate,
   } = props;
 
+  const [
+    dynamicLayoutScrollHasHappened,
+    setDynamicLayoutScrollHasHappened,
+  ] = useState(false);
+  const [listRendered, setListRendered] = useState(false);
   const [firstViewableIndex, setFirstViewableIndex] = useState(0);
   const [lastViewableIndex, setLastViewableIndex] = useState(
     INITIAL_LIST_SIZE + viewableRangeOffset!
   );
+
+  const listReference = useRef<FlatList>(null);
 
   const { months, firstMonth: firstMonthToRender } = useMonths({
     numberOfMonths,
@@ -82,16 +91,58 @@ const Calendar = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
     return 0;
   }, [firstMonthToRender, localStartDate, months, numberOfMonths]);
 
+  useEffect(() => {
+    if (
+      calculateMonthHeightDynamically &&
+      !dynamicLayoutScrollHasHappened &&
+      firstMonthIndex !== 0 &&
+      listRendered
+    ) {
+      setTimeout(() => {
+        if (listReference.current !== null) {
+          setDynamicLayoutScrollHasHappened(true);
+          listReference.current.scrollToIndex({
+            index: firstMonthIndex,
+            animated: true,
+          });
+        }
+      }, 0);
+    }
+  }, [
+    calculateMonthHeightDynamically,
+    dynamicLayoutScrollHasHappened,
+    firstMonthIndex,
+    listRendered,
+  ]);
+
+  useEffect(() => {
+    Calendar.layouts = [];
+  }, [months]);
+
   const getItemLayout = useCallback(
     (
       _data: any,
       index: number
-    ): { length: number; offset: number; index: number } => ({
-      length: monthHeight,
-      offset: monthHeight * index,
-      index,
-    }),
-    [monthHeight]
+    ): { length: number; offset: number; index: number } => {
+      if (calculateMonthHeightDynamically) {
+        if (index === -1 || !Calendar.layouts[index]) {
+          return { index, length: 0, offset: 0 };
+        }
+
+        const length = Calendar.layouts[index];
+        const offset = Calendar.layouts
+          .slice(0, index)
+          .reduce((a, c) => a + c, 0);
+        return { length, offset, index };
+      }
+
+      return {
+        length: monthHeight,
+        offset: monthHeight * index,
+        index,
+      };
+    },
+    [calculateMonthHeightDynamically, monthHeight]
   );
 
   const keyExtractor = useCallback(
@@ -137,6 +188,19 @@ const Calendar = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
     },
   ]);
 
+  const handleMonthLayout = useCallback(
+    (index, e: LayoutChangeEvent) => {
+      if (calculateMonthHeightDynamically && !Calendar.layouts[index]) {
+        Calendar.layouts[index] = e.nativeEvent.layout.height;
+
+        if (index === firstMonthIndex) {
+          setListRendered(true);
+        }
+      }
+    },
+    [calculateMonthHeightDynamically, firstMonthIndex]
+  );
+
   const handlePress = useCallback(
     (date: Date) => {
       if (onPress) {
@@ -166,6 +230,7 @@ const Calendar = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
           dayNames={dayNames}
           height={monthHeight}
           firstDayMonday={firstDayMonday}
+          calculateMonthHeightDynamically={calculateMonthHeightDynamically}
           renderDayContent={props.renderDayContent}
           markedDays={props.markedDays}
           minDate={props.minDate}
@@ -178,16 +243,19 @@ const Calendar = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
           firstViewableIndex={firstViewableIndex}
           lastViewableIndex={lastViewableIndex}
           viewableRangeOffset={viewableRangeOffset!}
+          onMonthLayout={handleMonthLayout}
         />
       );
     },
     [
+      calculateMonthHeightDynamically,
       dayNames,
       disableOffsetDays,
       disableRange,
       firstDayMonday,
       firstMonthToRender,
       firstViewableIndex,
+      handleMonthLayout,
       handlePress,
       lastViewableIndex,
       localEndDate,
@@ -214,9 +282,15 @@ const Calendar = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
   return (
     <FlatList
       getItemLayout={!isWeb ? getItemLayout : undefined}
-      initialScrollIndex={!isWeb ? firstMonthIndex : 0}
+      initialScrollIndex={
+        !isWeb && !calculateMonthHeightDynamically ? firstMonthIndex : 0
+      }
       removeClippedSubviews
-      initialNumToRender={initialNumToRender}
+      initialNumToRender={
+        calculateMonthHeightDynamically && firstMonthIndex !== 0
+          ? months.length
+          : initialNumToRender
+      }
       keyExtractor={keyExtractor}
       viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
       showsVerticalScrollIndicator={showsVerticalScrollIndicator}
@@ -227,6 +301,10 @@ const Calendar = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
   );
 });
 
-Calendar.displayName = 'Calendar';
+Calendario.displayName = 'Calendar';
 
-export default Calendar;
+const Calendar = Object.assign(Calendario, {
+  layouts: [] as number[],
+});
+
+export { Calendario as Calendar };
