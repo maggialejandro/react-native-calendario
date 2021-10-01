@@ -1,5 +1,5 @@
-import React, { useMemo } from 'react';
-import { View, Text } from 'react-native';
+import React, { useCallback, useMemo } from 'react';
+import { View, Text, LayoutChangeEvent } from 'react-native';
 import { Month, MonthProps } from 'react-native-month';
 import moment from 'moment';
 import { isValidDate, getMonthNames, isSameDate } from '../../utils/date';
@@ -57,6 +57,8 @@ const MonthTitle = React.memo<MonthTitleProps>(
 );
 
 interface Props extends MonthProps {
+  onMonthLayout: (weeks: number, e: LayoutChangeEvent) => void;
+  calculateMonthHeightDynamically?: boolean;
   monthNames?: string[];
   firstMonthToRender: Date;
   firstViewableIndex: number;
@@ -64,6 +66,7 @@ interface Props extends MonthProps {
   viewableRangeOffset: number;
   renderAllMonths?: boolean;
   showMonthTitle: boolean;
+  firstDayMonday: boolean;
   height: number;
   index: number;
 }
@@ -75,8 +78,11 @@ export default React.memo<Props>(
       year,
       minDate,
       maxDate,
+      firstDayMonday,
       showMonthTitle,
       renderAllMonths,
+      calculateMonthHeightDynamically,
+      onMonthLayout,
       monthNames,
       theme = {},
       height,
@@ -90,11 +96,27 @@ export default React.memo<Props>(
         : getMonthNames(locale);
     const monthName = `${MONTH_NAMES[month]} ${year}`;
 
-    if (
+    const isEmptyMonth =
       !renderAllMonths &&
+      !calculateMonthHeightDynamically &&
       (index < props.firstViewableIndex - props.viewableRangeOffset ||
-        index > props.lastViewableIndex)
-    ) {
+        index > props.lastViewableIndex);
+
+    const handleOnLayout = useCallback(
+      (e: LayoutChangeEvent) => {
+        if (calculateMonthHeightDynamically) {
+          onMonthLayout(index, e);
+        }
+      },
+      [calculateMonthHeightDynamically, index, onMonthLayout]
+    );
+
+    const monthStyle = useMemo(
+      () => (calculateMonthHeightDynamically ? {} : { height }),
+      [calculateMonthHeightDynamically, height]
+    );
+
+    if (isEmptyMonth) {
       return <EmptyMonth name={monthName} height={height} theme={theme} />;
     }
 
@@ -108,27 +130,29 @@ export default React.memo<Props>(
         : undefined;
 
     return (
-      <View style={{ height }}>
+      <View style={monthStyle} onLayout={handleOnLayout}>
         {showMonthTitle && <MonthTitle name={monthName} theme={theme} />}
-        <Month
-          month={month}
-          year={year}
-          disabledDays={props.disabledDays}
-          disableOffsetDays={props.disableOffsetDays}
-          disableRange={props.disableRange}
-          startDate={props.startDate}
-          endDate={props.endDate}
-          firstDayMonday={props.firstDayMonday}
-          locale={props.locale}
-          markedDays={props.markedDays}
-          maxDate={max}
-          minDate={min}
-          onPress={props.onPress}
-          renderDayContent={props.renderDayContent}
-          showWeekdays={props.showWeekdays}
-          theme={props.theme}
-          dayNames={props.dayNames}
-        />
+        <View>
+          <Month
+            month={month}
+            year={year}
+            disabledDays={props.disabledDays}
+            disableOffsetDays={props.disableOffsetDays}
+            disableRange={props.disableRange}
+            startDate={props.startDate}
+            endDate={props.endDate}
+            firstDayMonday={firstDayMonday}
+            locale={props.locale}
+            markedDays={props.markedDays}
+            maxDate={max}
+            minDate={min}
+            onPress={props.onPress}
+            renderDayContent={props.renderDayContent}
+            showWeekdays={props.showWeekdays}
+            theme={props.theme}
+            dayNames={props.dayNames}
+          />
+        </View>
       </View>
     );
   },
