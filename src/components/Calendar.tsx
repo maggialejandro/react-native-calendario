@@ -1,5 +1,11 @@
-import React, { useCallback, useRef, useState, useMemo } from 'react';
-import { FlatList, Platform } from 'react-native';
+import React, {
+  useCallback,
+  useRef,
+  useState,
+  useMemo,
+  useEffect,
+} from 'react';
+import { FlatList, LayoutChangeEvent, Platform } from 'react-native';
 import moment from 'moment';
 
 import Month from './Month';
@@ -19,7 +25,7 @@ const VIEWABILITY_CONFIG = {
   minimumViewTime: 32,
 };
 
-export default function Calendar(props: CalendarProps) {
+function Calendar(props: CalendarProps) {
   const {
     numberOfMonths = NUMBER_OF_MONTHS,
     startingMonth = moment().format('YYYY-MM-DD'),
@@ -33,6 +39,7 @@ export default function Calendar(props: CalendarProps) {
     monthHeight = MONTH_HEIGHT,
     disableOffsetDays = false,
     viewableRangeOffset = VIEWABLE_RANGE_OFFSET,
+    calculateMonthHeightDynamically,
     monthNames,
     onPress,
     dayNames,
@@ -40,6 +47,11 @@ export default function Calendar(props: CalendarProps) {
     endDate,
   } = props;
 
+  const [
+    dynamicLayoutScrollHasHappened,
+    setDynamicLayoutScrollHasHappened,
+  ] = useState(false);
+  const [listRendered, setListRendered] = useState(false);
   const [firstViewableIndex, setFirstViewableIndex] = useState(0);
   const [lastViewableIndex, setLastViewableIndex] = useState(
     INITIAL_LIST_SIZE + viewableRangeOffset!
@@ -75,16 +87,58 @@ export default function Calendar(props: CalendarProps) {
     return 0;
   }, [firstMonthToRender, localStartDate, months, numberOfMonths]);
 
+  useEffect(() => {
+    if (
+      calculateMonthHeightDynamically &&
+      !dynamicLayoutScrollHasHappened &&
+      firstMonthIndex !== 0 &&
+      listRendered
+    ) {
+      setTimeout(() => {
+        if (listReference.current !== null) {
+          setDynamicLayoutScrollHasHappened(true);
+          listReference.current.scrollToIndex({
+            index: firstMonthIndex,
+            animated: true,
+          });
+        }
+      }, 0);
+    }
+  }, [
+    calculateMonthHeightDynamically,
+    dynamicLayoutScrollHasHappened,
+    firstMonthIndex,
+    listRendered,
+  ]);
+
+  useEffect(() => {
+    Calendar.layouts = [];
+  }, [months]);
+
   const getItemLayout = useCallback(
     (
       _data: any,
       index: number
-    ): { length: number; offset: number; index: number } => ({
-      length: monthHeight,
-      offset: monthHeight * index,
-      index,
-    }),
-    [monthHeight]
+    ): { length: number; offset: number; index: number } => {
+      if (calculateMonthHeightDynamically) {
+        if (index === -1 || !Calendar.layouts[index]) {
+          return { index, length: 0, offset: 0 };
+        }
+
+        const length = Calendar.layouts[index];
+        const offset = Calendar.layouts
+          .slice(0, index)
+          .reduce((a, c) => a + c, 0);
+        return { length, offset, index };
+      }
+
+      return {
+        length: monthHeight,
+        offset: monthHeight * index,
+        index,
+      };
+    },
+    [calculateMonthHeightDynamically, monthHeight]
   );
 
   const keyExtractor = useCallback(
@@ -130,6 +184,19 @@ export default function Calendar(props: CalendarProps) {
     },
   ]);
 
+  const handleMonthLayout = useCallback(
+    (index, e: LayoutChangeEvent) => {
+      if (calculateMonthHeightDynamically && !Calendar.layouts[index]) {
+        Calendar.layouts[index] = e.nativeEvent.layout.height;
+
+        if (index === firstMonthIndex) {
+          setListRendered(true);
+        }
+      }
+    },
+    [calculateMonthHeightDynamically, firstMonthIndex]
+  );
+
   const handlePress = useCallback(
     (date: Date) => {
       if (onPress) {
@@ -159,6 +226,7 @@ export default function Calendar(props: CalendarProps) {
           dayNames={dayNames}
           height={monthHeight}
           firstDayMonday={firstDayMonday}
+          calculateMonthHeightDynamically={calculateMonthHeightDynamically}
           renderDayContent={props.renderDayContent}
           markedDays={props.markedDays}
           minDate={props.minDate}
@@ -171,16 +239,19 @@ export default function Calendar(props: CalendarProps) {
           firstViewableIndex={firstViewableIndex}
           lastViewableIndex={lastViewableIndex}
           viewableRangeOffset={viewableRangeOffset!}
+          onMonthLayout={handleMonthLayout}
         />
       );
     },
     [
+      calculateMonthHeightDynamically,
       dayNames,
       disableOffsetDays,
       disableRange,
       firstDayMonday,
       firstMonthToRender,
       firstViewableIndex,
+      handleMonthLayout,
       handlePress,
       lastViewableIndex,
       localEndDate,
@@ -207,9 +278,15 @@ export default function Calendar(props: CalendarProps) {
   return (
     <FlatList
       getItemLayout={!isWeb ? getItemLayout : undefined}
-      initialScrollIndex={!isWeb ? firstMonthIndex : 0}
+      initialScrollIndex={
+        !isWeb && !calculateMonthHeightDynamically ? firstMonthIndex : 0
+      }
       removeClippedSubviews
-      initialNumToRender={initialNumToRender}
+      initialNumToRender={
+        calculateMonthHeightDynamically && firstMonthIndex !== 0
+          ? months.length
+          : initialNumToRender
+      }
       keyExtractor={keyExtractor}
       viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
       renderItem={renderMonth}
@@ -218,3 +295,7 @@ export default function Calendar(props: CalendarProps) {
     />
   );
 }
+
+Calendar.layouts = [] as number[];
+
+export default Calendar;

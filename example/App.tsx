@@ -118,7 +118,6 @@ export default class App extends React.PureComponent<Props, State> {
           this.setState({ endDate: date });
         } else {
           this.setState({ startDate: date, endDate: date });
-          console.log('update 4');
         }
       } else {
         this.setState({ startDate: date });
@@ -162,9 +161,8 @@ export default class App extends React.PureComponent<Props, State> {
             startingMonth="2019-11-10"
             markedDays={markedDays}
             monthHeight={370}
-            numberOfMonths={100}
+            numberOfMonths={50}
             initialListSize={4}
-            firstDayMonday
             theme={THEME}
             disabledDays={DISABLED_DAYS}
             // renderDayContent={this.renderDayContent}

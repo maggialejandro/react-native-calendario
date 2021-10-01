@@ -26,8 +26,10 @@ const defaultProps = {
 describe('Month', () => {
   it('should render out of range content', () => {
     const onPressHandler = jest.fn((date) => date);
+    const onMonthLayout = jest.fn();
     const props = {
       ...defaultProps,
+      onMonthLayout: onMonthLayout,
       onPress: onPressHandler,
     };
     const tree = renderer.create(<Month {...props} />).toJSON();
