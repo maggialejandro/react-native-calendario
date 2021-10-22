@@ -1,4 +1,11 @@
-import React, { useCallback, useRef, useState, useMemo } from 'react';
+import React, {
+  useCallback,
+  useRef,
+  useState,
+  useMemo,
+  forwardRef,
+  Ref,
+} from 'react';
 import { FlatList, Platform } from 'react-native';
 import moment from 'moment';
 
@@ -19,7 +26,7 @@ const VIEWABILITY_CONFIG = {
   minimumViewTime: 32,
 };
 
-export default function Calendar(props: CalendarProps) {
+const Calendar = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
   const {
     numberOfMonths = NUMBER_OF_MONTHS,
     startingMonth = moment().format('YYYY-MM-DD'),
@@ -44,7 +51,6 @@ export default function Calendar(props: CalendarProps) {
   const [lastViewableIndex, setLastViewableIndex] = useState(
     INITIAL_LIST_SIZE + viewableRangeOffset!
   );
-  const listReference = useRef<FlatList>(null);
 
   const { months, firstMonth: firstMonthToRender } = useMonths({
     numberOfMonths,
@@ -214,7 +220,11 @@ export default function Calendar(props: CalendarProps) {
       viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
       renderItem={renderMonth}
       data={months}
-      ref={listReference}
+      ref={ref}
     />
   );
-}
+});
+
+Calendar.displayName = 'Calendar';
+
+export default Calendar;
