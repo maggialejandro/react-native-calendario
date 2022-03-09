@@ -1,4 +1,4 @@
-import { ComponentType, RefObject } from 'react';
+import { ReactElement, RefObject } from 'react';
 import { FlatList, ViewStyle, TextStyle, ViewToken } from 'react-native';
 import { MarkedDays, ThemeType as MonthThemeType } from 'react-native-month';
 
@@ -196,7 +196,7 @@ export interface CalendarProps {
    * @memberof CalendarProps
    */
   onChange?: (range: RangeType) => void;
-  renderDayContent?: (day: DayType) => ComponentType;
+  renderDayContent?: (day: DayType) => ReactElement;
 
   /**
    * Show Month title
