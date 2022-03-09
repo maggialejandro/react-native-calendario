@@ -12036,10 +12036,10 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-native-month@1.0.5:
-  version "1.0.5"
-  resolved "https://registry.yarnpkg.com/react-native-month/-/react-native-month-1.0.5.tgz#d39ad8d08485f03c21fb12bac818093120f3ee38"
-  integrity sha512-uWpCaxARPY0hSqz+Aty0Xk04wnCUEy4JhgieaL03wi7aTse4Bvt4+B7jWxREGC/ibDip40ZLeBqwXcVHGWgYbA==
+react-native-month@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-native-month/-/react-native-month-1.1.0.tgz#f66cc8ea912960b27b594d420914a1c0567f8441"
+  integrity sha512-1qAtt4bolsKJUuhYMZ4yywrIp1JNAN/y9wys1wzLNZjsIGyw/dsQgfXNJAblTvlcypzp4hrph/RAwMCdNtKDcw==
 
 react-native-safe-area-context@3.2.0:
   version "3.2.0"
