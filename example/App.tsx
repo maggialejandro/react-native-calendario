@@ -1,15 +1,8 @@
-import React from 'react';
-import { View, Text, StatusBar, SafeAreaView, StyleSheet } from 'react-native';
-import { Calendar, DayType, ThemeType } from 'react-native-calendario';
+import React, { useCallback, useState } from 'react';
+import { View, StatusBar, SafeAreaView } from 'react-native';
+import { Calendar, ThemeType } from 'react-native-calendario';
 import moment from 'moment';
 import { MarkedDays } from 'react-native-month';
-
-const styles = StyleSheet.create({
-  customDayContent: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-});
 
 const THEME: ThemeType = {
   monthTitleTextStyle: {
@@ -59,15 +52,6 @@ const DISABLED_DAYS = {
   '2019-11-10': truthyValue,
 };
 
-type Props = {};
-
-type State = {
-  minDate?: Date;
-  maxDate?: Date;
-  startDate?: Date;
-  endDate?: Date;
-};
-
 const START_DATE_1 = '2020-01-10';
 const END_DATE_1 = '2020-04-15';
 const MIN_DATE_1 = '2020-01-02';
@@ -98,79 +82,58 @@ const markedDays: MarkedDays = {
   },
 };
 
-export default class App extends React.PureComponent<Props, State> {
-  state = {
-    ...INITIAL_STATE,
-  };
+const App = () => {
+  const [startDate, setStartDate] = useState<Date | undefined>(
+    INITIAL_STATE.startDate
+  );
+  const [endDate, setEndDate] = useState<Date | undefined>(
+    INITIAL_STATE.endDate
+  );
 
-  handlePress = (date: Date) => {
-    const { disableRange, startDate, endDate } = this.state;
-
-    if (disableRange) {
-      this.setState({ startDate: date });
-    } else {
+  const handleChangeDate = useCallback(
+    (date) => {
       if (startDate) {
         if (endDate) {
-          this.setState({ startDate: date, endDate: undefined });
-        } else if (date < startDate!) {
-          this.setState({ startDate: date });
-        } else if (date > startDate!) {
-          this.setState({ endDate: date });
+          setStartDate(date);
+          setEndDate(undefined);
+        } else if (date < startDate) {
+          setStartDate(date);
+        } else if (date > startDate) {
+          setEndDate(date);
         } else {
-          this.setState({ startDate: date, endDate: date });
-          console.log('update 4');
+          setStartDate(date);
+          setEndDate(date);
         }
       } else {
-        this.setState({ startDate: date });
+        setStartDate(date);
       }
-    }
-  };
+    },
+    [startDate, endDate]
+  );
 
-  renderDayContent = (item: DayType) => {
-    const { isActive, date } = item;
-    return (
-      <View style={styles.customDayContent}>
-        <Text
-          style={[
-            { color: isActive ? 'green' : 'grey' },
-            THEME.dayTextStyle,
-            isActive ? THEME.activeDayTextStyle : {},
-          ]}
-        >
-          {date.getDate()}
-        </Text>
-        <Text>{item.date.getDate()}</Text>
+  return (
+    <SafeAreaView>
+      <View
+        style={{
+          paddingTop: StatusBar.currentHeight,
+        }}
+      >
+        <Calendar
+          onPress={handleChangeDate}
+          startDate={startDate}
+          endDate={endDate}
+          startingMonth={'2019-11-01'}
+          markedDays={markedDays}
+          monthHeight={370}
+          numberOfMonths={100}
+          initialListSize={4}
+          firstDayMonday
+          theme={THEME}
+          disabledDays={DISABLED_DAYS}
+        />
       </View>
-    );
-  };
+    </SafeAreaView>
+  );
+};
 
-  render() {
-    return (
-      <SafeAreaView>
-        <View
-          style={{
-            paddingTop: StatusBar.currentHeight,
-          }}
-        >
-          <Calendar
-            onPress={this.handlePress}
-            disableRange={this.state.disableRange}
-            minDate={this.state.minDate}
-            maxDate={this.state.maxDate}
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            startingMonth="2019-11-10"
-            markedDays={markedDays}
-            monthHeight={370}
-            numberOfMonths={100}
-            initialListSize={4}
-            firstDayMonday
-            theme={THEME}
-            disabledDays={DISABLED_DAYS}
-            // renderDayContent={this.renderDayContent}
-          />
-        </View>
-      </SafeAreaView>
-    );
-  }
-}
+export default App;
