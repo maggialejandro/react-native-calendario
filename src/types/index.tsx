@@ -10,23 +10,9 @@ export type RangeType = {
 export type LocaleType = 'es' | 'en' | 'fr' | 'br' | 'zh';
 
 export interface ThemeType extends MonthThemeType {
-  activeDayColor?: string;
-  activeDayContainerStyle?: ViewStyle;
-  activeDayTextStyle?: TextStyle;
-  dayContainerStyle?: ViewStyle;
-  dayOutOfRangeContainerStyle?: ViewStyle;
-  dayOutOfRangeTextStyle?: TextStyle;
-  dayTextStyle?: TextStyle;
   emptyMonthContainerStyle?: ViewStyle;
   emptyMonthTextStyle?: TextStyle;
-  endDateContainerStyle?: ViewStyle;
   monthTitleTextStyle?: TextStyle;
-  nonTouchableDayContainerStyle?: ViewStyle;
-  nonTouchableDayTextStyle?: TextStyle;
-  nonTouchableLastMonthDayTextStyle?: TextStyle;
-  startDateContainerStyle?: ViewStyle;
-  todayContainerStyle?: ViewStyle;
-  todayTextStyle?: TextStyle;
 }
 
 export type DayType = {
