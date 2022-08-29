@@ -4004,8 +4004,6 @@ ansi-red@^0.1.1:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/ansi-red/-/ansi-red-0.1.1.tgz#8c638f9d1080800a353c9c28c8a81ca4705d946c"
   integrity sha1-jGOPnRCAgAo1PJwoyKgcpHBdlGw=
-  dependencies:
-    ansi-wrap "0.1.0"
 
 ansi-regex@^2.0.0:
   version "2.1.1"
@@ -4649,8 +4647,6 @@ bplist-creator@0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/bplist-creator/-/bplist-creator-0.0.7.tgz#37df1536092824b87c42f957b01344117372ae45"
   integrity sha1-N98VNgkoJLh8QvlXsBNEEXNyrkU=
-  dependencies:
-    stream-buffers "~2.2.0"
 
 bplist-creator@0.0.8:
   version "0.0.8"
@@ -12036,10 +12032,10 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-native-month@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-month/-/react-native-month-1.1.0.tgz#f66cc8ea912960b27b594d420914a1c0567f8441"
-  integrity sha512-1qAtt4bolsKJUuhYMZ4yywrIp1JNAN/y9wys1wzLNZjsIGyw/dsQgfXNJAblTvlcypzp4hrph/RAwMCdNtKDcw==
+react-native-month@1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/react-native-month/-/react-native-month-1.2.1.tgz#9fd8480c8632a90e321e0aa8faa3ec865e241e27"
+  integrity sha512-t9b6otwy3PSsqCqy9vK/Sn7IHYV/h5Gr+QwOjiOmdcuJcxoUqNZ6g1xeHl91yKnAVu+5WkHljjFgnixVdOwOcQ==
 
 react-native-safe-area-context@3.2.0:
   version "3.2.0"
