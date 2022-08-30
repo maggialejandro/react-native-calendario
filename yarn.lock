@@ -8234,10 +8234,10 @@ react-native-builder-bob@0.18.1:
   optionalDependencies:
     jetifier "^1.6.6"
 
-react-native-month@1.2.1:
-  version "1.2.1"
-  resolved "https://registry.yarnpkg.com/react-native-month/-/react-native-month-1.2.1.tgz#9fd8480c8632a90e321e0aa8faa3ec865e241e27"
-  integrity sha512-t9b6otwy3PSsqCqy9vK/Sn7IHYV/h5Gr+QwOjiOmdcuJcxoUqNZ6g1xeHl91yKnAVu+5WkHljjFgnixVdOwOcQ==
+react-native-month@1.2.2:
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/react-native-month/-/react-native-month-1.2.2.tgz#176a4542b8cf43a7fd6226651e9cf5e0eaefe2a7"
+  integrity sha512-lhT98R+aFVjseQXxQMu+6eRJxDfNCzIe6+CY/5Ov8Mz5ZnmQK+o3VVTU59sYjrQeZ2Z/UpepSRNO+48k5tPOkA==
 
 react-native@0.63.3:
   version "0.63.3"
@@ -9030,11 +9030,6 @@ static-extend@^0.1.1:
   version "1.5.0"
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha1-Fhx9rBd2Wf2YEfQ3cfqZOBR4Yow=
-
-stream-buffers@~2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/stream-buffers/-/stream-buffers-2.2.0.tgz#91d5f5130d1cef96dcfa7f726945188741d09ee4"
-  integrity sha1-kdX1Ew0c75bc+n9yaUUYh0HQnuQ=
 
 string-length@^4.0.1:
   version "4.0.2"
