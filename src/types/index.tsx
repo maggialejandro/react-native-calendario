@@ -201,6 +201,14 @@ export interface CalendarProps {
   showWeekdays?: boolean;
 
   /**
+   * Show FlatList's vertical scroll indicator
+   *
+   * @type {boolean}
+   * @memberof CalendarProps
+   */
+  showsVerticalScrollIndicator?: boolean;
+
+  /**
    * Selected start date
    *
    * @type {Date}
