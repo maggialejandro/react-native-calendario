@@ -40,6 +40,7 @@ const Calendar = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
     monthHeight = MONTH_HEIGHT,
     disableOffsetDays = false,
     viewableRangeOffset = VIEWABLE_RANGE_OFFSET,
+    showsVerticalScrollIndicator,
     monthNames,
     onPress,
     dayNames,
@@ -218,6 +219,7 @@ const Calendar = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
       initialNumToRender={initialNumToRender}
       keyExtractor={keyExtractor}
       viewabilityConfigCallbackPairs={viewabilityConfigCallbackPairs.current}
+      showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       renderItem={renderMonth}
       data={months}
       ref={ref}

@@ -130,6 +130,7 @@ const App = () => {
           firstDayMonday
           theme={THEME}
           disabledDays={DISABLED_DAYS}
+          showsVerticalScrollIndicator={false}
         />
       </View>
     </SafeAreaView>
