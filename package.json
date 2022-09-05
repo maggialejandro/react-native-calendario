@@ -35,7 +35,7 @@
   "dependencies": {
     "moment": "2.29.1",
     "react-dom": "16.13.1",
-    "react-native-month": "1.2.2"
+    "react-native-month": "1.2.3"
   },
   "peerDependencies": {
     "react": "*",

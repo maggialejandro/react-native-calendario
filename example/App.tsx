@@ -80,6 +80,13 @@ const markedDays: MarkedDays = {
       },
     ],
   },
+  '2020-01-08': {
+    theme: {
+      dayContainerStyle: {
+        backgroundColor: 'lightgray',
+      },
+    },
+  },
 };
 
 const App = () => {
