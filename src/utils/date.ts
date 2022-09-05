@@ -123,6 +123,21 @@ export function getMonthNames(locale?: LocaleType): string[] {
         '十一月',
         '十二月',
       ];
+    case 'ru':
+      return [
+        'Январь',
+        'Февраль',
+        'Март',
+        'Апрель',
+        'Май',
+        'Июнь',
+        'Июль',
+        'Август',
+        'Сентябрь',
+        'Октябрь',
+        'Ноябрь',
+        'Декабрь',
+      ];
     default:
       return [
         'January',
