@@ -123,6 +123,51 @@ export function getMonthNames(locale?: LocaleType): string[] {
         '十一月',
         '十二月',
       ];
+    case 'it':
+      return [
+        'Gennaio',
+        'Febbraio',
+        'Marzo',
+        'Aprile',
+        'Maggio',
+        'Giugno',
+        'Luglio',
+        'Agosto',
+        'Settembre',
+        'Ottobre',
+        'Novembre',
+        'Dicembre',
+      ];
+    case 'de':
+      return [
+        'Januar',
+        'Februar',
+        'Marsch',
+        'April',
+        'Kann',
+        'Juni',
+        'Juli',
+        'August',
+        'September',
+        'Oktober',
+        'November',
+        'Dezember',
+      ];
+    case 'nl':
+      return [
+        'Januari',
+        'Februari',
+        'Maart',
+        'April',
+        'Kunnen',
+        'Juni',
+        'Juli',
+        'Augustus',
+        'September',
+        'Oktober',
+        'november',
+        'December',
+      ];
     default:
       return [
         'January',
