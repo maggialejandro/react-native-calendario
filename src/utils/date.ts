@@ -137,7 +137,7 @@ export function getMonthNames(locale?: LocaleType): string[] {
         'Ottobre',
         'Novembre',
         'Dicembre',
-       ];
+      ];
     case 'de':
       return [
         'Januar',
