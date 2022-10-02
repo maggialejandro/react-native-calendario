@@ -8,7 +8,7 @@
   },
   "dependencies": {
     "eslint-config-satya164": "3.1.10",
-    "expo": "42.0.3",
+    "expo": "46.0.14",
     "moment": "2.29.1",
     "react": "16.13.1",
     "react-dom": "16.13.1",
@@ -18,8 +18,8 @@
   },
   "devDependencies": {
     "babel-plugin-module-resolver": "4.0.0",
-    "babel-preset-expo": "8.4.1",
-    "expo-cli": "^4.9.1"
+    "babel-preset-expo": "9.2.0",
+    "expo-cli": "6.0.6"
   },
   "resolutions": {
     "@babel/runtime": "7.3.1"
