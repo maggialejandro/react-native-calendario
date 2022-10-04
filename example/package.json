@@ -7,19 +7,22 @@
     "web": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start --web"
   },
   "dependencies": {
+    "@expo/webpack-config": "^0.17.2",
     "eslint-config-satya164": "3.1.10",
-    "expo": "42.0.3",
+    "expo": "~46.0.9",
     "moment": "2.29.1",
-    "react": "16.13.1",
-    "react-dom": "16.13.1",
-    "react-native": "https://github.com/expo/react-native/archive/sdk-42.0.0.tar.gz",
+    "react": "18.0.0",
+    "react-dom": "18.0.0",
+    "react-native": "0.69.5",
     "react-native-month": "1.2.3",
-    "react-native-web": "0.13.12"
+    "react-native-web": "~0.18.7"
   },
   "devDependencies": {
-    "babel-plugin-module-resolver": "4.0.0",
-    "babel-preset-expo": "8.4.1",
-    "expo-cli": "^4.9.1"
+    "@babel/core": "^7.19.1",
+    "babel-loader": "^8.2.5",
+    "babel-plugin-module-resolver": "4.1.0",
+    "babel-preset-expo": "9.2.0",
+    "expo-cli": "^6.0.5"
   },
   "resolutions": {
     "@babel/runtime": "7.3.1"
