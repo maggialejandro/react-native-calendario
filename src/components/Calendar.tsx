@@ -21,7 +21,6 @@ const INITIAL_LIST_SIZE = 2;
 const VIEWABLE_RANGE_OFFSET = 5;
 
 const VIEWABILITY_CONFIG = {
-  waitForInteraction: true,
   itemVisiblePercentThreshold: 10,
   minimumViewTime: 32,
 };
