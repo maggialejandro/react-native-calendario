@@ -22,7 +22,7 @@
     "babel-loader": "^8.2.5",
     "babel-plugin-module-resolver": "4.1.0",
     "babel-preset-expo": "9.2.0",
-    "expo-cli": "^6.0.5"
+    "expo-cli": "6.0.6"
   },
   "resolutions": {
     "@babel/runtime": "7.3.1"

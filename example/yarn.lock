@@ -6023,10 +6023,10 @@ expo-asset@~8.6.1:
     path-browserify "^1.0.0"
     url-parse "^1.5.9"
 
-expo-cli@^6.0.5:
-  version "6.0.5"
-  resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-6.0.5.tgz#f3523e91cea06373bb4346afdf3ef825975b1d54"
-  integrity sha512-A2ZkQVHWUNFPjb61ZCgbZbLdqOSDSlT9vyhijIa0MDmvTUbO4i1r2S8UInndmW0vyRxmmYvvgHDj0J3xaoKuqw==
+expo-cli@6.0.6:
+  version "6.0.6"
+  resolved "https://registry.yarnpkg.com/expo-cli/-/expo-cli-6.0.6.tgz#658953825726aa3301abafd87bd45bdd60e66b73"
+  integrity sha512-YYgrqRsNwVyLS5681NhBwZkdN/S3ZxA2OAZbg745tQXj+sPlAVH2lZcnH4qXS8+ehbt3QU1E5HWStVkcTvOZ0Q==
   dependencies:
     "@babel/runtime" "7.9.0"
     "@expo/apple-utils" "0.0.0-alpha.31"
@@ -6083,7 +6083,7 @@ expo-cli@^6.0.5:
     url-join "4.0.0"
     uuid "^8.0.0"
     wrap-ansi "^7.0.0"
-    xdl "59.2.52"
+    xdl "59.2.53"
 
 expo-constants@~13.2.2, expo-constants@~13.2.4:
   version "13.2.4"
@@ -13188,10 +13188,10 @@ xcode@^3.0.1:
     simple-plist "^1.1.0"
     uuid "^7.0.3"
 
-xdl@59.2.52:
-  version "59.2.52"
-  resolved "https://registry.yarnpkg.com/xdl/-/xdl-59.2.52.tgz#083b6974c5cbc21fee7d22f4b6b0589442ef84d6"
-  integrity sha512-OUPiONKR3UHdZu71ynfxI0uEQ/ID8OqmstlzKVKyne3ZXdT9bQ4oHLrhQxMJPi2tiizItTLnb30r+KIwOe/7yw==
+xdl@59.2.53:
+  version "59.2.53"
+  resolved "https://registry.yarnpkg.com/xdl/-/xdl-59.2.53.tgz#852cc75ea51f1e6eac1de3f46d1e071bdfa4d78d"
+  integrity sha512-Or1r7NkMTgQ09JeDWx7k397LMzFB+APJAzDCFI8DRrTswAadWteha5GDyY7qt5afvFkniznHMc/d2ZN2BdIU+A==
   dependencies:
     "@expo/bunyan" "4.0.0"
     "@expo/config" "6.0.24"
