@@ -1,0 +1,47 @@
+on: [push, pull_request]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  run-linters:
+    name: Run linters
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Get npm cache directory
+        id: npm-cache-directory
+        run: |
+          echo "::set-output name=dir::$(npm config get cache)"
+
+      - uses: actions/cache@v3
+        id: npm-cache
+        with:
+          path: ${{ steps.npm-cache-directory.outputs.dir }}
+          key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
+
+      - uses: actions/cache@v3
+        id: eslintcache-cache
+        with:
+          path: .eslintcache
+          key: ${{ runner.os }}-eslintcache
+
+      - name: Setup node
+        uses: actions/setup-node@v2
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Install Node.js dependencies
+        run: npm ci --no-audit --prefer-offline
+
+      - name: Eslint
+        run: npm run lint
+
+      - name: TypeScript
+        run: npm run typescript
+
+      - name: Jest
+        run: npm run test

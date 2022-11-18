@@ -9,16 +9,16 @@
   "dependencies": {
     "@expo/webpack-config": "^0.17.2",
     "eslint-config-satya164": "3.1.10",
-    "expo": "~46.0.9",
+    "expo": "~47.0.6",
     "moment": "2.29.1",
-    "react": "18.0.0",
-    "react-dom": "18.0.0",
-    "react-native": "0.69.6",
-    "react-native-month": "1.4.0",
-    "react-native-web": "~0.18.7"
+    "react": "18.1.0",
+    "react-dom": "18.1.0",
+    "react-native": "0.70.5",
+    "react-native-month": "1.5.0",
+    "react-native-web": "~0.18.9"
   },
   "devDependencies": {
-    "@babel/core": "7.19.3",
+    "@babel/core": "^7.12.9",
     "babel-loader": "8.2.5",
     "babel-plugin-module-resolver": "4.1.0",
     "babel-preset-expo": "9.2.0",
