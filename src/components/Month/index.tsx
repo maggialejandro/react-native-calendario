@@ -1,8 +1,8 @@
 import React, { useCallback, useMemo } from 'react';
 import { View, Text, LayoutChangeEvent } from 'react-native';
-import { Month, MonthProps } from 'react-native-month';
+import { getMonthNames, Month, MonthProps } from 'react-native-month';
 import moment from 'moment';
-import { isValidDate, getMonthNames, isSameDate } from '../../utils/date';
+import { isValidDate, isSameDate } from '../../utils/date';
 import { shouldRenderMonth, isMonthDrawn } from './utils';
 import styles from './styles';
 import { ThemeType } from '../../types';
@@ -86,7 +86,7 @@ export default React.memo<Props>(
       monthNames,
       theme = {},
       height,
-      locale,
+      locale = 'en',
       index,
     } = props;
 
