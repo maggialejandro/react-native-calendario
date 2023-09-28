@@ -5413,9 +5413,7 @@
     "update-check" "1.5.3"
 
 "expo@*", "expo@~47.0.6":
-  "integrity" "sha512-XFcTnkOWEbc5mbrpdgIkPq3Heuem+8OErdjnWshwiDtaCdqK0EKToJtE2ufhCxb/RzfeJ5k07mpk+8CRRayi4w=="
-  "resolved" "https://registry.npmjs.org/expo/-/expo-47.0.6.tgz"
-  "version" "47.0.6"
+  version "47.0.14"
   dependencies:
     "@babel/runtime" "^7.14.0"
     "@expo/cli" "0.4.9"
