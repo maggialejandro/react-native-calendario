@@ -5,7 +5,7 @@ import React, {
   useMemo,
   useEffect,
   forwardRef,
-  Ref,
+  useImperativeHandle,
 } from 'react';
 import { FlatList, LayoutChangeEvent, Platform } from 'react-native';
 import moment from 'moment';
@@ -26,7 +26,7 @@ const VIEWABILITY_CONFIG = {
   minimumViewTime: 32,
 };
 
-const Calendario = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
+const Calendario = forwardRef<FlatList, CalendarProps>((props, ref) => {
   const {
     numberOfMonths = NUMBER_OF_MONTHS,
     startingMonth = moment().format('YYYY-MM-DD'),
@@ -60,6 +60,8 @@ const Calendario = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
   );
 
   const listReference = useRef<FlatList>(null);
+
+  useImperativeHandle(ref, () => listReference.current as FlatList);
 
   const { months, firstMonth: firstMonthToRender } = useMonths({
     numberOfMonths,
@@ -295,7 +297,7 @@ const Calendario = forwardRef((props: CalendarProps, ref: Ref<FlatList>) => {
       showsVerticalScrollIndicator={showsVerticalScrollIndicator}
       renderItem={renderMonth}
       data={months}
-      ref={ref}
+      ref={listReference}
     />
   );
 });
