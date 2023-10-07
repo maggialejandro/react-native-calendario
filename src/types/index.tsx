@@ -1,5 +1,11 @@
 import { ReactElement, RefObject } from 'react';
-import { FlatList, ViewStyle, TextStyle, ViewToken } from 'react-native';
+import {
+  FlatList,
+  ViewStyle,
+  TextStyle,
+  ViewToken,
+  StyleProp,
+} from 'react-native';
 import { MarkedDays, ThemeType as MonthThemeType } from 'react-native-month';
 
 export type RangeType = {
@@ -243,6 +249,7 @@ export interface CalendarProps {
    */
   calculateMonthHeightDynamically?: boolean;
 
+  contentContainerStyle?: StyleProp<ViewStyle>;
   theme?: ThemeType;
   viewableItemsChanged?: (viableItems: ViewableItemsType) => void;
   viewableRangeOffset?: number;

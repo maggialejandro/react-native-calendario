@@ -34,6 +34,7 @@ const Calendario = forwardRef<FlatList, CalendarProps>((props, ref) => {
     showWeekdays = true,
     showMonthTitle = true,
     theme = {},
+    contentContainerStyle,
     locale = 'en',
     disableRange = false,
     firstDayMonday = false,
@@ -282,6 +283,7 @@ const Calendario = forwardRef<FlatList, CalendarProps>((props, ref) => {
 
   return (
     <FlatList
+      contentContainerStyle={contentContainerStyle}
       getItemLayout={!isWeb ? getItemLayout : undefined}
       initialScrollIndex={
         !isWeb && !calculateMonthHeightDynamically ? firstMonthIndex : 0
