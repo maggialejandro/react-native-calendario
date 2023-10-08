@@ -10097,10 +10097,10 @@
   "resolved" "https://registry.npmjs.org/react-native-gradle-plugin/-/react-native-gradle-plugin-0.70.3.tgz"
   "version" "0.70.3"
 
-"react-native-month@^1.6.1":
-  "integrity" "sha512-736o3mPHqVvJWP8a0+2Vf6ne3/zOaX8Qb4ZfBKFxmkc6orIQA5INmIUdjuo6JwHJfaRmIFmdwcbEzRz7otxDcw=="
-  "resolved" "https://registry.npmjs.org/react-native-month/-/react-native-month-1.6.1.tgz"
-  "version" "1.6.1"
+"react-native-month@^1.6.2":
+  "integrity" "sha512-IA2bwHSebcJhltiSR2cwq8PnfWokOFtju0pPA3LmdN0vd8QdfYNwCZUJxwz/6LE97VJ3ypZr6YngcBGF+OOgKQ=="
+  "resolved" "https://registry.npmjs.org/react-native-month/-/react-native-month-1.6.2.tgz"
+  "version" "1.6.2"
 
 "react-native-web@~0.18.9":
   "integrity" "sha512-BaV5Mpe7u9pN5vTRDW2g+MLh6PbPBJZpXRQM3Jr2cNv7hNa3sxCGh9T+NcW6wOFzf/+USrdrEPI1M9wNyr7vyA=="
