@@ -286,7 +286,9 @@ const Calendario = forwardRef<FlatList, CalendarProps>((props, ref) => {
       contentContainerStyle={contentContainerStyle}
       getItemLayout={!isWeb ? getItemLayout : undefined}
       initialScrollIndex={
-        !isWeb && !calculateMonthHeightDynamically ? firstMonthIndex : 0
+        props.initialScrollIndex ?? (!isWeb && !calculateMonthHeightDynamically)
+          ? firstMonthIndex
+          : 0
       }
       removeClippedSubviews
       initialNumToRender={
