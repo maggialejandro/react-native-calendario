@@ -253,4 +253,15 @@ export interface CalendarProps {
   theme?: ThemeType;
   viewableItemsChanged?: (viableItems: ViewableItemsType) => void;
   viewableRangeOffset?: number;
+  /**
+   * Initial scroll index for the FlatList
+   * Use this if you want to start the calendar at a specific month's index
+   *
+   * - if this is passed, instead of starting the calendar at the month that contains the `startDate`, it will start at the month that has the index of initialScrollIndex
+   * - good if `Calendar` is nested within another `VirtualizedList` and you want to start the calendar at index 0
+   *
+   * @type {number}
+   * @default undefined
+   */
+  initialScrollIndex?: number;
 }
