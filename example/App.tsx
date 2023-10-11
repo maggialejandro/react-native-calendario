@@ -1,8 +1,23 @@
-import React, { useCallback, useState } from 'react';
-import { View, StatusBar, SafeAreaView } from 'react-native';
+import React, { useCallback, useRef, useState } from 'react';
+import { View, StatusBar, SafeAreaView, Button, Text } from 'react-native';
 import { Calendar, ThemeType } from 'react-native-calendario';
 import moment from 'moment';
 import { MarkedDays } from 'react-native-month';
+import { GestureHandlerRootView } from 'react-native-gesture-handler';
+import {
+  FlatList as RNFlatList,
+  FlatListProps as RNFlatListProps,
+} from 'react-native';
+import {
+  BottomSheetFlatList,
+  BottomSheetFlatListMethods,
+  BottomSheetModal,
+  BottomSheetModalProvider,
+  SCROLLABLE_TYPE,
+  createBottomSheetScrollableComponent,
+} from '@gorhom/bottom-sheet';
+import Animated from 'react-native-reanimated';
+import { BottomSheetFlatListProps } from '@gorhom/bottom-sheet/lib/typescript/components/bottomSheetScrollable/types';
 
 const THEME: ThemeType = {
   monthTitleTextStyle: {
@@ -67,6 +82,15 @@ const INITIAL_STATE = {
   maxDate: moment(MAX_DATE_1, FORMAT).toDate(),
 };
 
+const AnimatedFlatList = Animated.createAnimatedComponent<RNFlatListProps<any>>(
+  RNFlatList
+);
+
+const BottomSheetFlatListComponent = createBottomSheetScrollableComponent<
+  BottomSheetFlatListMethods,
+  BottomSheetFlatListProps<any>
+>(SCROLLABLE_TYPE.FLATLIST, AnimatedFlatList);
+
 const markedDays: MarkedDays = {
   '2020-03-12': {
     dots: [
@@ -90,6 +114,7 @@ const markedDays: MarkedDays = {
 };
 
 const App = () => {
+  const calendarRef = useRef<BottomSheetModal>(null);
   const [startDate, setStartDate] = useState<Date | undefined>(
     INITIAL_STATE.startDate
   );
@@ -119,29 +144,45 @@ const App = () => {
   );
 
   return (
-    <SafeAreaView>
-      <View
-        style={{
-          paddingTop: StatusBar.currentHeight,
-        }}
-      >
-        <Calendar
-          onPress={handleChangeDate}
-          startDate={startDate}
-          endDate={endDate}
-          startingMonth={'2019-11-01'}
-          markedDays={markedDays}
-          monthHeight={370}
-          numberOfMonths={100}
-          initialListSize={4}
-          firstDayMonday
-          theme={THEME}
-          disabledDays={DISABLED_DAYS}
-          showsVerticalScrollIndicator={false}
-          calculateMonthHeightDynamically
-        />
-      </View>
-    </SafeAreaView>
+    <GestureHandlerRootView style={{ flex: 1, backgroundColor: 'lightgray' }}>
+      <BottomSheetModalProvider>
+        <SafeAreaView>
+          <View
+            style={{
+              paddingTop: StatusBar.currentHeight,
+            }}
+          >
+            <Button
+              title="Open Calendar"
+              onPress={() => calendarRef.current?.present()}
+            />
+            <BottomSheetModal ref={calendarRef} snapPoints={['65%', '90%']}>
+              <Text
+                style={{ color: 'green', textAlign: 'right', marginRight: 10 }}
+                onPress={() => calendarRef.current.close()}
+              >
+                Close
+              </Text>
+              <Calendar
+                onPress={handleChangeDate}
+                startDate={startDate}
+                endDate={endDate}
+                startingMonth={'2023-10-01'}
+                markedDays={markedDays}
+                monthHeight={370}
+                numberOfMonths={13}
+                initialListSize={4}
+                firstDayMonday
+                theme={THEME}
+                disableOffsetDays
+                viewableRangeOffset={5}
+                renderer={BottomSheetFlatListComponent}
+              />
+            </BottomSheetModal>
+          </View>
+        </SafeAreaView>
+      </BottomSheetModalProvider>
+    </GestureHandlerRootView>
   );
 };
 

@@ -1,10 +1,11 @@
-import { ReactElement, RefObject } from 'react';
+import { ForwardRefExoticComponent, ReactElement, RefObject } from 'react';
 import {
   FlatList,
   ViewStyle,
   TextStyle,
   ViewToken,
   StyleProp,
+  FlatListProps,
 } from 'react-native';
 import { MarkedDays, ThemeType as MonthThemeType } from 'react-native-month';
 
@@ -39,7 +40,7 @@ export type ViewableItemsType = {
   viewableItems: ViewToken[];
 };
 
-export interface CalendarProps {
+export interface CalendarProps<List extends FlatList<any>> {
   /**
    * FlatList's ref
    *
@@ -264,4 +265,7 @@ export interface CalendarProps {
    * @default undefined
    */
   initialScrollIndex?: number;
+  renderer?: ForwardRefExoticComponent<
+    FlatListProps<any> & { ref?: React.RefObject<List> }
+  >;
 }

@@ -6,6 +6,7 @@ import React, {
   useEffect,
   forwardRef,
   useImperativeHandle,
+  Ref,
 } from 'react';
 import { FlatList, LayoutChangeEvent, Platform } from 'react-native';
 import moment from 'moment';
@@ -26,7 +27,10 @@ const VIEWABILITY_CONFIG = {
   minimumViewTime: 32,
 };
 
-const Calendario = forwardRef<FlatList, CalendarProps>((props, ref) => {
+const InnerCalendario = <List extends FlatList<any>>(
+  props: CalendarProps<List>,
+  ref: Ref<List>
+) => {
   const {
     numberOfMonths = NUMBER_OF_MONTHS,
     startingMonth = moment().format('YYYY-MM-DD'),
@@ -48,6 +52,7 @@ const Calendario = forwardRef<FlatList, CalendarProps>((props, ref) => {
     dayNames,
     startDate,
     endDate,
+    renderer,
   } = props;
 
   const [
@@ -60,9 +65,10 @@ const Calendario = forwardRef<FlatList, CalendarProps>((props, ref) => {
     INITIAL_LIST_SIZE + viewableRangeOffset!
   );
 
-  const listReference = useRef<FlatList>(null);
+  const Component = renderer ?? FlatList;
+  const listReference = useRef<List>(null);
 
-  useImperativeHandle(ref, () => listReference.current as FlatList);
+  useImperativeHandle(ref, () => listReference.current as List);
 
   const { months, firstMonth: firstMonthToRender } = useMonths({
     numberOfMonths,
@@ -282,7 +288,7 @@ const Calendario = forwardRef<FlatList, CalendarProps>((props, ref) => {
   const initialNumToRender = isWeb ? numberOfMonths : initialListSize;
 
   return (
-    <FlatList
+    <Component
       contentContainerStyle={contentContainerStyle}
       getItemLayout={!isWeb ? getItemLayout : undefined}
       initialScrollIndex={
@@ -304,9 +310,15 @@ const Calendario = forwardRef<FlatList, CalendarProps>((props, ref) => {
       ref={listReference}
     />
   );
-});
+};
 
-Calendario.displayName = 'Calendar';
+export const Calendario = forwardRef(InnerCalendario) as <
+  List extends FlatList<any>
+>(
+  props: CalendarProps<List> & { ref?: React.Ref<List> }
+) => ReturnType<typeof InnerCalendario>;
+
+InnerCalendario.displayName = 'Calendar';
 
 const Calendar = Object.assign(Calendario, {
   layouts: [] as number[],
