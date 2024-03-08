@@ -1,9 +1,14 @@
 import React, { useCallback, useMemo } from 'react';
 import { View, Text, LayoutChangeEvent } from 'react-native';
-import { getMonthNames, Month, MonthProps } from 'react-native-month';
+import {
+  DateString,
+  getMonthNames,
+  Month,
+  MonthProps,
+} from 'react-native-month';
 import moment from 'moment';
-import { isValidDate, isSameDate } from '../../utils/date';
-import { shouldRenderMonth, isMonthDrawn } from './utils';
+import { isValidDate } from '../../utils/date';
+import { shouldRenderMonth, monthBetweenRange } from './utils';
 import styles from './styles';
 import { ThemeType } from '../../types';
 
@@ -60,7 +65,7 @@ interface Props extends MonthProps {
   onMonthLayout: (weeks: number, e: LayoutChangeEvent) => void;
   calculateMonthHeightDynamically?: boolean;
   monthNames?: string[];
-  firstMonthToRender: Date;
+  firstMonthToRender: DateString;
   firstViewableIndex: number;
   lastViewableIndex: number;
   viewableRangeOffset: number;
@@ -76,8 +81,6 @@ export default React.memo<Props>(
     const {
       month,
       year,
-      minDate,
-      maxDate,
       firstDayMonday,
       showMonthTitle,
       renderAllMonths,
@@ -120,15 +123,6 @@ export default React.memo<Props>(
       return <EmptyMonth name={monthName} height={height} theme={theme} />;
     }
 
-    const min =
-      minDate && isValidDate(new Date(minDate))
-        ? moment(minDate, 'YYYY-MM-DD').toDate()
-        : undefined;
-    const max =
-      maxDate && isValidDate(new Date(maxDate))
-        ? moment(maxDate, 'YYYY-MM-DD').toDate()
-        : undefined;
-
     return (
       <View style={monthStyle} onLayout={handleOnLayout}>
         {showMonthTitle && <MonthTitle name={monthName} theme={theme} />}
@@ -144,8 +138,8 @@ export default React.memo<Props>(
             firstDayMonday={firstDayMonday}
             locale={props.locale}
             markedDays={props.markedDays}
-            maxDate={max}
-            minDate={min}
+            maxDate={props.maxDate}
+            minDate={props.minDate}
             onPress={props.onPress}
             renderDayContent={props.renderDayContent}
             showWeekdays={props.showWeekdays}
@@ -202,43 +196,63 @@ export default React.memo<Props>(
           }
         }
       } else {
-        const startDateChanged =
-          (prevProps.startDate instanceof Date &&
-            nextProps.startDate instanceof Date &&
-            !isSameDate(prevProps.startDate, nextProps.startDate)) ||
-          prevProps.startDate !== nextProps.startDate;
-        const endDateChanged =
-          (prevProps.endDate instanceof Date &&
-            nextProps.endDate instanceof Date &&
-            !isSameDate(prevProps.endDate, nextProps.endDate)) ||
-          prevProps.endDate !== nextProps.endDate;
+        const startDateChanged = prevProps.startDate !== nextProps.startDate;
+        const endDateChanged = prevProps.endDate !== nextProps.endDate;
 
         if (startDateChanged || endDateChanged) {
+          const prevIsRange = prevProps.startDate && prevProps.endDate;
+          const nextIsRange = nextProps.startDate && nextProps.endDate;
+
+          if (prevIsRange && nextIsRange) {
+            return (
+              !monthBetweenRange(
+                currentMonth,
+                moment(prevProps.startDate).toDate(),
+                moment(prevProps.endDate).toDate()
+              ) &&
+              !monthBetweenRange(
+                currentMonth,
+                moment(nextProps.startDate).toDate(),
+                moment(nextProps.endDate).toDate()
+              )
+            );
+          } else if (prevIsRange) {
+            return (
+              !monthBetweenRange(
+                currentMonth,
+                moment(prevProps.startDate).toDate(),
+                moment(prevProps.endDate).toDate()
+              ) &&
+              !(
+                isValidDate(nextProps.startDate) &&
+                moment(nextProps.startDate).isSame(currentMonth, 'month')
+              )
+            );
+          } else if (nextIsRange) {
+            return (
+              !monthBetweenRange(
+                currentMonth,
+                moment(nextProps.startDate).toDate(),
+                moment(nextProps.endDate).toDate()
+              ) &&
+              !(
+                isValidDate(prevProps.startDate) &&
+                moment(prevProps.startDate).isSame(currentMonth, 'month')
+              )
+            );
+          }
+
           if (
-            isMonthDrawn(
-              currentMonth.year(),
-              currentMonth.month(),
+            shouldRenderMonth(
+              currentMonth,
               prevProps.startDate,
-              prevProps.endDate
-            ) !==
-              isMonthDrawn(
-                currentMonth.year(),
-                currentMonth.month(),
-                nextProps.startDate,
-                nextProps.endDate
-              ) ||
-            (prevProps.startDate instanceof Date &&
-              moment(prevProps.startDate).isSame(currentMonth, 'month') &&
-              (startDateChanged || endDateChanged)) ||
-            (nextProps.startDate instanceof Date &&
-              moment(nextProps.startDate).isSame(currentMonth, 'month') &&
-              startDateChanged) ||
-            (prevProps.endDate instanceof Date &&
-              moment(prevProps.endDate).isSame(currentMonth, 'month') &&
-              endDateChanged) ||
-            (nextProps.endDate instanceof Date &&
-              moment(nextProps.endDate).isSame(currentMonth, 'month') &&
-              endDateChanged)
+              nextProps.startDate
+            ) ||
+            shouldRenderMonth(
+              currentMonth,
+              prevProps.endDate,
+              nextProps.endDate
+            )
           ) {
             return false;
           }

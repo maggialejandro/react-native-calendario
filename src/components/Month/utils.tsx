@@ -1,4 +1,5 @@
 import moment, { Moment } from 'moment';
+import { DateString } from 'react-native-month/lib/typescript/src/types';
 
 export function monthBetweenRange(month: Moment, start: Date, end: Date) {
   const firstDayOfMonth = month.startOf('month').toDate();
@@ -11,36 +12,10 @@ export function monthBetweenRange(month: Moment, start: Date, end: Date) {
   );
 }
 
-export function isMonthDrawn(
-  year: number,
-  month: number,
-  start?: Date,
-  end?: Date
-) {
-  if (start instanceof Date) {
-    start.setHours(0, 0, 0, 0);
-    if (end instanceof Date) {
-      end.setHours(0, 0, 0, 0);
-      const firstMonthDay = new Date(year, month, 0, 0, 0, 0, 0);
-      const lastMonthDay = new Date(year, month + 1, 0);
-
-      return (
-        (firstMonthDay <= end && firstMonthDay >= start) ||
-        (lastMonthDay >= start && lastMonthDay <= end) ||
-        (start <= lastMonthDay && end >= firstMonthDay)
-      );
-    }
-
-    return start.getFullYear() === year && start.getMonth() === month;
-  }
-
-  return false;
-}
-
 export function shouldRenderMonth(
   currentMonth: Moment,
-  pervMinMax?: Date,
-  nextMinMax?: Date
+  pervMinMax?: DateString,
+  nextMinMax?: DateString
 ) {
   if (pervMinMax !== nextMinMax) {
     if (pervMinMax) {
