@@ -1,5 +1,7 @@
 import { renderHook } from '@testing-library/react-hooks';
 import useMonths from '../use-months';
+import moment from 'moment';
+import { DATE_FORMAT } from '../../utils/date';
 
 describe('useMonths', () => {
   it('should return correct starting month', () => {
@@ -9,15 +11,20 @@ describe('useMonths', () => {
       useMonths({ startingMonth, numberOfMonths })
     );
 
-    expect(result.current.firstMonth.getMonth()).toBe(1);
+    expect(result.current.firstMonth).toBe(startingMonth);
     expect(result.current.months.length).toBe(10);
   });
 
   it('should return default starting month', () => {
     const numberOfMonths = 12;
-    const { result } = renderHook(() => useMonths({ numberOfMonths }));
+    const startingMonth = '2020-02-44';
+    const { result } = renderHook(() =>
+      useMonths({ startingMonth, numberOfMonths })
+    );
 
-    expect(result.current.firstMonth.getMonth()).toBe(new Date().getMonth());
+    expect(result.current.firstMonth).toBe(
+      moment().startOf('month').format(DATE_FORMAT)
+    );
     expect(result.current.months.length).toBe(12);
   });
 });

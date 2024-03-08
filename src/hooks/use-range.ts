@@ -1,17 +1,18 @@
 import { useMemo } from 'react';
 import moment from 'moment';
 
-import { isValidDate } from '../utils/date';
+import { DATE_FORMAT, isValidDate } from '../utils/date';
 import { CalendarProps } from '../types';
+import { DateString } from 'react-native-month/lib/typescript/src/types';
 
 interface Input
   extends Pick<CalendarProps, 'startDate' | 'endDate' | 'numberOfMonths'> {
-  firstMonthToRender: Date;
+  firstMonthToRender: DateString;
 }
 
 interface Result {
-  start?: Date;
-  end?: Date;
+  start?: DateString;
+  end?: DateString;
 }
 
 export default function useRange({
@@ -21,23 +22,36 @@ export default function useRange({
   firstMonthToRender,
 }: Input): Result {
   return useMemo(() => {
-    let start: Date | undefined;
+    let start = startDate;
+    let end = endDate;
+
     const lastMonth = moment(firstMonthToRender)
       .add(numberOfMonths, 'months')
-      .toDate();
+      .format(DATE_FORMAT);
 
-    if (startDate && isValidDate(new Date(startDate))) {
-      start = moment(startDate, 'YYYY-MM-DD').toDate();
-
-      if (start > lastMonth) {
+    if (startDate) {
+      if (isValidDate(startDate)) {
+        if (startDate > lastMonth) {
+          start = undefined;
+        }
+      } else {
         start = undefined;
+        console.error(
+          'Invalid startDate format, should be a string YYYY-MM-DD'
+        );
       }
     }
 
-    let end =
-      endDate && isValidDate(new Date(endDate)) && endDate <= lastMonth
-        ? moment(endDate, 'YYYY-MM-DD').toDate()
-        : undefined;
+    if (endDate) {
+      if (isValidDate(endDate)) {
+        if (!start || endDate < start) {
+          end = undefined;
+        }
+      } else {
+        end = undefined;
+        console.error('Invalid endDate format, should be a string YYYY-MM-DD');
+      }
+    }
 
     return {
       start,

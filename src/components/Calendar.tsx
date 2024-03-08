@@ -13,8 +13,9 @@ import moment from 'moment';
 import Month from './Month';
 import useMonths from '../hooks/use-months';
 import useRange from '../hooks/use-range';
-import { getMonthIndex } from '../utils/date';
+import { DATE_FORMAT, getMonthIndex } from '../utils/date';
 import { CalendarProps, ViewableItemsType } from '../types';
+import { DateString } from 'react-native-month/lib/typescript/src/types';
 
 const NUMBER_OF_MONTHS = 12;
 const MONTH_HEIGHT = 370;
@@ -29,7 +30,7 @@ const VIEWABILITY_CONFIG = {
 const Calendario = forwardRef<FlatList, CalendarProps>((props, ref) => {
   const {
     numberOfMonths = NUMBER_OF_MONTHS,
-    startingMonth = moment().format('YYYY-MM-DD'),
+    startingMonth = moment().format(DATE_FORMAT),
     initialListSize = INITIAL_LIST_SIZE,
     showWeekdays = true,
     showMonthTitle = true,
@@ -204,7 +205,7 @@ const Calendario = forwardRef<FlatList, CalendarProps>((props, ref) => {
   );
 
   const handlePress = useCallback(
-    (date: Date) => {
+    (date: DateString) => {
       if (onPress) {
         onPress(date);
       }

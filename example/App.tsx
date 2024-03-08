@@ -1,8 +1,7 @@
 import React, { useCallback, useState } from 'react';
 import { View, StatusBar, SafeAreaView } from 'react-native';
 import { Calendar, ThemeType } from 'react-native-calendario';
-import moment from 'moment';
-import { MarkedDays } from 'react-native-month';
+import { DateString, MarkedDays } from 'react-native-month';
 
 const THEME: ThemeType = {
   monthTitleTextStyle: {
@@ -48,27 +47,17 @@ const THEME: ThemeType = {
 const truthyValue = true;
 
 const DISABLED_DAYS = {
-  '2019-11-20': truthyValue,
-  '2019-11-10': truthyValue,
+  '2024-03-20': truthyValue,
+  '2024-04-10': truthyValue,
 };
 
-const START_DATE_1 = '2020-01-10';
-const END_DATE_1 = '2020-04-15';
-const MIN_DATE_1 = '2020-01-02';
-const MAX_DATE_1 = '2020-04-20';
-
-const FORMAT = 'YYYY-MM-DD';
-
-const INITIAL_STATE = {
-  disableRange: false,
-  startDate: moment(START_DATE_1, FORMAT).toDate(),
-  endDate: moment(END_DATE_1, FORMAT).toDate(),
-  minDate: moment(MIN_DATE_1, FORMAT).toDate(),
-  maxDate: moment(MAX_DATE_1, FORMAT).toDate(),
-};
+const START_DATE = '2024-01-12';
+const END_DATE = '2024-02-15';
+const MIN_DATE = '2024-01-10';
+const MAX_DATE = '2024-04-20';
 
 const markedDays: MarkedDays = {
-  '2020-03-12': {
+  '2024-02-12': {
     dots: [
       {
         color: 'red',
@@ -80,7 +69,7 @@ const markedDays: MarkedDays = {
       },
     ],
   },
-  '2020-01-08': {
+  '2024-01-08': {
     theme: {
       dayContainerStyle: {
         backgroundColor: 'lightgray',
@@ -89,34 +78,48 @@ const markedDays: MarkedDays = {
   },
 };
 
-const App = () => {
-  const [startDate, setStartDate] = useState<Date | undefined>(
-    INITIAL_STATE.startDate
-  );
-  const [endDate, setEndDate] = useState<Date | undefined>(
-    INITIAL_STATE.endDate
-  );
+type Range = {
+  start?: DateString;
+  end?: DateString;
+};
 
-  const handleChangeDate = useCallback(
-    (date: Date) => {
-      if (startDate) {
-        if (endDate) {
-          setStartDate(date);
-          setEndDate(undefined);
-        } else if (date < startDate) {
-          setStartDate(date);
-        } else if (date > startDate) {
-          setEndDate(date);
+const App = () => {
+  const [range, setRange] = useState<Range>({
+    start: START_DATE,
+    end: END_DATE,
+  });
+
+  const handleChangeDate = useCallback((date: DateString) => {
+    setRange((prevRange) => {
+      if (prevRange?.start) {
+        if (prevRange.end) {
+          return {
+            start: date,
+            end: undefined,
+          };
+        } else if (date < prevRange.start) {
+          return {
+            start: date,
+            end: prevRange.end,
+          };
+        } else if (date > prevRange.start) {
+          return {
+            start: prevRange.start,
+            end: date,
+          };
         } else {
-          setStartDate(date);
-          setEndDate(date);
+          return {
+            start: date,
+            end: date,
+          };
         }
       } else {
-        setStartDate(date);
+        return {
+          start: date,
+        };
       }
-    },
-    [startDate, endDate]
-  );
+    });
+  }, []);
 
   return (
     <SafeAreaView>
@@ -127,12 +130,14 @@ const App = () => {
       >
         <Calendar
           onPress={handleChangeDate}
-          startDate={startDate}
-          endDate={endDate}
-          startingMonth={'2019-11-01'}
+          startDate={range.start}
+          endDate={range.end}
+          minDate={MIN_DATE}
+          maxDate={MAX_DATE}
+          startingMonth={'2024-01-01'}
           markedDays={markedDays}
           monthHeight={370}
-          numberOfMonths={100}
+          numberOfMonths={12}
           initialListSize={4}
           firstDayMonday
           theme={THEME}

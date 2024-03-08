@@ -1,14 +1,16 @@
 import { useMemo } from 'react';
 import moment from 'moment';
 
-import { isValidDate } from '../utils/date';
+import { DATE_FORMAT, isValidDate } from '../utils/date';
 import { CalendarProps } from '../types';
+import { DateString } from 'react-native-month/lib/typescript/src/types';
 
-interface Input
-  extends Pick<CalendarProps, 'startingMonth' | 'numberOfMonths'> {}
+interface Input extends Pick<CalendarProps, 'numberOfMonths'> {
+  startingMonth: DateString;
+}
 
 interface Result {
-  firstMonth: Date;
+  firstMonth: DateString;
   months: any[];
 }
 
@@ -17,10 +19,10 @@ export default function useMonths({
   numberOfMonths,
 }: Input): Result {
   return useMemo(() => {
-    const firstMonth =
-      startingMonth && isValidDate(new Date(startingMonth))
-        ? moment(startingMonth, 'YYYY-MM-DD').toDate()
-        : new Date();
+    let firstMonth = startingMonth;
+    if (!isValidDate(startingMonth)) {
+      firstMonth = moment().startOf('month').format(DATE_FORMAT);
+    }
 
     return {
       firstMonth,

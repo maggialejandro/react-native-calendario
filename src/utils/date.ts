@@ -1,4 +1,7 @@
 import moment from 'moment';
+import { DateString } from 'react-native-month/lib/typescript/src/types';
+
+export const DATE_FORMAT = 'YYYY-MM-DD';
 
 export function addDays(date: Date, days: number): Date {
   const result = new Date(date);
@@ -6,35 +9,31 @@ export function addDays(date: Date, days: number): Date {
   return result;
 }
 
-export function isValidDate(date: Date): boolean {
+// TODO: import from react-native-month
+export function isValidDate(str?: string): str is DateString {
+  if (!str) {
+    return false;
+  }
   return (
-    Object.prototype.toString.call(date) === '[object Date]' &&
-    !isNaN(date.getTime())
-  );
-}
-
-export function isSameDate(one: Date, other: Date) {
-  return (
-    one.getDate() === other.getDate() &&
-    one.getMonth() === other.getMonth() &&
-    one.getFullYear() === other.getFullYear()
+    str.match(/^\d{4}-(0[1-9]|1[0-2])-(0[1-9]|[1-2][0-9]|3[01])$/) !== null
   );
 }
 
 export function getMonthIndex(
-  firstMonth: Date,
-  date: Date,
+  firstMonth: DateString,
+  startDate: DateString,
   months: any[],
   numberOfMonths: number
 ) {
   const _firstMonth = moment(firstMonth);
-  const lastMonth = _firstMonth.clone().add(numberOfMonths, 'months');
+  const lastMonth = _firstMonth
+    .clone()
+    .add(numberOfMonths, 'months')
+    .endOf('month')
+    .format(DATE_FORMAT);
 
-  if (
-    date >= _firstMonth.toDate() &&
-    date <= lastMonth.endOf('month').toDate()
-  ) {
-    const monthIndex = moment(date).diff(_firstMonth, 'months');
+  if (startDate >= firstMonth && startDate <= lastMonth) {
+    const monthIndex = moment(startDate).diff(_firstMonth, 'months');
 
     if (monthIndex >= 0 && monthIndex <= months.length) {
       return monthIndex;

@@ -9,7 +9,7 @@ const defaultProps = {
   year: 2020,
   monthNames: [],
   dayNames: [],
-  firstMonthToRender: new Date(2019, 10, 1),
+  firstMonthToRender: '2019-11-01',
   theme: {},
   locale: 'en' as LocaleType,
   showWeekdays: true,

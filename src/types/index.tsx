@@ -6,12 +6,11 @@ import {
   ViewToken,
   StyleProp,
 } from 'react-native';
-import { MarkedDays, ThemeType as MonthThemeType } from 'react-native-month';
-
-export type RangeType = {
-  endDate?: Date;
-  startDate: Date;
-};
+import {
+  MarkedDays,
+  ThemeType as MonthThemeType,
+  DateString,
+} from 'react-native-month';
 
 export type LocaleType = 'es' | 'en' | 'fr' | 'br' | 'zh' | 'ru';
 
@@ -21,9 +20,11 @@ export interface ThemeType extends MonthThemeType {
   monthTitleTextStyle?: TextStyle;
 }
 
+// TODO: import from react-native-month
 export type DayType = {
-  date: Date;
+  date: DateString;
   id: string;
+  key: string;
   isActive: boolean;
   isEndDate: boolean;
   isHidden: boolean;
@@ -31,6 +32,7 @@ export type DayType = {
   isOutOfRange: boolean;
   isStartDate: boolean;
   isToday: boolean;
+  isWeekend: boolean;
   isVisible: boolean;
 };
 
@@ -85,12 +87,36 @@ export interface CalendarProps {
   disableRange?: boolean;
 
   /**
-   * Selected end date
+   * Selected start date
    *
-   * @type {Date}
+   * @type {string} format: YYYY-MM-DD
    * @memberof CalendarProps
    */
-  endDate?: Date;
+  startDate?: DateString;
+
+  /**
+   * Selected end date
+   *
+   * @type {string} format: YYYY-MM-DD
+   * @memberof CalendarProps
+   */
+  endDate?: DateString;
+
+  /**
+   * Minimum date that can be selected.
+   *
+   * @type {string} format: YYYY-MM-DD
+   * @memberof CalendarProps
+   */
+  minDate?: DateString;
+
+  /**
+   * Maximum date that can be selected.
+   *
+   * @type {string} format: YYYY-MM-DD
+   * @memberof CalendarProps
+   */
+  maxDate?: DateString;
 
   /**
    * FlatList's extraData prop
@@ -136,22 +162,6 @@ export interface CalendarProps {
   markedDays?: MarkedDays;
 
   /**
-   * Maximum date that can be selected.
-   *
-   * @type {Date}
-   * @memberof CalendarProps
-   */
-  maxDate?: Date;
-
-  /**
-   * Minimum date that can be selected.
-   *
-   * @type {Date}
-   * @memberof CalendarProps
-   */
-  minDate?: Date;
-
-  /**
    * Change Month row height
    *
    * @type {number}
@@ -180,14 +190,8 @@ export interface CalendarProps {
    *
    * @memberof CalendarProps
    */
-  onPress: (date: Date) => void;
+  onPress: (date: DateString) => void;
 
-  /**
-   * Use onPress
-   * @deprecated
-   * @memberof CalendarProps
-   */
-  onChange?: (range: RangeType) => void;
   renderDayContent?: (day: DayType) => ReactElement;
 
   /**
@@ -215,20 +219,12 @@ export interface CalendarProps {
   showsVerticalScrollIndicator?: boolean;
 
   /**
-   * Selected start date
-   *
-   * @type {Date}
-   * @memberof CalendarProps
-   */
-  startDate?: Date;
-
-  /**
    * First month to render
    *
-   * @type {string}
+   * @type {string} format: YYYY-MM-DD
    * @memberof CalendarProps
    */
-  startingMonth?: string;
+  startingMonth?: DateString;
 
   /**
    * On Web FlatList's onViewableItemsChanged is not trigger, use this prop to render all months.
