@@ -191,7 +191,7 @@ const Calendario = forwardRef<FlatList, CalendarProps>((props, ref) => {
   ]);
 
   const handleMonthLayout = useCallback(
-    (index, e: LayoutChangeEvent) => {
+    (index: number, e: LayoutChangeEvent) => {
       if (calculateMonthHeightDynamically && !Calendar.layouts[index]) {
         Calendar.layouts[index] = e.nativeEvent.layout.height;
 
