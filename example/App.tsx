@@ -98,7 +98,7 @@ const App = () => {
   );
 
   const handleChangeDate = useCallback(
-    (date) => {
+    (date: Date) => {
       if (startDate) {
         if (endDate) {
           setStartDate(date);
