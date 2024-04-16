@@ -157,7 +157,7 @@ export interface CalendarProps {
    * @type {number}
    * @memberof CalendarProps
    */
-  monthHeight: number;
+  monthHeight?: number;
 
   /**
    * Array of names of each month
@@ -173,7 +173,7 @@ export interface CalendarProps {
    * @type {number}
    * @memberof CalendarProps
    */
-  numberOfMonths: number;
+  numberOfMonths?: number;
 
   /**
    * Day pressed
