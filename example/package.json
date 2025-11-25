@@ -7,9 +7,9 @@
     "web": "EXPO_NO_TYPESCRIPT_SETUP=1 expo start --web"
   },
   "dependencies": {
-    "@expo/webpack-config": "^0.17.2",
+    "@expo/webpack-config": "^18.0.0",
     "eslint-config-satya164": "3.1.10",
-    "expo": "~48.0.21",
+    "expo": "~54.0.25",
     "moment": "2.30.1",
     "react": "18.1.0",
     "react-dom": "18.1.0",
